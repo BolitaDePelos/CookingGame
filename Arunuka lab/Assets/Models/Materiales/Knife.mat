@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FoodTray
+  m_Name: Knife
   m_Shader: {fileID: -6465566751694194690, guid: f31e13533a74de345ac960ac5885220b, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -38,7 +38,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseTexture:
-        m_Texture: {fileID: 2800000, guid: 35e2ce6ce257c3444b58512d08a1fb94, type: 3}
+        m_Texture: {fileID: 2800000, guid: 40989eab7610297449bfeb8542b77465, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -70,7 +70,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Metalic:
-        m_Texture: {fileID: 2800000, guid: 8b287ee96e4b5ec44b26578c3a54a2f9, type: 3}
+        m_Texture: {fileID: 2800000, guid: f3357485f1e5d5044a194fa405367d42, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -82,7 +82,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal_Base:
-        m_Texture: {fileID: 2800000, guid: 17d2c8d6f2008f74cad4f856409bfca8, type: 3}
+        m_Texture: {fileID: 2800000, guid: b3de05f10e73d624099db144177d895d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -111,7 +111,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - HatchingDrawStrength: 7.47
+    - HatchingDrawStrength: 7.68
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -127,12 +127,12 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HatchingDensity: 1
+    - _HatchingDensity: 0
     - _HatchingRotation: 5
-    - _HatchingSmoothness: 0.245
+    - _HatchingSmoothness: 0.475
     - _Metallic: 0
-    - _NormalBase_Strength: 1
-    - _NormalPainterly_Strength: 2.86
+    - _NormalBase_Strength: 0.1
+    - _NormalPainterly_Strength: 1.22
     - _NormalsSensitive: 1
     - _OcclusionStrength: 1
     - _Outline_Thickness: 1
@@ -140,7 +140,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.5
+    - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -150,7 +150,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Offset_NormalPainterly: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
