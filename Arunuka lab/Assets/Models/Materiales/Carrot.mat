@@ -111,7 +111,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - HatchingDrawStrength: 8.64
+    - HatchingDrawStrength: 7.96
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -127,9 +127,9 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HatchingDensity: 1.03
+    - _HatchingDensity: 1
     - _HatchingRotation: 5
-    - _HatchingSmoothness: 0.625
+    - _HatchingSmoothness: 0.459
     - _Metallic: 0
     - _NormalBase_Strength: 1
     - _NormalPainterly_Strength: 0.25
