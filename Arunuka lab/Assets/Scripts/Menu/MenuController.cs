@@ -41,7 +41,7 @@ public class MenuController : MonoBehaviour
     [SerializeField] private GameObject comfirmationPrompt = null;
 
     [Header("Level to load")]
-    public string _newGameLevel = SceneName.Scene_Level_01.ToString();
+    public string _newGameLevel = SceneName.Scene_Level_1.ToString();
     private string levelToLoad;
     [SerializeField] private GameObject noSavedGameDialog = null;
 

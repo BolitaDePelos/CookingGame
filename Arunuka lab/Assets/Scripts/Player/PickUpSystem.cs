@@ -17,6 +17,7 @@ public class PickUpSystem : MonoBehaviour
 
     [SerializeField] private GameObject inHandItem;
 
+
     private RaycastHit hit;
 
     [SerializeField] private AudioSource pickUpSource;
@@ -90,7 +91,6 @@ public class PickUpSystem : MonoBehaviour
                 inHandItem = pickableItem.PickUp();
                 inHandItem.transform.SetParent(pickUpParent.transform, pickableItem.keepWorldPosition);
             }
-            
 
             if (hit.collider.GetComponent<Knife>())
             {

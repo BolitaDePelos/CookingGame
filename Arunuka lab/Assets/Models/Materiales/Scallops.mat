@@ -132,7 +132,7 @@ Material:
     - _HatchingSmoothness: 0.435
     - _Metallic: 0
     - _NormalBase_Strength: 1
-    - _NormalPainterly_Strength: 1
+    - _NormalPainterly_Strength: 0.5
     - _NormalsSensitive: 1
     - _OcclusionStrength: 1
     - _Outline_Thickness: 1
