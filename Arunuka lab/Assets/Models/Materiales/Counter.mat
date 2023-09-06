@@ -38,7 +38,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseTexture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 0b060f34c6cb1fb4c870cf1799bffc8a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -70,7 +70,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Metalic:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 9086cc564e86e3841af847246698bcd4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -111,7 +111,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - HatchingDrawStrength: 4
+    - HatchingDrawStrength: 2.84
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -127,9 +127,9 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HatchingDensity: 1
-    - _HatchingRotation: 5
-    - _HatchingSmoothness: 0.4
+    - _HatchingDensity: 1.662
+    - _HatchingRotation: 12.3
+    - _HatchingSmoothness: 0.551
     - _Metallic: 0
     - _NormalBase_Strength: 1
     - _NormalPainterly_Strength: 0.25
