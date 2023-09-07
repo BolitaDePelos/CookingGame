@@ -6,16 +6,20 @@ public class Fridge : MonoBehaviour, IUsable
 {
     [field:SerializeField]
     public UnityEvent OnUse { get; private set; }
-
+    
+    [Header("Animation")]
     [SerializeField] public NameAnimation animator;
     [SerializeField] string Open = "Open";
     [SerializeField] string Close = "Close";
     public bool isOpen;
 
-    public void Use(GameObject actor)
+    private void Update()
     {
         ToggleFridgeState();
-        PlayAppropriateAnimation();
+    }
+
+    public void Use(GameObject actor)
+    {
         OnUse?.Invoke();
 
     }
@@ -25,7 +29,7 @@ public class Fridge : MonoBehaviour, IUsable
         isOpen = !isOpen;
     }
 
-    private void PlayAppropriateAnimation()
+    public void PlayAnimation()
     {
         if (isOpen)
         {

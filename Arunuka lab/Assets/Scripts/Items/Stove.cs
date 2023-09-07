@@ -8,18 +8,33 @@ public class Stove : MonoBehaviour, IUsable
 
     [field: SerializeField]
     public UnityEvent OnUse { get; private set; }
-    public GameObject StoveCollider;
+
+    [Header("Collider")]
+    public GameObject colliderFlame;
+
+    [Header("VFX")]
+    public GameObject vfx;
+
+    [Header("Animation")]
+    [SerializeField] public NameAnimation animator;
+    [SerializeField] string Open = "Open";
+    [SerializeField] string Close = "Close";
     public bool IsActivate;
 
     private void Start()
     {
-        StoveCollider.SetActive(false);
+        colliderFlame.SetActive(false);
+        vfx.SetActive(false);
+    }
+
+    private void Update()
+    {
+        ToggleStoveState();
+
     }
 
     public void Use(GameObject actor)
     {
-        ActiveCollider();
-        ToggleStoveState();
         OnUse?.Invoke();
 
     }
@@ -30,15 +45,21 @@ public class Stove : MonoBehaviour, IUsable
         IsActivate = !IsActivate;
     }
 
-    private void ActiveCollider()
+    public void Active()
     {
         if (IsActivate)
         {
-            StoveCollider.SetActive(true);
-        }
+            animator.PlayAnimationByName(Open);
+            vfx.SetActive(true);
+            colliderFlame.SetActive(true);
+
+}
         else
         {
-            StoveCollider.SetActive(false);
+            animator.PlayAnimationByName(Close);
+            vfx.SetActive(false);
+            colliderFlame.SetActive(false);
+
         }
     }
 
