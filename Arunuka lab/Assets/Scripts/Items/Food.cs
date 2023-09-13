@@ -17,6 +17,13 @@ public class Food : MonoBehaviour
     private CuttingManager cuttingManager;
     [SerializeField]
     private bool onCuttingBoard;
+
+    public Vector3 initPos;
+
+    private void Start(){
+        initPos = transform.position;
+    }
+
     public void SetIngredientType(Ingredients type)
     {
         IngredientType = type;

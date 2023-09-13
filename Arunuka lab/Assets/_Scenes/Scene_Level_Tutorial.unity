@@ -243,15 +243,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 48b3849fc744dab469eabd92ef1b1ebd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.07764733
+      value: -1.779
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 48b3849fc744dab469eabd92ef1b1ebd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.07535064
+      value: 1.104
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 48b3849fc744dab469eabd92ef1b1ebd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.54463637
+      value: -1.67
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 48b3849fc744dab469eabd92ef1b1ebd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -491,15 +491,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 530223e1c8bc9a8498bc497ec5c28fd8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.1306473
+      value: -1.832
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 530223e1c8bc9a8498bc497ec5c28fd8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.016350627
+      value: 1.045
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 530223e1c8bc9a8498bc497ec5c28fd8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.72063637
+      value: -1.846
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 530223e1c8bc9a8498bc497ec5c28fd8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -676,15 +676,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fc965a3b04433454b973539667dda7bb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.20564723
+      value: -1.907
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fc965a3b04433454b973539667dda7bb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.03685069
+      value: 1.0655
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fc965a3b04433454b973539667dda7bb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.51563644
+      value: -1.641
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fc965a3b04433454b973539667dda7bb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -935,15 +935,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41055c2c41bedab45824dbfa5000f125, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.07435274
+      value: -1.627
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41055c2c41bedab45824dbfa5000f125, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.013034701
+      value: 1.041684
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41055c2c41bedab45824dbfa5000f125, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.5469011
+      value: -1.6722647
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41055c2c41bedab45824dbfa5000f125, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1338,6 +1338,7 @@ MonoBehaviour:
   cuttingBoard: {fileID: 1781565093}
   cuttingManager: {fileID: 509272732}
   onCuttingBoard: 0
+  initPos: {x: 0, y: 0, z: 0}
 --- !u!54 &878878707
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1380,18 +1381,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.04192686, y: 0.06755841, z: 0.084056415}
   m_Center: {x: -0.007170081, y: -0.001621306, z: 0.00009750575}
---- !u!114 &878878712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 878878702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7977c6397c7a01e46b5ef4088b9d6319, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &920955701 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 88c40aab5912c65478590769f9cc0470, type: 3}
@@ -1410,15 +1399,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 88c40aab5912c65478590769f9cc0470, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.17964733
+      value: -1.881
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 88c40aab5912c65478590769f9cc0470, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.24135065
+      value: 1.27
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 88c40aab5912c65478590769f9cc0470, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.77324915
+      value: -1.8986127
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 88c40aab5912c65478590769f9cc0470, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1482,9 +1471,10 @@ MonoBehaviour:
   IngredientType: 4
   IngredientName: Scallops
   crossMaterial: {fileID: 2100000, guid: 25c17fe8d8cb50948a70b717bff5c191, type: 2}
-  cuttingBoard: {fileID: 0}
-  cuttingManager: {fileID: 0}
+  cuttingBoard: {fileID: 1781565093}
+  cuttingManager: {fileID: 509272732}
   onCuttingBoard: 0
+  initPos: {x: 0, y: 0, z: 0}
 --- !u!54 &953395066
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1809,11 +1799,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1125243937 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 626708465640066697, guid: fc2c817fa6a9ab543b2d3a0daeb1ee64, type: 3}
-  m_PrefabInstance: {fileID: 320861504380316813}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1169811032
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1827,15 +1812,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7d5bfe92e574cc1458e468b878dfb3c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.8363528
+      value: 1.1350001
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7d5bfe92e574cc1458e468b878dfb3c6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.13603497
+      value: 1.1646843
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7d5bfe92e574cc1458e468b878dfb3c6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.6113636
+      value: 0.48600006
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7d5bfe92e574cc1458e468b878dfb3c6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1975,15 +1960,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 579cb4bde4e03f1419136002b02de7f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.16926122
+      value: -1.8706139
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 579cb4bde4e03f1419136002b02de7f5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.24135077
+      value: 1.2700001
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 579cb4bde4e03f1419136002b02de7f5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.5547643
+      value: -1.6801279
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 579cb4bde4e03f1419136002b02de7f5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2063,9 +2048,10 @@ MonoBehaviour:
   IngredientType: 4
   IngredientName: Scallops
   crossMaterial: {fileID: 2100000, guid: 25c17fe8d8cb50948a70b717bff5c191, type: 2}
-  cuttingBoard: {fileID: 0}
-  cuttingManager: {fileID: 0}
+  cuttingBoard: {fileID: 1781565093}
+  cuttingManager: {fileID: 509272732}
   onCuttingBoard: 0
+  initPos: {x: 0, y: 0, z: 0}
 --- !u!65 &1231166093
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2172,37 +2158,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1512518062807580672, guid: fc2c817fa6a9ab543b2d3a0daeb1ee64, type: 3}
   m_PrefabInstance: {fileID: 320861504380316813}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1125243937}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 331c5272e5413af4bb0fa5115830f696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1290089706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1125243937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7977c6397c7a01e46b5ef4088b9d6319, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &1290089707
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1125243937}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.11, y: 0.15, z: 0.084056415}
-  m_Center: {x: 0.00092405104, y: 0.008824388, z: 0.00009750391}
 --- !u!1 &1319438939 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 530223e1c8bc9a8498bc497ec5c28fd8, type: 3}
@@ -2226,6 +2187,7 @@ MonoBehaviour:
   cuttingBoard: {fileID: 1781565093}
   cuttingManager: {fileID: 509272732}
   onCuttingBoard: 0
+  initPos: {x: 0, y: 0, z: 0}
 --- !u!54 &1319438944
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2268,18 +2230,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.11, y: 0.086743355, z: 0.084056415}
   m_Center: {x: 0.0009240508, y: 0.030029058, z: 0.00009750575}
---- !u!114 &1319438949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1319438939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7977c6397c7a01e46b5ef4088b9d6319, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1339758114
 GameObject:
   m_ObjectHideFlags: 0
@@ -2304,7 +2254,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1339758114}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7013527, y: 1.0286493, z: -1.1253636}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2599,15 +2549,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f009e046c9fd7734c98cb15a89516db0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.3277167
+      value: -2.0290694
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f009e046c9fd7734c98cb15a89516db0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.24135065
+      value: 1.27
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f009e046c9fd7734c98cb15a89516db0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.67932796
+      value: -1.8046916
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f009e046c9fd7734c98cb15a89516db0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2671,9 +2621,10 @@ MonoBehaviour:
   IngredientType: 4
   IngredientName: Scallops
   crossMaterial: {fileID: 2100000, guid: 25c17fe8d8cb50948a70b717bff5c191, type: 2}
-  cuttingBoard: {fileID: 0}
-  cuttingManager: {fileID: 0}
+  cuttingBoard: {fileID: 1781565093}
+  cuttingManager: {fileID: 509272732}
   onCuttingBoard: 0
+  initPos: {x: 0, y: 0, z: 0}
 --- !u!54 &1462791009
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3217,6 +3168,32 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.5809174, y: 0.020438105, z: 3.987213}
   m_Center: {x: -0.97689164, y: 0.4556154, z: -0.67667353}
+--- !u!65 &1840591265
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840591260}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.5809174, y: 0.10292959, z: 3.987213}
+  m_Center: {x: -0.9768915, y: 0.51, z: -0.67667353}
+--- !u!114 &1840591266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840591260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7977c6397c7a01e46b5ef4088b9d6319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cuttableLayer: 8
 --- !u!1 &1910953608 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 03384245c5c39f94e8e394fd5f83f3a1, type: 3}
@@ -3240,6 +3217,7 @@ MonoBehaviour:
   cuttingBoard: {fileID: 0}
   cuttingManager: {fileID: 0}
   onCuttingBoard: 0
+  initPos: {x: 0, y: 0, z: 0}
 --- !u!135 &1910953612
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3594,15 +3572,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9dc6155f55209004c8612358b950f55b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.32477796
+      value: -2.0261307
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9dc6155f55209004c8612358b950f55b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.06607783
+      value: 1.0947272
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9dc6155f55209004c8612358b950f55b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.5384481
+      value: -1.6638117
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9dc6155f55209004c8612358b950f55b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3669,6 +3647,7 @@ MonoBehaviour:
   cuttingBoard: {fileID: 1781565093}
   cuttingManager: {fileID: 509272732}
   onCuttingBoard: 0
+  initPos: {x: 0, y: 0, z: 0}
 --- !u!54 &2141912469
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3711,18 +3690,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.11, y: 0.14089698, z: 0.084056415}
   m_Center: {x: 0.0009240509, y: -0.0019180699, z: 0.00009750566}
---- !u!114 &2141912474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 56887744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7977c6397c7a01e46b5ef4088b9d6319, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &18725364383888226
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3772,15 +3739,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 286353148665435187, guid: fc2c817fa6a9ab543b2d3a0daeb1ee64, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.019352674
+      value: -1.682
       objectReference: {fileID: 0}
     - target: {fileID: 286353148665435187, guid: fc2c817fa6a9ab543b2d3a0daeb1ee64, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.28815067
+      value: 1.3168
       objectReference: {fileID: 0}
     - target: {fileID: 286353148665435187, guid: fc2c817fa6a9ab543b2d3a0daeb1ee64, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.6116364
+      value: -1.737
       objectReference: {fileID: 0}
     - target: {fileID: 286353148665435187, guid: fc2c817fa6a9ab543b2d3a0daeb1ee64, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4735,15 +4702,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4622777704948516711, guid: fa6663a43718c434080f183c9559e474, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.6327527
+      value: 0.93139994
       objectReference: {fileID: 0}
     - target: {fileID: 4622777704948516711, guid: fa6663a43718c434080f183c9559e474, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.18235064
+      value: 1.211
       objectReference: {fileID: 0}
     - target: {fileID: 4622777704948516711, guid: fa6663a43718c434080f183c9559e474, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.1040636
+      value: -0.021299958
       objectReference: {fileID: 0}
     - target: {fileID: 4622777704948516711, guid: fa6663a43718c434080f183c9559e474, type: 3}
       propertyPath: m_LocalRotation.w
