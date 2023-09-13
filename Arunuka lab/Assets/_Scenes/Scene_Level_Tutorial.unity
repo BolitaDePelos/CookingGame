@@ -1025,6 +1025,7 @@ MonoBehaviour:
   currentItemsCount: 0
   totalItemsCount: 4
   tutorialMode: 1
+  knife: {fileID: 1360640797}
 --- !u!4 &509272733
 Transform:
   m_ObjectHideFlags: 0
@@ -1500,7 +1501,7 @@ BoxCollider:
   m_GameObject: {fileID: 920955701}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.12085449, y: 0.0763028, z: 0.14561215}
   m_Center: {x: 0, y: 0.035935514, z: -0.000000018626451}
@@ -2061,7 +2062,7 @@ BoxCollider:
   m_GameObject: {fileID: 853316091}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.14521186, y: 0.079161376, z: 0.13054393}
   m_Center: {x: 0, y: 0.03914459, z: 0.000000059604645}
@@ -2272,6 +2273,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1360640797 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4622777704948516707, guid: fa6663a43718c434080f183c9559e474, type: 3}
+  m_PrefabInstance: {fileID: 4622777706276628370}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1404006961
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2650,7 +2656,7 @@ BoxCollider:
   m_GameObject: {fileID: 16034448}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.13633278, y: 0.08104705, z: 0.17304203}
   m_Center: {x: 0.000000011175874, y: 0.039164733, z: 0.00000003725291}
@@ -4692,9 +4698,17 @@ PrefabInstance:
       propertyPath: explosionForce
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 4622777704948516705, guid: fa6663a43718c434080f183c9559e474, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4622777704948516707, guid: fa6663a43718c434080f183c9559e474, type: 3}
       propertyPath: m_Name
       value: Knife
+      objectReference: {fileID: 0}
+    - target: {fileID: 4622777704948516710, guid: fa6663a43718c434080f183c9559e474, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4622777704948516711, guid: fa6663a43718c434080f183c9559e474, type: 3}
       propertyPath: m_RootOrder
