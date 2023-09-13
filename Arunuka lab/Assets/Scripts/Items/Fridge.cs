@@ -13,6 +13,9 @@ public class Fridge : MonoBehaviour, IUsable
     [SerializeField] string Close = "Close";
     public bool isOpen;
 
+    public bool tutorialMode;
+    public int tutorialFridgeTask=2;
+
     private void Update()
     {
         ToggleFridgeState();
@@ -21,6 +24,10 @@ public class Fridge : MonoBehaviour, IUsable
     public void Use(GameObject actor)
     {
         OnUse?.Invoke();
+        if (tutorialMode&&TutorialManager.Instance.index==tutorialFridgeTask) {
+            TutorialManager.Instance.NextText();
+            tutorialMode = false;
+        }
 
     }
 
