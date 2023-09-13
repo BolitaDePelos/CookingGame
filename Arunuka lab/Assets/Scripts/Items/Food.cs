@@ -9,6 +9,14 @@ public class Food : MonoBehaviour
     public Ingredients IngredientType;
     public string IngredientName;
     public Material crossMaterial;
+
+
+    [SerializeField]
+    private GameObject cuttingBoard;
+    [SerializeField]
+    private CuttingManager cuttingManager;
+    [SerializeField]
+    private bool onCuttingBoard;
     public void SetIngredientType(Ingredients type)
     {
         IngredientType = type;
@@ -44,6 +52,12 @@ public class Food : MonoBehaviour
     }
 
 
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject== cuttingBoard&&!onCuttingBoard){
+            onCuttingBoard = true;
+            cuttingManager.AddItemCut(this);
+        }
+    }
 
 }
