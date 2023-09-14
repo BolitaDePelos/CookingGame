@@ -54,7 +54,7 @@ public class Player : SingletonMonobehaviour<Player>
 
     private const float _threshold = 0.01f;
 
-
+    public bool tutorialMode;
     protected override void Awake()
     {
         if(mainCamera == null)
@@ -121,6 +121,8 @@ public class Player : SingletonMonobehaviour<Player>
             // rotate the player left and right
             transform.Rotate(Vector3.up * rotationVelocity);
         }
+
+
     }
 
 
@@ -170,10 +172,17 @@ public class Player : SingletonMonobehaviour<Player>
         {
             // move
             inputDirection = transform.right * xInput+ transform.forward * yInput;
+            if (tutorialMode) {
+                TutorialManager.Instance.NextText();
+                tutorialMode = false;
+            }
         }
 
         // move the player
         characterController.Move(inputDirection.normalized * (speed * Time.deltaTime) + new Vector3(0.0f, verticalVelocity, 0.0f) * Time.deltaTime);
+
+
+
     }
 
 

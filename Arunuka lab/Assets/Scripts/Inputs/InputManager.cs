@@ -112,7 +112,7 @@ public class InputManager : MonoBehaviour
         {
             GameEventsManager.instance.InputEvents.UsePressed();
 
-            Debug.Log("Button Use Pressed");
+            //Debug.Log("Button Use Pressed");
 
         }
 

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class Knife : MonoBehaviour, IUsable
 {
-    
+
     [field: SerializeField]
     public UnityEvent OnUse { get; private set; }
 
@@ -14,7 +14,7 @@ public class Knife : MonoBehaviour, IUsable
     public LayerMask layerMask;
     //public Material crossMaterial;
     public Vector3 CutZoneKnife;
-    public float explosionForce=100f;
+    public float explosionForce = 100f;
 
     // Limit Cuts
     private Dictionary<GameObject, int> cutsPerObject = new Dictionary<GameObject, int>();
@@ -22,7 +22,16 @@ public class Knife : MonoBehaviour, IUsable
 
     private Dictionary<GameObject, GameObject> parentsPerObject = new Dictionary<GameObject, GameObject>();
 
+    public bool tutorialMode;
+    [SerializeField]
+    private CuttingManager cuttingManager;
+    private void Start()
+    {
+        if (tutorialMode)
+            enabled = false;
 
+
+    }
     public void Use(GameObject actor)
     {
         OnUse?.Invoke();
@@ -85,6 +94,7 @@ public class Knife : MonoBehaviour, IUsable
             if (currentCutsForObject >= maxCutsPerObject)
             {
                 Debug.Log("Se ha alcanzado el límite de cortes permitidos para este objeto.");
+                cuttingManager.CheckCut();
                 continue; // Continúa al siguiente objeto si se alcanza el límite
             }
 
@@ -111,6 +121,9 @@ public class Knife : MonoBehaviour, IUsable
                     parent.transform.position = Vector3.zero; // Crea el objeto padre en el punto (0, 0, 0)
                     parent.name = hitObject.name + " (Sliced)";
                     parentsPerObject[hitObject] = parent;
+                    //Create a new list of slice parents
+                    cuttingManager.AddSliceItem(parent); 
+
                 }
                 else
                 {
@@ -124,8 +137,8 @@ public class Knife : MonoBehaviour, IUsable
                 top.transform.SetParent(parent.transform, true);
 
 
-                AddHullComponents(bottom, hitObject.GetComponent<Food>().vegetableType,hitObject.GetComponent<Food>().crossMaterial);
-                AddHullComponents(top, hitObject.GetComponent<Food>().vegetableType, hitObject.GetComponent<Food>().crossMaterial);
+                AddHullComponents(bottom, hitObject.GetComponent<Food>().IngredientType, hitObject.GetComponent<Food>().crossMaterial);
+                AddHullComponents(top, hitObject.GetComponent<Food>().IngredientType, hitObject.GetComponent<Food>().crossMaterial);
                 Destroy(hitObject);
 
                 cutsPerObject[bottom] = currentCutsForObject + 1; // Incrementa el contador de cortes para la mitad inferior
@@ -161,7 +174,7 @@ public class Knife : MonoBehaviour, IUsable
         go.transform.rotation = Quaternion.identity;
         // Item Food
         Food food = go.AddComponent<Food>();
-        food.SetVegetableType(vegetableType);
+        food.SetIngredientType(vegetableType);
         food.SetCrossMaterial(CrossMaterial);
 
         rb.AddExplosionForce(explosionForce, go.transform.position, 20);

@@ -17,5 +17,6 @@ public enum Ingredients
 public enum SceneName
 {
     MainMenu,
-    Scene_Level_01
+    Scene_Level_1,
+    Scene_Level_Tutorial
 }

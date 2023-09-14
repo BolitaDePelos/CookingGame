@@ -111,7 +111,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - HatchingDrawStrength: 4.43
+    - HatchingDrawStrength: 2.88
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -129,18 +129,18 @@ Material:
     - _GlossyReflections: 0
     - _HatchingDensity: 1.677
     - _HatchingRotation: 5
-    - _HatchingSmoothness: 0.683
+    - _HatchingSmoothness: 0.593
     - _Metallic: 0
     - _NormalBase_Strength: 1
-    - _NormalPainterly_Strength: 1.69
+    - _NormalPainterly_Strength: 0.5
     - _NormalsSensitive: 1
     - _OcclusionStrength: 1
-    - _Outline_Thickness: 1
+    - _Outline_Thickness: 0.75
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.63
+    - _Smoothness: 0.25
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

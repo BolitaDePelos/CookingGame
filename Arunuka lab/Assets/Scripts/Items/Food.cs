@@ -6,24 +6,49 @@ using UnityEngine.Events;
 public class Food : MonoBehaviour
 {
 
-    public Ingredients vegetableType;
-    public string vegetableName;
+    public Ingredients IngredientType;
+    public string IngredientName;
     public Material crossMaterial;
-    public void SetVegetableType(Ingredients type)
+
+
+    [SerializeField]
+    private GameObject cuttingBoard;
+    [SerializeField]
+    private CuttingManager cuttingManager;
+    [SerializeField]
+    private bool onCuttingBoard;
+
+    public Vector3 initPos;
+
+    private void Start(){
+        initPos = transform.position;
+    }
+
+    public void SetIngredientType(Ingredients type)
     {
-        vegetableType = type;
-        switch (vegetableType)
+        IngredientType = type;
+        switch (IngredientType)
         {
             case Ingredients.Carrot:
-                vegetableName = "Carrot";
+                IngredientName = "Carrot";
                 break;
             case Ingredients.Onion:
-                vegetableName = "Onion";
-
+                IngredientName = "Onion";
                 break;
             case Ingredients.Garlic:
-                vegetableName = "Garlic";
-
+                IngredientName = "Garlic";
+                break;
+            case Ingredients.Celery:
+                IngredientName = "Celery";
+                break;
+            case Ingredients.Pumpkin:
+                IngredientName = "Pumpkin";
+                break;
+            case Ingredients.Scallops:
+                IngredientName = "Scallops";
+                break;
+            case Ingredients.Quail:
+                IngredientName = "Quail";
                 break;
         }
     }
@@ -34,6 +59,12 @@ public class Food : MonoBehaviour
     }
 
 
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject== cuttingBoard&&!onCuttingBoard){
+            onCuttingBoard = true;
+            cuttingManager.AddItemCut(this);
+        }
+    }
 
 }

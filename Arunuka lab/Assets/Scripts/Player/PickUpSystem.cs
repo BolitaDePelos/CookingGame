@@ -17,9 +17,16 @@ public class PickUpSystem : MonoBehaviour
 
     [SerializeField] private GameObject inHandItem;
 
+
     private RaycastHit hit;
 
     [SerializeField] private AudioSource pickUpSource;
+
+
+    [SerializeField]
+    private Player player;
+    [SerializeField]
+    private Transform cutPositionPlayer;
 
     private void OnEnable()
     {
@@ -90,12 +97,13 @@ public class PickUpSystem : MonoBehaviour
                 inHandItem = pickableItem.PickUp();
                 inHandItem.transform.SetParent(pickUpParent.transform, pickableItem.keepWorldPosition);
             }
-            
 
             if (hit.collider.GetComponent<Knife>())
             {
                 Debug.Log("Its Knife!");
                 hit.collider.GetComponentInParent<Animator>().SetTrigger("Knife");
+                PlayerSetCutPosition();
+
             }
         }
     }
@@ -125,6 +133,13 @@ public class PickUpSystem : MonoBehaviour
 
     }
 
+
+    public void PlayerSetCutPosition() {
+        player.GetComponent<CharacterController>().enabled=false;
+        player.transform.position = cutPositionPlayer.transform.position;
+        player.GetComponent<CharacterController>().enabled = true;
+
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
