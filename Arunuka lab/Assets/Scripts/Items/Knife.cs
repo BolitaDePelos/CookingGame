@@ -23,7 +23,8 @@ public class Knife : MonoBehaviour, IUsable
     private Dictionary<GameObject, GameObject> parentsPerObject = new Dictionary<GameObject, GameObject>();
 
     public bool tutorialMode;
-
+    [SerializeField]
+    private CuttingManager cuttingManager;
     private void Start()
     {
         if (tutorialMode)
@@ -93,6 +94,7 @@ public class Knife : MonoBehaviour, IUsable
             if (currentCutsForObject >= maxCutsPerObject)
             {
                 Debug.Log("Se ha alcanzado el límite de cortes permitidos para este objeto.");
+                cuttingManager.CheckCut();
                 continue; // Continúa al siguiente objeto si se alcanza el límite
             }
 
@@ -119,6 +121,9 @@ public class Knife : MonoBehaviour, IUsable
                     parent.transform.position = Vector3.zero; // Crea el objeto padre en el punto (0, 0, 0)
                     parent.name = hitObject.name + " (Sliced)";
                     parentsPerObject[hitObject] = parent;
+                    //Create a new list of slice parents
+                    cuttingManager.AddSliceItem(parent); 
+
                 }
                 else
                 {

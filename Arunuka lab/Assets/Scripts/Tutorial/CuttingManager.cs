@@ -19,6 +19,9 @@ public class CuttingManager : MonoBehaviour
 
     [SerializeField]
     private GameObject knife;
+    [SerializeField]
+    private List<GameObject> sliceParents;
+    public bool onCutDone;
     public void AddItemCut(Food item) {
         if (ingredients.Contains(item)) {
             currentItemsCount++;
@@ -26,12 +29,27 @@ public class CuttingManager : MonoBehaviour
 
         if (currentItemsCount== totalItemsCount && tutorialMode) {
             TutorialManager.Instance.NextText();
-          //  ActiveKnife();
         }
     }
 
-    public void ActiveKnife() {
-      //  knife.GetComponent<BoxCollider>().enabled = true;
-        knife.GetComponent<Rigidbody>().isKinematic = false;
+    public void AddSliceItem(GameObject parent) {
+        sliceParents.Add(parent);
+    }
+
+    public void CheckCut()
+    {
+        int sliceParentsCount=0;
+        for (int idx=0;idx<sliceParents.Count;idx++) {
+            if (sliceParents[idx].gameObject.transform.GetChild(2).gameObject.activeInHierarchy){
+                sliceParentsCount++;
+            }
+
+        }
+        if (sliceParentsCount==totalItemsCount&&! onCutDone) {
+            TutorialManager.Instance.NextText();
+            onCutDone = true;
+
+        }
+
     }
 }
