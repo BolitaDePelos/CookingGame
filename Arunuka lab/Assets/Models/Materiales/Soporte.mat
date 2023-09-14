@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FryPan
+  m_Name: Soporte
   m_Shader: {fileID: -6465566751694194690, guid: f31e13533a74de345ac960ac5885220b, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -38,7 +38,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseTexture:
-        m_Texture: {fileID: 2800000, guid: 5f49594d478d37745857a61f26df42d5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0c23c70090ffc894488795a4a84d25ca, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -70,7 +70,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Metalic:
-        m_Texture: {fileID: 2800000, guid: 3f40ab3778792dd42b0a089d9fd54956, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1641523609ea7aa4d8a0f6d0d0c7c8f1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -82,7 +82,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal_Base:
-        m_Texture: {fileID: 2800000, guid: 17d2c8d6f2008f74cad4f856409bfca8, type: 3}
+        m_Texture: {fileID: 2800000, guid: e94542a0923c3c34ea2ac14ad334bb65, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -111,7 +111,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - HatchingDrawStrength: 11.71
+    - HatchingDrawStrength: 9.06
     - _AlphaClip: 0
     - _Alpha_Clip: 0
     - _Blend: 0
@@ -128,20 +128,20 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HatchingDensity: 0.487
+    - _HatchingDensity: 1
     - _HatchingRotation: 5
-    - _HatchingSmoothness: 0.724
+    - _HatchingSmoothness: 0.923
     - _Metallic: 0
-    - _NormalBase_Strength: 1
-    - _NormalPainterly_Strength: 1
+    - _NormalBase_Strength: -1.79
+    - _NormalPainterly_Strength: 1.52
     - _NormalsSensitive: 1
     - _OcclusionStrength: 1
-    - _Outline_Thickness: 4.48
+    - _Outline_Thickness: 0.8
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 1
+    - _Smoothness: 0.26
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -158,5 +158,5 @@ Material:
     - _Texture_Tiling: {r: 1, g: 1, b: 0, a: 0}
     - _Tiling_NormalPainterly: {r: 1, g: 1, b: 0, a: 0}
     - __Hatching_AlphaBlend_Color: {r: 0, g: 0, b: 0, a: 1}
-    - __Hatching_Scale: {r: 5, g: 2, b: 0, a: 0}
+    - __Hatching_Scale: {r: 2, g: 2, b: 0, a: 0}
   m_BuildTextureStacks: []
