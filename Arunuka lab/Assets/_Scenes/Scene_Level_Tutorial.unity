@@ -510,6 +510,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Counter
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c38a365cc9e229c4eaa5ea0942446ce5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1646625735040598078, guid: c38a365cc9e229c4eaa5ea0942446ce5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -2284,6 +2288,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 331c5272e5413af4bb0fa5115830f696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1315192829 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c38a365cc9e229c4eaa5ea0942446ce5, type: 3}
+  m_PrefabInstance: {fileID: 167848176}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1315192830
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315192829}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.856871, y: 0.6163465, z: 0.76865065}
+  m_Center: {x: -0.9284352, y: 0.18619615, z: -0.29410774}
 --- !u!1 &1319438939 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 530223e1c8bc9a8498bc497ec5c28fd8, type: 3}
