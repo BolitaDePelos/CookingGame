@@ -7,10 +7,18 @@ public class PickableItem : MonoBehaviour, IPickable
     public bool keepWorldPosition { get; private set; }
 
     private Rigidbody rb;
+    public bool tutorialMode;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+    }
+
+    private void Start(){
+        if (tutorialMode)
+            enabled = false;
+
+
     }
     public GameObject PickUp()
     {

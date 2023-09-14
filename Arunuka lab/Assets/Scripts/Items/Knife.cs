@@ -22,7 +22,15 @@ public class Knife : MonoBehaviour, IUsable
 
     private Dictionary<GameObject, GameObject> parentsPerObject = new Dictionary<GameObject, GameObject>();
 
+    public bool tutorialMode;
 
+    private void Start()
+    {
+        if (tutorialMode)
+            enabled = false;
+
+
+    }
     public void Use(GameObject actor)
     {
         OnUse?.Invoke();

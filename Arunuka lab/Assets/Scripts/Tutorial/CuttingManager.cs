@@ -26,12 +26,12 @@ public class CuttingManager : MonoBehaviour
 
         if (currentItemsCount== totalItemsCount && tutorialMode) {
             TutorialManager.Instance.NextText();
-            ActiveKnife();
+          //  ActiveKnife();
         }
     }
 
     public void ActiveKnife() {
-        knife.GetComponent<BoxCollider>().enabled = true;
-        knife.GetComponent<Rigidbody>().isKinematic = true;
+      //  knife.GetComponent<BoxCollider>().enabled = true;
+        knife.GetComponent<Rigidbody>().isKinematic = false;
     }
 }

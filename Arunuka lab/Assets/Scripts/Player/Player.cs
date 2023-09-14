@@ -121,6 +121,8 @@ public class Player : SingletonMonobehaviour<Player>
             // rotate the player left and right
             transform.Rotate(Vector3.up * rotationVelocity);
         }
+
+
     }
 
 
