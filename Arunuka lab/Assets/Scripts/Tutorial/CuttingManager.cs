@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using UnityEngine;
+using UnityEngine.Events;
+
 
 public class CuttingManager : MonoBehaviour
 {
@@ -22,6 +24,12 @@ public class CuttingManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> sliceParents;
     public bool onCutDone;
+
+    [SerializeField]
+    private UnityEvent OnCutEnds;
+    [SerializeField]
+    private StroveManager stroveManager;
+
     public void AddItemCut(Food item) {
         if (ingredients.Contains(item)) {
             currentItemsCount++;
@@ -45,9 +53,11 @@ public class CuttingManager : MonoBehaviour
             }
 
         }
-        if (sliceParentsCount==totalItemsCount&&! onCutDone) {
+        if (sliceParentsCount==totalItemsCount&&!onCutDone) {
             TutorialManager.Instance.NextText();
             onCutDone = true;
+            OnCutEnds.Invoke();
+            stroveManager.SetSlicesPosition(sliceParents);
 
         }
 
