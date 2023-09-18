@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Floor 2
+  m_Name: WallHouseDetails09
   m_Shader: {fileID: -6465566751694194690, guid: f31e13533a74de345ac960ac5885220b, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -39,7 +39,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseTexture:
-        m_Texture: {fileID: 2800000, guid: dadbefa0108f75e47a3984e9fe6cb2a1, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4cc1e7a8fd58fa34e85b23cdc81f5013, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -71,7 +71,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Metalic:
-        m_Texture: {fileID: 2800000, guid: d1f6c21933088f54c976d25d0876c15f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 41c0fbfe21423c34899901ce20020a4f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -83,8 +83,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal_Base:
-        m_Texture: {fileID: 2800000, guid: 67df61c4c8717464ca2876f09d3c66f3, type: 3}
-        m_Scale: {x: 0.5, y: 0.5}
+        m_Texture: {fileID: 2800000, guid: 17d2c8d6f2008f74cad4f856409bfca8, type: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
@@ -130,13 +130,13 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HUE: 325
+    - _HUE: 231
     - _HatchingDensity: 1
     - _HatchingRotation: 20.3
     - _HatchingSmoothness: 0.587
     - _Metallic: 0
-    - _NormalBase_Strength: 0.8
-    - _NormalPainterly_Strength: 0.1
+    - _NormalBase_Strength: 1
+    - _NormalPainterly_Strength: 0.25
     - _NormalsSensitive: 1
     - _OcclusionStrength: 1
     - _Outline_Thickness: 1
@@ -144,7 +144,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.1
+    - _Smoothness: 0.25
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -160,7 +160,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Offset_NormalPainterly: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Texture_Tiling: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _Texture_Tiling: {r: 1, g: 1, b: 0, a: 0}
     - _Tiling_NormalPainterly: {r: 1, g: 1, b: 0, a: 0}
     - __Hatching_AlphaBlend_Color: {r: 0, g: 0, b: 0, a: 1}
     - __Hatching_Scale: {r: 2, g: 2, b: 0, a: 0}

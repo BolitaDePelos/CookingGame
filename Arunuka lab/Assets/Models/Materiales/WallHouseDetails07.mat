@@ -130,7 +130,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HUE: 0
+    - _HUE: 164
     - _HatchingDensity: 1
     - _HatchingRotation: 20.3
     - _HatchingSmoothness: 0.587
