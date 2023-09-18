@@ -48,6 +48,8 @@ public class PourDetector : MonoBehaviour
     private void EndPour()
     {
         print("End");
+        currentStream.End();
+        currentStream = null;
 
 
 
@@ -55,7 +57,7 @@ public class PourDetector : MonoBehaviour
 
     private float CalculatePourAngle()
     {
-        return transform.forward.y * Mathf.Rad2Deg;
+        return transform.forward.x * Mathf.Rad2Deg;
 
 
     }
