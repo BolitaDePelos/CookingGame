@@ -66,7 +66,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D:
-        m_Texture: {fileID: 2800000, guid: a880e41dc9270f344a6bc4901f45298f, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -95,8 +95,8 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
     - _EnvironmentReflections: 1
-    - _Fill: 0.308
-    - _FresnelPower: 2
+    - _Fill: 0.529
+    - _FresnelPower: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -121,11 +121,11 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 1, g: 0, b: 0, a: 0}
-    - _LiquidColor: {r: 0.5471698, g: 0, b: 0, a: 0}
+    - _FresnelColor: {r: 0, g: 0, b: 0, a: 0}
+    - _LiquidColor: {r: 0.5882353, g: 0, b: 0.006275458, a: 1}
     - _SlideColor: {r: 1, g: 1, b: 1, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _SurfaceColor: {r: 1, g: 0, b: 0, a: 0}
+    - _SurfaceColor: {r: 0.7372549, g: 0.1157992, b: 0, a: 0}
     - _TopColor: {r: 0.18396229, g: 0.22431567, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &7853167018401535201
