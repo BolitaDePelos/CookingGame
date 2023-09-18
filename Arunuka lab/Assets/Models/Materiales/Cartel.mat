@@ -20,17 +20,16 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Flores
+  m_Name: Cartel
   m_Shader: {fileID: -6465566751694194690, guid: f31e13533a74de345ac960ac5885220b, type: 3}
-  m_ValidKeywords:
-  - _ALPHATEST_ON
+  m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
+  m_CustomRenderQueue: 2000
   stringTagMap:
-    RenderType: TransparentCutout
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -40,7 +39,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseTexture:
-        m_Texture: {fileID: 2800000, guid: 4bbac674bf2fe2d43ad27939f89ec356, type: 3}
+        m_Texture: {fileID: 2800000, guid: 40c294b9555abd545bd5c4e2941e1b91, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -72,7 +71,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Metalic:
-        m_Texture: {fileID: 2800000, guid: eb8ac472a6a6e75498a7b6693f546eb6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 72dfe32e72f1b664ea1313bfaff878fe, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -84,7 +83,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal_Base:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 07c3273e925d12e41b0292d732a78ce5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -113,8 +112,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - HatchingDrawStrength: 6.37
-    - _AlphaClip: 1
+    - HatchingDrawStrength: 5.95
+    - _AlphaClip: 0
     - _Alpha_Clip: 0.5
     - _Blend: 0
     - _BumpScale: 1
@@ -132,12 +131,12 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _HUE: 0
-    - _HatchingDensity: 0.254
-    - _HatchingRotation: 7.3
-    - _HatchingSmoothness: 0.457
+    - _HatchingDensity: 0.78
+    - _HatchingRotation: 20.3
+    - _HatchingSmoothness: 0.339
     - _Metallic: 0
     - _NormalBase_Strength: 1
-    - _NormalPainterly_Strength: 1
+    - _NormalPainterly_Strength: 0.25
     - _NormalsSensitive: 1
     - _OcclusionStrength: 1
     - _Outline_Thickness: 1
@@ -145,7 +144,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.1
+    - _Smoothness: 0.62
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -157,12 +156,12 @@ Material:
     - _ZWriteControl: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 1}
+    - _Color: {r: 0.8962264, g: 0.8962264, b: 0.8962264, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Offset_NormalPainterly: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Texture_Tiling: {r: 1, g: 1, b: 0, a: 0}
     - _Tiling_NormalPainterly: {r: 1, g: 1, b: 0, a: 0}
     - __Hatching_AlphaBlend_Color: {r: 0, g: 0, b: 0, a: 1}
-    - __Hatching_Scale: {r: 5, g: 2, b: 0, a: 0}
+    - __Hatching_Scale: {r: 2, g: 2, b: 0, a: 0}
   m_BuildTextureStacks: []
