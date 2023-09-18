@@ -308,6 +308,9 @@
         },
         {
             "m_Id": "c4ffc3b8e5664055b56332a36fd75e46"
+        },
+        {
+            "m_Id": "0f0f7c5e99654fbf988ed546915f5227"
         }
     ],
     "m_GroupDatas": [
@@ -375,6 +378,20 @@
                     "m_Id": "69e814a6b55a4be3896e8b44a99ff841"
                 },
                 "m_SlotId": 4
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "0f0f7c5e99654fbf988ed546915f5227"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "4900afc834574d4cb020555fc9abd9d7"
+                },
+                "m_SlotId": 2
             }
         },
         {
@@ -1349,8 +1366,8 @@
     },
     "m_FragmentContext": {
         "m_Position": {
-            "x": 3179.0,
-            "y": 668.9999389648438
+            "x": 3189.0,
+            "y": 602.0000610351563
         },
         "m_Blocks": [
             {
@@ -1654,6 +1671,41 @@
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "0f0f7c5e99654fbf988ed546915f5227",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 1686.0001220703125,
+            "y": 1165.0,
+            "width": 149.0,
+            "height": 34.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "4428231b883a4b158644b72458727b8f"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "bcc19f72e0ab46aab7847e9178ad5f8f"
+    }
 }
 
 {
@@ -3119,6 +3171,27 @@
     "m_Property": {
         "m_Id": "b3f19fb2159c4ac3a86ac672ecea624c"
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
+    "m_ObjectId": "4428231b883a4b158644b72458727b8f",
+    "m_Id": 0,
+    "m_DisplayName": "Texture Tiling",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0
+    },
+    "m_Labels": []
 }
 
 {
