@@ -22,13 +22,15 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Sheets
   m_Shader: {fileID: -6465566751694194690, guid: f31e13533a74de345ac960ac5885220b, type: 3}
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _ALPHATEST_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2450
+  stringTagMap:
+    RenderType: TransparentCutout
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -112,12 +114,14 @@ Material:
     m_Ints: []
     m_Floats:
     - HatchingDrawStrength: 6.37
-    - _AlphaClip: 0
+    - _AlphaClip: 1
+    - _Alpha_Clip: 0.1
     - _Blend: 0
     - _BumpScale: 1
+    - _CastShadows: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Cull: 2
+    - _Cull: 0
     - _Cutoff: 0.5
     - _DepthSensitive: 1
     - _DetailAlbedoMapScale: 1
@@ -133,7 +137,7 @@ Material:
     - _HatchingSmoothness: 0.457
     - _Metallic: 0
     - _NormalBase_Strength: 1
-    - _NormalPainterly_Strength: 5.55
+    - _NormalPainterly_Strength: 0.5
     - _NormalsSensitive: 1
     - _OcclusionStrength: 1
     - _Outline_Thickness: 1
@@ -148,7 +152,9 @@ Material:
     - _Surface: 0
     - _UseNormalMap: 0
     - _WorkflowMode: 1
+    - _ZTest: 4
     - _ZWrite: 1
+    - _ZWriteControl: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 1}
