@@ -57,7 +57,7 @@ public class PourDetector : MonoBehaviour
 
     private float CalculatePourAngle()
     {
-        return transform.forward.x * Mathf.Rad2Deg;
+        return transform.forward.z * Mathf.Rad2Deg;
 
 
     }

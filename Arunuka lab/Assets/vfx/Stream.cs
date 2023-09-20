@@ -8,8 +8,8 @@ public class Stream : MonoBehaviour
     private ParticleSystem splashparticle = null;
 
     private Coroutine pourRoutine = null;   
-    private Vector3 TargetPosition = Vector3.zero;
-    private Vector3 targetPosition;
+    private Vector3 targetPosition = Vector3.zero;
+    
 
     private void Awake()
     {
@@ -35,7 +35,7 @@ public class Stream : MonoBehaviour
     {
         while (gameObject.activeSelf)
         {
-            TargetPosition = FindEndPoint();
+            targetPosition = FindEndPoint();
             MoveToPosition(0,transform.position);
             AnimateToPosition(1, targetPosition);
 
@@ -57,8 +57,8 @@ public class Stream : MonoBehaviour
     {
         while(!HasReachedPosition(0, targetPosition))
         {
-            AnimateToPosition(0 , targetPosition);
-            AnimateToPosition (1 , targetPosition);
+            AnimateToPosition(0 ,targetPosition);
+            AnimateToPosition(1 ,targetPosition);
             yield return null;
         }
         Destroy(gameObject);
