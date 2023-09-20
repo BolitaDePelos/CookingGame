@@ -27,8 +27,9 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2000
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -73,8 +74,16 @@ Material:
         m_Texture: {fileID: 2800000, guid: 7c7ac2188a4a736438534d1ef8ff1520, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Metallic:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: 7d97b8cd9a689584f9fcc3aa82c78dcc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalPainterly:
@@ -113,8 +122,10 @@ Material:
     m_Floats:
     - HatchingDrawStrength: 5.95
     - _AlphaClip: 0
+    - _Alpha_Clip: 0.5
     - _Blend: 0
     - _BumpScale: 1
+    - _CastShadows: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
@@ -134,6 +145,7 @@ Material:
     - _Metallic: 0
     - _NormalBase_Strength: 1
     - _NormalPainterly_Strength: 0.25
+    - _NormalStrength: 1
     - _NormalsSensitive: 1
     - _OcclusionStrength: 1
     - _Outline_Thickness: 1
@@ -148,7 +160,9 @@ Material:
     - _Surface: 0
     - _UseNormalMap: 0
     - _WorkflowMode: 1
+    - _ZTest: 4
     - _ZWrite: 1
+    - _ZWriteControl: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.8962264, g: 0.8962264, b: 0.8962264, a: 1}

@@ -67,6 +67,7 @@ public class Player : SingletonMonobehaviour<Player>
     {
         characterController = GetComponent<CharacterController>();
         animPlayer = GetComponent<Animator>();
+        Bufferposition = transform.position;
     }
 
     private void Update()
@@ -89,8 +90,13 @@ public class Player : SingletonMonobehaviour<Player>
 
     }
 
+    Vector3 Bufferposition;
     private void PlayerInput()
     {
+        var pos = Bufferposition;
+        pos.x = transform.position.x;
+        pos.y = transform.position.y;
+        transform.position = pos;
 
         xInput = InputManager.GetInstance().GetMoveDirection().x;
         yInput = InputManager.GetInstance().GetMoveDirection().y;
@@ -99,7 +105,9 @@ public class Player : SingletonMonobehaviour<Player>
         yInputMouse = InputManager.GetInstance().GetlookInput().y;
 
         IsCurrentDeviceMouse = InputManager.GetInstance().IsCurrentDeviceMouse;
-    
+
+
+
     }
 
     private void CameraRotation()

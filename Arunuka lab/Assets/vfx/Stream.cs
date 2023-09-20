@@ -5,11 +5,16 @@ using UnityEngine;
 public class Stream : MonoBehaviour
 {
    private LineRenderer lineRendererer = null;
+    private ParticleSystem splashparticle = null;
+
+    private Coroutine pourRoutine = null;   
     private Vector3 TargetPosition = Vector3.zero;
+    private Vector3 targetPosition;
 
     private void Awake()
     {
         lineRendererer = GetComponent<LineRenderer>();
+        splashparticle = GetComponentInChildren<ParticleSystem>();
 
     }
 
@@ -22,6 +27,7 @@ public class Stream : MonoBehaviour
     public void Begin()
     {
         StartCoroutine(BeginPour());
+        pourRoutine = StartCoroutine(BeginPour());
 
     }
 
@@ -31,7 +37,7 @@ public class Stream : MonoBehaviour
         {
             TargetPosition = FindEndPoint();
             MoveToPosition(0,transform.position);
-            MoveToPosition (1, TargetPosition);
+            AnimateToPosition(1, targetPosition);
 
             yield return null;
         }
@@ -39,6 +45,25 @@ public class Stream : MonoBehaviour
 
     }
 
+    public void End()
+    {
+        StopCoroutine(pourRoutine);
+        pourRoutine = StartCoroutine(EndPour());
+
+    }
+
+
+    private IEnumerator EndPour()
+    {
+        while(!HasReachedPosition(0, targetPosition))
+        {
+            AnimateToPosition(0 , targetPosition);
+            AnimateToPosition (1 , targetPosition);
+            yield return null;
+        }
+        Destroy(gameObject);
+
+    }
     private Vector3 FindEndPoint()
     {
         RaycastHit hit;
@@ -56,4 +81,28 @@ public class Stream : MonoBehaviour
         lineRendererer.SetPosition(index, targetPosition);
     }
 
+
+    private void AnimateToPosition(int index, Vector3 targetPosition)
+    {
+        Vector3 currentPoint = lineRendererer.GetPosition(index);
+        Vector3 newPosition = Vector3.MoveTowards(currentPoint, targetPosition, Time.deltaTime * 1.75f);
+        lineRendererer.SetPosition (index, newPosition);
+
+    }
+
+    private bool HasReachedPosition(int index, Vector3 targetPosition )
+    {
+        Vector3 currentPosition = lineRendererer.GetPosition(index);
+        return currentPosition == targetPosition;
+    }
+
+    private IEnumerator UpdateParticle()
+    {
+        splashparticle.gameObject.transform.position = transform.position;
+
+        bool isHitting = HasReachedPosition(1, targetPosition);
+        splashparticle.gameObject.SetActive(isHitting);
+        yield return null;
+
+    }
 }
