@@ -1,36 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PickableItem : MonoBehaviour, IPickable
 {
-    public bool keepWorldPosition { get; private set; }
+    /// <inheritdoc />
+    public bool KeepWorldPosition { get; private set; }
+
+    public bool tutorialMode;
 
     private Rigidbody rb;
-    public bool tutorialMode;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    private void Start(){
-        if (tutorialMode)
-            enabled = false;
-
-
-    }
-    public GameObject PickUp()
+    private void Start()
     {
+        enabled = !tutorialMode;
+    }
+
+    /// <inheritdoc />
+    public GameObject PickUp(GameObject picker)
+    {
+        gameObject.transform.SetParent(picker.transform, KeepWorldPosition);
 
         if (rb != null)
-        {
             rb.isKinematic = true;
-        }
 
-        transform.position = Vector3.zero;
-        transform.rotation = Quaternion.identity;
-        return this.gameObject;
+        transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+        return gameObject;
+    }
 
+    /// <inheritdoc />
+    public void Drop()
+    {
+        gameObject.transform.SetParent(null);
+
+        if (rb != null)
+            rb.isKinematic = false;
     }
 }

@@ -11,7 +11,6 @@ public enum Ingredients
     Pepper,
     whiteWine,
     OliveOil
-
 }
 
 public enum SceneName

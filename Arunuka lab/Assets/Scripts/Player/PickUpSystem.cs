@@ -1,145 +1,116 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PickUpSystem : MonoBehaviour
 {
-
     [SerializeField] private LayerMask pickableLayerMask;
 
     [SerializeField] private Transform playerCameraTransform;
 
-    [SerializeField] [Min(1)] private float hitrange = 3;
+    [SerializeField][Min(1)] private float hitrange = 3;
 
-    [SerializeField] Transform pickUpParent;
+    [SerializeField] private Transform pickUpParent;
 
     [SerializeField] private GameObject inHandItem;
 
-
-    private RaycastHit hit;
-
     [SerializeField] private AudioSource pickUpSource;
 
+    [SerializeField] private Player player;
 
-    [SerializeField]
-    private Player player;
-    [SerializeField]
-    private Transform cutPositionPlayer;
+    [SerializeField] private Transform cutPositionPlayer;
+
+    private RaycastHit hit;
 
     private void OnEnable()
     {
         GameEventsManager.instance.InputEvents.OnInteractionPressed += PickUp;
         GameEventsManager.instance.InputEvents.OnDropPressed += DropItem;
         GameEventsManager.instance.InputEvents.OnUsePressed += UseItem;
-
-
     }
-
 
     private void OnDisable()
     {
         GameEventsManager.instance.InputEvents.OnInteractionPressed -= PickUp;
         GameEventsManager.instance.InputEvents.OnDropPressed -= DropItem;
         GameEventsManager.instance.InputEvents.OnUsePressed -= UseItem;
-
-
     }
-
 
     private void Update()
     {
         if (hit.collider != null)
         {
-           // hit.collider.GetComponent<Highlight>()?.ToggleHighlight(false);
-            
-
+            // hit.collider.GetComponent<Highlight>()?.ToggleHighlight(false);
         }
 
-        if(inHandItem != null)
-        {
+        if (inHandItem != null)
             return;
-        }
 
-
-        if(Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out hit, hitrange, pickableLayerMask))
+        if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out hit, hitrange, pickableLayerMask))
         {
             //hit.collider.GetComponent <Highlight>()?.ToggleHighlight(true);
-            
         }
     }
 
-
     private void UseItem()
     {
+        if (inHandItem == null)
+            return;
 
-        if(inHandItem != null)
-        {
-            IUsable usable = inHandItem.GetComponent<IUsable>();
-            if(usable != null)
-            {
-                usable.Use(this.gameObject);
-            }
-        }
-
+        if (inHandItem.TryGetComponent(out IUsable usable))
+            usable.Use(gameObject);
     }
 
     private void PickUp()
     {
-        if(hit.collider != null && inHandItem ==null)
+        if (hit.collider == null || inHandItem != null)
+            return;
+
+        if (hit.collider.TryGetComponent(out IPickable pickableItem))
         {
-            
-            IPickable pickableItem = hit.collider.GetComponent<IPickable>();
-            if(pickableItem != null)
-            {
-                pickUpSource.Play();
-                inHandItem = pickableItem.PickUp();
-                inHandItem.transform.SetParent(pickUpParent.transform, pickableItem.keepWorldPosition);
-            }
+            pickUpSource.Play();
+            inHandItem = pickableItem.PickUp(pickUpParent.gameObject);
+        }
 
-            if (hit.collider.GetComponent<Knife>())
-            {
-                Debug.Log("Its Knife!");
-                hit.collider.GetComponentInParent<Animator>().SetTrigger("Knife");
-                PlayerSetCutPosition();
-
-            }
+        if (hit.collider.GetComponent<Knife>())
+        {
+            Debug.Log("It's a Knife!");
+            player.GetComponentInParent<Animator>().SetTrigger("Knife");
+            PlayerSetCutPosition();
         }
     }
-
 
     private void DropItem()
     {
+        // Resumes player movement.
+        //
+        player.SetCanMove(true);
 
-        if (inHandItem != null)
-        {
-            //Reset Animation
-            Animator animator = hit.collider.GetComponentInParent<Animator>();
-            animator.Play("Default");
+        if (inHandItem == null)
+            return;
 
-            inHandItem.transform.SetParent(null);
-            inHandItem = null;
-            Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
-            
+        //Reset Animation.
+        //
+        player.GetComponentInParent<Animator>().Play("Default");
 
+        // Execute drop behaviour for item.
+        //
+        if (inHandItem.TryGetComponent(out IPickable pickableItem))
+            pickableItem.Drop();
 
-            if (rb != null)
-            {
-                rb.isKinematic = false;
-            }
-
-        }
-
+        inHandItem = null;
     }
 
+    public void PlayerSetCutPosition()
+    {
+        // Stops temporally player movement.
+        //
+        player.SetCanMove(false);
 
-    public void PlayerSetCutPosition() {
-        player.GetComponent<CharacterController>().enabled=false;
-        player.transform.position = cutPositionPlayer.transform.position;
-        player.GetComponent<CharacterController>().enabled = true;
-
+        // Set the cutting position, if we have one.
+        //
+        if (cutPositionPlayer != null)
+            player.transform.position = cutPositionPlayer.transform.position;
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;

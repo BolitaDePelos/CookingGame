@@ -1,24 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PickableObject : MonoBehaviour, IPickable
 {
-    [field:SerializeField]
-    public bool keepWorldPosition { get; private set; }
+    [field: SerializeField]
+    public bool KeepWorldPosition { get; private set; }
 
-    Rigidbody rb;
+    private Rigidbody rb;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    public GameObject PickUp()
+    /// <inheritdoc />
+    public GameObject PickUp(GameObject picker)
     {
+        gameObject.transform.SetParent(picker.transform, KeepWorldPosition);
+
         if (rb != null)
             rb.isKinematic = true;
-        return gameObject;
 
+        return gameObject;
+    }
+
+    /// <inheritdoc />
+    public void Drop()
+    {
+        gameObject.transform.SetParent(null);
+
+        if (rb != null)
+            rb.isKinematic = false;
     }
 }
