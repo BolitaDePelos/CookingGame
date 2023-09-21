@@ -1,14 +1,12 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Mechanics of a pot.
-/// </summary>
-public class Pot : SingletonMonobehaviour<Pot>
+public class FryPan : SingletonMonobehaviour<FryPan>
 {
-    [Header("Pouring Properties")]
-    [SerializeField] private float liquidFillDurationSeconds = 10;
-    [SerializeField] private MeshRenderer liquidRenderer;
+    //[Header("Pouring Properties")]
+    //[SerializeField] private float liquidFillDurationSeconds = 10;
+    //[SerializeField] private MeshRenderer liquidRenderer;
 
     [Header("Extra properties")]
     [SerializeField] private List<GameObject> foodInsidePot = new();
@@ -29,7 +27,7 @@ public class Pot : SingletonMonobehaviour<Pot>
         if(!stoveIsActive && smokeParticles.isPlaying)
             smokeParticles.Stop();
 
-        UpdateLiquid();
+        //UpdateLiquid();
     }
 
     /// <summary>
@@ -53,7 +51,7 @@ public class Pot : SingletonMonobehaviour<Pot>
             return;
 
         food.SetIsBeingCooked(stoveIsActive);
-        food.SetFoodLocation(FoodLocation.Pot);
+        food.SetFoodLocation(FoodLocation.Pan);
     }
 
     /// <summary>
@@ -76,21 +74,21 @@ public class Pot : SingletonMonobehaviour<Pot>
     /// </summary>
     public void SetIsBeingPoured(bool isBeingPoured) => this.isBeingPoured = isBeingPoured;
 
-    private void UpdateLiquid()
-    {
-        if (!isBeingPoured)
-            return;
+    //private void UpdateLiquid()
+    //{
+    //    if (!isBeingPoured)
+    //        return;
 
-        if (liquidRenderer == null)
-            return;
+    //    if (liquidRenderer == null)
+    //        return;
 
-        if (currentPouringDuration > liquidFillDurationSeconds)
-            return;
+    //    if (currentPouringDuration > liquidFillDurationSeconds)
+    //        return;
 
-        float percent = currentPouringDuration / liquidFillDurationSeconds;
-        float fill = MIN_HEIGHT + ((MAX_HEIGHT - MIN_HEIGHT) * percent);
-        liquidRenderer.material.SetFloat("_Fill", fill);
+    //    float percent = currentPouringDuration / liquidFillDurationSeconds;
+    //    float fill = MIN_HEIGHT + ((MAX_HEIGHT - MIN_HEIGHT) * percent);
+    //    liquidRenderer.material.SetFloat("_Fill", fill);
 
-        currentPouringDuration += Time.deltaTime;
-    }
+    //    currentPouringDuration += Time.deltaTime;
+    //}
 }

@@ -1,5 +1,6 @@
 using EzySlice;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -186,8 +187,8 @@ public class Knife : MonoBehaviour, IUsable, IPickable
             bottom.transform.SetParent(cutParent.transform, true);
             top.transform.SetParent(cutParent.transform, true);
 
-            AddHullComponents(bottom, hitObject.GetComponent<Food>().IngredientType, hitObject.GetComponent<Food>().crossMaterial);
-            AddHullComponents(top, hitObject.GetComponent<Food>().IngredientType, hitObject.GetComponent<Food>().crossMaterial);
+            AddHullComponents(bottom, hitObject);
+            AddHullComponents(top, hitObject);
             Destroy(hitObject);
 
             // Asigna el mismo objeto padre a las mitades cortadas.
@@ -210,7 +211,7 @@ public class Knife : MonoBehaviour, IUsable, IPickable
         }
     }
 
-    public void AddHullComponents(GameObject go, Ingredients vegetableType, Material CrossMaterial)
+    public void AddHullComponents(GameObject go, GameObject parent)
     {
         go.layer = 8;
         Rigidbody rb = go.AddComponent<Rigidbody>();
@@ -219,10 +220,19 @@ public class Knife : MonoBehaviour, IUsable, IPickable
         collider.convex = true;
 
         go.transform.rotation = Quaternion.identity;
+        
         // Item Food
+        //
+        Food parentFood = parent.GetComponent<Food>();
         Food food = go.AddComponent<Food>();
-        food.SetIngredientType(vegetableType);
-        food.SetCrossMaterial(CrossMaterial);
+        food.SetIngredientType(parentFood.IngredientType);
+        food.SetCrossMaterial(parentFood.crossMaterial);
+
+        // IPickable
+        //
+        PickableObject parentPickable = parent.GetComponent<PickableObject>();
+        PickableObject pickable = go.AddComponent<PickableObject>();
+        pickable.KeepWorldPosition = parentPickable.KeepWorldPosition;
 
         rb.AddExplosionForce(explosionForce, go.transform.position, 20);
     }

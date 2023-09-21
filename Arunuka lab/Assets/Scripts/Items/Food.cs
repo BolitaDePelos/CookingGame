@@ -37,6 +37,9 @@ public class Food : MonoBehaviour
     {
         initPos = transform.position;
 
+        if(materialRenderer == null && TryGetComponent(out MeshRenderer myMeshRenderer))
+            materialRenderer = myMeshRenderer;
+
         originalColor = materialRenderer != null
             ? materialRenderer.material.color
             : Color.white;

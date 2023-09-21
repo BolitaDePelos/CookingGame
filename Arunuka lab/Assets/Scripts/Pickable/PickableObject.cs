@@ -3,7 +3,7 @@ using UnityEngine;
 public class PickableObject : MonoBehaviour, IPickable
 {
     [field: SerializeField]
-    public bool KeepWorldPosition { get; private set; }
+    public bool KeepWorldPosition { get; set; }
 
     private Rigidbody rb;
     private bool isPickable = true;

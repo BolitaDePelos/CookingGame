@@ -6,6 +6,9 @@ public class Stove : MonoBehaviour, IUsable
     [field: SerializeField]
     public UnityEvent OnUse { get; private set; }
 
+    [SerializeField] UnityEvent OnStoveOn;
+    [SerializeField] UnityEvent OnStoveOff;
+
     [Header("Collider")]
     public GameObject colliderFlame;
 
@@ -47,14 +50,14 @@ public class Stove : MonoBehaviour, IUsable
             animator.PlayAnimationByName(Open);
             vfx.SetActive(true);
             colliderFlame.SetActive(true);
-            Pot.Instance.SetStoveActive(true);
+            OnStoveOn?.Invoke();
         }
         else
         {
             animator.PlayAnimationByName(Close);
             vfx.SetActive(false);
             colliderFlame.SetActive(false);
-            Pot.Instance.SetStoveActive(false);
+            OnStoveOff?.Invoke();
         }
     }
 }
