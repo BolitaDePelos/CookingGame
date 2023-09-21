@@ -8,7 +8,7 @@ using UnityEngine.Events;
 /// </summary>
 public class Knife : MonoBehaviour, IUsable, IPickable
 {
-    public UnityEvent OnUse { get; private set; }
+    public UnityEvent OnUse { get; set; }
 
     public Transform cutPlane;
     public LayerMask layerMask;
@@ -20,22 +20,33 @@ public class Knife : MonoBehaviour, IUsable, IPickable
     [SerializeField]
     private CuttingManager cuttingManager;
 
-    // Cache of how many cuts has an object.
+    [SerializeField]
+    private UnityEvent onCut;
+
+    [SerializeField]
+    private UnityEvent onPickUp;
+
+    [SerializeField]
+    private UnityEvent onDrop;
+
+    // Cache of how many cuts has the parent.
     // Note: The GetHasCode of GameObject is the InstanceId, so it's not expensive to leave it as the key.
     //
-    private readonly Dictionary<GameObject, int> currentCutsInObject = new();
+    private readonly Dictionary<GameObject, int> currentCutsInParent = new();
 
     private readonly Dictionary<GameObject, GameObject> parentsPerObject = new();
 
     public bool KeepWorldPosition => false;
 
-    private bool onUse = false;
     private readonly float movementSpeed = 1.0f;
     private Rigidbody m_Rigidbody;
+    private bool isPickable = true;
+    private bool isPickedUp = false;
 
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
+        cuttingManager = CuttingManager.Instance;
     }
 
     /// <summary>
@@ -51,7 +62,7 @@ public class Knife : MonoBehaviour, IUsable, IPickable
     /// </summary>
     private void Update()
     {
-        if (!onUse)
+        if (!IsPickedUp())
             return;
 
         Vector3 localPosition = transform.localPosition;
@@ -69,9 +80,18 @@ public class Knife : MonoBehaviour, IUsable, IPickable
     public void Use(GameObject actor) => OnUse?.Invoke();
 
     /// <inheritdoc />
+    public void SetIsPickable(bool isPickable) => this.isPickable = isPickable;
+
+    /// <inheritdoc />
+    public bool IsPickable() => isPickable;
+
+    /// <inheritdoc />
+    public bool IsPickedUp() => isPickedUp;
+
+    /// <inheritdoc />
     public GameObject PickUp(GameObject picker)
     {
-        onUse = true;
+        isPickedUp = true;
         m_Rigidbody.isKinematic = true;
 
         //TODO: Set an animation for this.
@@ -80,20 +100,24 @@ public class Knife : MonoBehaviour, IUsable, IPickable
             new Vector3(-0.31099999f, 0.331f, -0.0340000018f),
             new Quaternion(0.114386953f, 0.710132778f, -0.0854734182f, 0.689435542f));
 
+        onPickUp?.Invoke();
+
         return gameObject;
     }
 
     /// <inheritdoc />
     public void Drop()
     {
-        onUse = false;
+        isPickedUp = false;
         m_Rigidbody.isKinematic = false;
 
         // TODO: Add animation to leave knife in its correct position.
         //
         transform.SetLocalPositionAndRotation(
-            new Vector3(-0.31099999f,0.0170000009f,-0.474397004f),
-            new Quaternion(-0.413232654f,0.435098618f,-0.567699552f,0.563600302f));
+            new Vector3(-0.31099999f, 0.0170000009f, -0.474397004f),
+            new Quaternion(-0.413232654f, 0.435098618f, -0.567699552f, 0.563600302f));
+
+        onDrop?.Invoke();
     }
 
     /// <summary>
@@ -108,15 +132,16 @@ public class Knife : MonoBehaviour, IUsable, IPickable
         foreach (Collider hit in hits)
         {
             GameObject hitObject = hit.gameObject;
-            if (!currentCutsInObject.ContainsKey(hitObject))
-                currentCutsInObject[hitObject] = 0;
 
-            int currentCutsForObject = currentCutsInObject[hitObject];
-            if (currentCutsForObject >= maxCutsPerObject)
+            int currentHitsOnParent = 0;
+            GameObject cutParent = GetCutParent(hitObject);
+            if (cutParent != null)
+                currentHitsOnParent = currentCutsInParent[cutParent];
+
+            if (currentHitsOnParent >= maxCutsPerObject)
             {
-                cuttingManager.CheckCut();
-
                 Debug.Log("Se ha alcanzado el límite de cortes permitidos para este objeto.");
+                cuttingManager.CheckCut();
                 continue;
             }
 
@@ -139,37 +164,31 @@ public class Knife : MonoBehaviour, IUsable, IPickable
 
             // Crea un nuevo GameObject vacío solo si no existe uno para el objeto que se está cortando.
             //
-            GameObject parent;
-            if (!parentsPerObject.ContainsKey(hitObject))
+            if (cutParent == null)
             {
-                parent = new GameObject();
-                parent.transform.position = Vector3.zero;
-                parent.name = hitObject.name + " (Sliced)";
-                parentsPerObject[hitObject] = parent;
-                cuttingManager.AddSliceItem(parent);
-            }
-            else
-            {
-                parent = parentsPerObject[hitObject];
+                cutParent = new GameObject();
+                cutParent.transform.position = Vector3.zero;
+                cutParent.name = hitObject.name + " (Sliced)";
+                cuttingManager.AddSliceItem(cutParent);
+
+                parentsPerObject[hitObject] = cutParent;
+                currentCutsInParent[cutParent] = 0;
             }
 
             GameObject bottom = hull.CreateLowerHull(hitObject, crossMaterial);
             GameObject top = hull.CreateUpperHull(hitObject, crossMaterial);
 
-            bottom.transform.SetParent(parent.transform, true);
-            top.transform.SetParent(parent.transform, true);
+            bottom.transform.SetParent(cutParent.transform, true);
+            top.transform.SetParent(cutParent.transform, true);
 
             AddHullComponents(bottom, hitObject.GetComponent<Food>().IngredientType, hitObject.GetComponent<Food>().crossMaterial);
             AddHullComponents(top, hitObject.GetComponent<Food>().IngredientType, hitObject.GetComponent<Food>().crossMaterial);
             Destroy(hitObject);
 
-            currentCutsInObject[top] = currentCutsForObject + 1;
-            currentCutsInObject[bottom] = currentCutsForObject + 1;
-
             // Asigna el mismo objeto padre a las mitades cortadas.
             //
-            parentsPerObject[top] = parent;
-            parentsPerObject[bottom] = parent;
+            parentsPerObject[top] = cutParent;
+            parentsPerObject[bottom] = cutParent;
 
             // Restaura las transformaciones locales de las mitades cortadas.
             //
@@ -178,6 +197,11 @@ public class Knife : MonoBehaviour, IUsable, IPickable
 
             top.transform.SetLocalPositionAndRotation(originalPosition, originalRotation);
             top.transform.localScale = originalScale;
+
+            // Adds cuts in parent counter.
+            //
+            currentCutsInParent[cutParent]++;
+            onCut?.Invoke();
         }
     }
 
@@ -208,6 +232,18 @@ public class Knife : MonoBehaviour, IUsable, IPickable
             return null;
 
         return obj.Slice(cutPlane.position, cutPlane.up, crossSectionMaterial);
+    }
+
+    /// <summary>
+    /// Returns the parent of the cut object. If it does not have a parent (It's first time cutting it),
+    /// then it returns NULL.
+    /// </summary>
+    private GameObject GetCutParent(GameObject objectToCut)
+    {
+        if (parentsPerObject.TryGetValue(objectToCut, out GameObject parent))
+            return parent;
+
+        return null;
     }
 
     private void OnDrawGizmos()

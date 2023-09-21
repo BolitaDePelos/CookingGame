@@ -10,7 +10,7 @@ public enum Ingredients
     Salt,
     Pepper,
     whiteWine,
-    OliveOil
+    OliveOil,
 }
 
 public enum SceneName
@@ -18,4 +18,25 @@ public enum SceneName
     MainMenu,
     Scene_Level_1,
     Scene_Level_Tutorial
+}
+
+/// <summary>
+/// State of the <see cref="Food"/>.
+/// </summary>
+public enum FoodCookState
+{
+    Raw,
+    Cooked,
+    Burn,
+}
+
+/// <summary>
+/// Location of the <see cref="Food"/>.
+/// </summary>
+public enum FoodLocation
+{
+    Table,
+    Pot,
+    Pan,
+    Plate
 }

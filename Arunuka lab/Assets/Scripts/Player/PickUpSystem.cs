@@ -64,11 +64,14 @@ public class PickUpSystem : MonoBehaviour
         if (hit.collider == null || inHandItem != null)
             return;
 
-        if (hit.collider.TryGetComponent(out IPickable pickableItem))
-        {
-            pickUpSource.Play();
-            inHandItem = pickableItem.PickUp(pickUpParent.gameObject);
-        }
+        if (!hit.collider.TryGetComponent(out IPickable pickableItem))
+            return;
+
+        if (!pickableItem.IsPickable())
+            return;
+
+        pickUpSource.Play();
+        inHandItem = pickableItem.PickUp(pickUpParent.gameObject);
 
         if (hit.collider.GetComponent<Knife>())
         {
