@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c789c9b3cfdf742adaf08704021afc, type: 3}
-  m_Name: Truck Blue
+  m_Name: TruckOption3
   m_EditorClassIdentifier: 
-  <NameItem>k__BackingField: Truck Blue
+  <NameItem>k__BackingField: TruckOption3
   <Texture>k__BackingField: {fileID: 0}
-  <Material>k__BackingField: {fileID: 4020148284677896404, guid: de83d45ed51cdf246a8b5859f70df063, type: 3}
+  <Material>k__BackingField: {fileID: 2100000, guid: ff4214f88996f6e4eb39bb9def13f093, type: 2}

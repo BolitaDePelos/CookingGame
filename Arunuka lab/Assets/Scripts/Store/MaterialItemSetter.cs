@@ -25,6 +25,9 @@ public class MaterialItemSetter : StoreItemSetter
 
     public override void SetItem(StorePropData data)
     {
+        if (data == null)
+            return;
+
         if (data.HasMaterial)
             render.material = data.Material;
     }

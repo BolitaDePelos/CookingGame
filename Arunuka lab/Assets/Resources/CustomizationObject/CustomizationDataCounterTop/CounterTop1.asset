@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c789c9b3cfdf742adaf08704021afc, type: 3}
-  m_Name: Truck Red
+  m_Name: CounterTop1
   m_EditorClassIdentifier: 
-  <NameItem>k__BackingField: Truck Red
+  <NameItem>k__BackingField: CounterTop1
   <Texture>k__BackingField: {fileID: 0}
-  <Material>k__BackingField: {fileID: 1218063318265753382, guid: 1bdbda2fcf90d1e48af0e565fdc2f2c6, type: 3}
+  <Material>k__BackingField: {fileID: 2100000, guid: 201d805950895d24bbeea62e0432475a, type: 2}

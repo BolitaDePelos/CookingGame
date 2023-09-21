@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bd633d42d53b5241a1f1d1090419d2f, type: 3}
-  m_Name: Truck
+  m_Name: CounterTop
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Truck
+  <Name>k__BackingField: CounterTop

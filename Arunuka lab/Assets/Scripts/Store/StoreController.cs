@@ -60,7 +60,7 @@ public class StoreController : Singleton<StoreController>
         costDisplayer.DisplayCost();
         buttonBuy.interactable =  CurrentItem.CheckBuy();
         buttonSelect.interactable = CurrentItem.CheckSelect();
-        vcam.Follow = CurrentItem.transform;
+        vcam.Follow = vcam.LookAt = CurrentItem.transform;
     }
 
     [MenuItem("Tools/PlayerPrefs Elimination")]
