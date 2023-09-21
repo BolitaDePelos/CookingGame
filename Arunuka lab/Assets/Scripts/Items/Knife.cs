@@ -46,7 +46,7 @@ public class Knife : MonoBehaviour, IUsable, IPickable
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
-        cuttingManager = CuttingManager.Instance;
+        
     }
 
     /// <summary>
@@ -55,6 +55,11 @@ public class Knife : MonoBehaviour, IUsable, IPickable
     private void Start()
     {
         enabled = !tutorialMode;
+
+        // Note: It needs to be referenced in the Start because 
+        //       we don't want to change the execution priority just for the Awake methods.
+        //
+        cuttingManager = CuttingManager.Instance;
     }
 
     /// <summary>
