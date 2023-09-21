@@ -7,6 +7,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 public class InputManager : MonoBehaviour
 {
+    [Header("UI")]
+    private bool AnyKeyPressed = false;
+
 
     [Header("Character Input")]
     private Vector2 move = Vector2.zero;
@@ -126,6 +129,22 @@ public class InputManager : MonoBehaviour
         }
     }
 
+
+    public void AnyButtonPressed(InputAction.CallbackContext context)
+    {
+
+        if (context.performed)
+        {
+            AnyKeyPressed = true;
+        }
+        else if (context.canceled)
+        {
+            AnyKeyPressed = false;
+        }
+    }
+
+
+
     public Vector2 GetMoveDirection()
     {
         return move;
@@ -158,6 +177,12 @@ public class InputManager : MonoBehaviour
         return result;
     }
 
+    public bool GetAnyPressed()
+    {
+        bool result = AnyKeyPressed;
+        AnyKeyPressed = false;
+        return result;
+    }
 
 
     private void OnApplicationFocus(bool focus)

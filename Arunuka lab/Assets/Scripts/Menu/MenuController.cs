@@ -45,8 +45,19 @@ public class MenuController : MonoBehaviour
     private string levelToLoad;
     [SerializeField] private GameObject noSavedGameDialog = null;
 
+    [Header("Anim")]
+    private bool Menu;
+    public Animator anim;
+
+    public GameObject CanvasAnyKey;
+
+
     private void Start()
     {
+        anim = GetComponent<Animator>();
+
+        Menu = false;
+        CanvasAnyKey.SetActive(true);
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
 
@@ -68,6 +79,11 @@ public class MenuController : MonoBehaviour
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
 
+    }
+
+    private void Update()
+    {
+        PressAnyKey();
     }
 
     public void SetResolution(int resolutionIndex)
@@ -183,6 +199,17 @@ public class MenuController : MonoBehaviour
         yield return new WaitForSeconds(2);
         comfirmationPrompt.SetActive(false);
 
+    }
+
+    public void PressAnyKey()
+    {
+        if (InputMainMenu.GetInstance().GetAnyPressed() && CanvasAnyKey.activeSelf)
+        {
+            Menu = true;
+            anim.SetBool("Menu", true);
+            CanvasAnyKey.SetActive(false);
+
+        }
     }
 
 }
