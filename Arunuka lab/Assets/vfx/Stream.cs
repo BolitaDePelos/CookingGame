@@ -5,7 +5,7 @@ using UnityEngine;
 public class Stream : MonoBehaviour
 {
    private LineRenderer lineRendererer = null;
-    private ParticleSystem splashparticle = null;
+    private ParticleSystem splashParticle = null;
 
     private Coroutine pourRoutine = null;   
     private Vector3 targetPosition = Vector3.zero;
@@ -14,7 +14,7 @@ public class Stream : MonoBehaviour
     private void Awake()
     {
         lineRendererer = GetComponent<LineRenderer>();
-        splashparticle = GetComponentInChildren<ParticleSystem>();
+        splashParticle = GetComponentInChildren<ParticleSystem>();
 
     }
 
@@ -26,7 +26,7 @@ public class Stream : MonoBehaviour
 
     public void Begin()
     {
-        StartCoroutine(BeginPour());
+        StartCoroutine(UpdateParticle());
         pourRoutine = StartCoroutine(BeginPour());
 
     }
@@ -36,8 +36,9 @@ public class Stream : MonoBehaviour
         while (gameObject.activeSelf)
         {
             targetPosition = FindEndPoint();
+
             MoveToPosition(0,transform.position);
-            AnimateToPosition(1, targetPosition);
+            AnimateToPosition(1,targetPosition);   
 
             yield return null;
         }
@@ -98,11 +99,16 @@ public class Stream : MonoBehaviour
 
     private IEnumerator UpdateParticle()
     {
-        splashparticle.gameObject.transform.position = transform.position;
 
-        bool isHitting = HasReachedPosition(1, targetPosition);
-        splashparticle.gameObject.SetActive(isHitting);
-        yield return null;
+        while (gameObject.activeSelf)
+        {
+            splashParticle.gameObject.transform.position = targetPosition;
 
+            bool isHitting = HasReachedPosition(1, targetPosition);
+            splashParticle.gameObject.SetActive(isHitting);
+            yield return null;
+
+        }
+       
     }
 }
