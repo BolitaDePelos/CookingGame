@@ -9,7 +9,6 @@ public class MoneyUpdateHandler : MonoBehaviour
     private void Start()
     {
         updater = new MoneyUpdater();
-        updater.UpdateMoney(100);
     }
 
     public void UpdateMoney(int amount) => updater.UpdateMoney(amount);
