@@ -47,16 +47,18 @@ public class MenuController : MonoBehaviour
 
     [Header("Anim")]
     private bool Menu;
+    private bool Fade;
     public Animator anim;
 
     public GameObject CanvasAnyKey;
-
+    public GameObject FadeCanvas;
 
     private void Start()
     {
         anim = GetComponent<Animator>();
 
         Menu = false;
+        Fade = false;
         CanvasAnyKey.SetActive(true);
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
@@ -95,7 +97,11 @@ public class MenuController : MonoBehaviour
 
     public void NewGameDialoYes()
     {
-        SceneControllerManager.Instance.FadeAndLoadScene(_newGameLevel, transform.position);
+        SceneControllerManager.Instance.LoadNextLevel(_newGameLevel);
+        Fade = true;
+        anim.SetTrigger("Fade");
+        FadeCanvas.SetActive(true);
+
     }
 
     public void LoadGameDialogYes()
@@ -103,7 +109,7 @@ public class MenuController : MonoBehaviour
         if (PlayerPrefs.HasKey("SavedLevel"))
         {
             levelToLoad = PlayerPrefs.GetString("SaveLevel");
-            SceneControllerManager.Instance.FadeAndLoadScene(levelToLoad, transform.position);
+            SceneControllerManager.Instance.LoadNextLevel(levelToLoad);
         }
         else
         {
@@ -208,7 +214,7 @@ public class MenuController : MonoBehaviour
             Menu = true;
             anim.SetBool("Menu", true);
             CanvasAnyKey.SetActive(false);
-
+            FadeCanvas.SetActive(true);
         }
     }
 

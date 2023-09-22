@@ -63,9 +63,18 @@ public class Player : SingletonMonobehaviour<Player>
     private bool canMove = true;
 
     private GameObject mainCamera;
+
     private CharacterController characterController;
 
     private const float CameraRotationThreshold = 0.01f;
+
+
+    [Header("Gravity")]
+    private float _gravity = -9.81f;
+    [SerializeField] private float gravityMultiplier = 3.0f;
+    private float _velocity;
+
+
 
     /// <summary>
     /// Called when the objects are being created.
@@ -98,8 +107,12 @@ public class Player : SingletonMonobehaviour<Player>
         PlayerInput();
         GroundedCheck();
 
+
         if (canMove)
+            ApplyGravity();
             Move();
+
+     
     }
 
     /// <summary>
@@ -107,7 +120,11 @@ public class Player : SingletonMonobehaviour<Player>
     /// </summary>
     private void LateUpdate()
     {
-        CameraRotation();
+        if (!RecipesMenu.GameIsPaused )
+        {
+            CameraRotation();
+        }
+  
     }
 
     /// <summary>
@@ -158,6 +175,7 @@ public class Player : SingletonMonobehaviour<Player>
     /// </summary>
     private void CameraRotation()
     {
+    
         if (InputManager.GetInstance().GetlookInput().sqrMagnitude < CameraRotationThreshold)
             return;
 
@@ -180,14 +198,17 @@ public class Player : SingletonMonobehaviour<Player>
     /// <summary>
     /// Moves the player based on the input values.
     /// </summary>
+    
     private void Move()
     {
         // Reference to the players current horizontal velocity.
         //
-        float currentHorizontalSpeed = new Vector3(
-            characterController.velocity.x,
-            0.0f,
-            characterController.velocity.z).magnitude;
+        
+          float currentHorizontalSpeed = new Vector3(
+              characterController.velocity.x,
+              0.0f,
+              characterController.velocity.z).magnitude;
+        
 
         float speedOffset = 0.1f;
         float inputMagnitude = InputManager.GetInstance().analogMovement
@@ -227,9 +248,23 @@ public class Player : SingletonMonobehaviour<Player>
 
         // Move the player.
         //
+
         Vector3 motion = inputDirection.normalized * (speed * Time.deltaTime)
             + new Vector3(0.0f, verticalVelocity, 0.0f) * Time.deltaTime;
         characterController.Move(motion);
+    }
+
+
+    private void ApplyGravity()
+    {
+        if (!grounded) // Si el jugador no está en el suelo.
+        {
+            verticalVelocity += _gravity * gravityMultiplier * Time.deltaTime; // Aplicar gravedad.
+        }
+        else // Si el jugador está en el suelo, resetear la velocidad vertical.
+        {
+            verticalVelocity = -0.5f; // Puedes ajustar este valor según tus necesidades.
+        }
     }
 
     private void OnDrawGizmosSelected()

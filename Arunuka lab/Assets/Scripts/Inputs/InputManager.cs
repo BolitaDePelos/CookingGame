@@ -8,7 +8,8 @@ using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
     [Header("UI")]
-    private bool AnyKeyPressed = false;
+    private bool RecipesPressed = false;
+    private bool PausePressed = false;
 
 
     [Header("Character Input")]
@@ -25,6 +26,8 @@ public class InputManager : MonoBehaviour
     [Header("Mouse Cursor Settings")]
     private bool cursorLocked = true;
     private bool cursorInputForLook = true;
+    private bool cursorUnlocked = false;
+
 
     private static InputManager instance;
 
@@ -130,19 +133,30 @@ public class InputManager : MonoBehaviour
     }
 
 
-    public void AnyButtonPressed(InputAction.CallbackContext context)
+    public void RecipesButtonPressed(InputAction.CallbackContext context)
     {
 
         if (context.performed)
         {
-            AnyKeyPressed = true;
+            RecipesPressed = true;
         }
         else if (context.canceled)
         {
-            AnyKeyPressed = false;
+            RecipesPressed = false;
         }
     }
 
+    public void PauseMenuPressed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            PausePressed = true;
+        }
+        else if (context.canceled)
+        {
+            PausePressed = false;
+        }
+    }
 
 
     public Vector2 GetMoveDirection()
@@ -177,23 +191,32 @@ public class InputManager : MonoBehaviour
         return result;
     }
 
-    public bool GetAnyPressed()
+    public bool GetRecipesPressed()
     {
-        bool result = AnyKeyPressed;
-        AnyKeyPressed = false;
+        bool result = RecipesPressed;
+        RecipesPressed = false;
         return result;
     }
 
+    public bool GetPauseMenuPressed()
+    {
+        bool result = PausePressed;
+        PausePressed = false;
+        return result;
+    }
 
+ /*
     private void OnApplicationFocus(bool focus)
     {
+
         SetCursorState(cursorLocked);
+
     }
     private void SetCursorState(bool newState)
     {
         Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
     }
-
+    */
     public bool IsCurrentDeviceMouse
     {
         get
