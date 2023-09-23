@@ -2,26 +2,25 @@ using UnityEngine;
 
 public class PickableObject : MonoBehaviour, IPickable
 {
-    [field: SerializeField]
-    public bool KeepWorldPosition { get; set; }
+    [field: SerializeField] public bool KeepWorldPosition { get; set; }
 
-    private Rigidbody rb;
-    private bool isPickable = true;
-    private bool isPickedUp = false;
+    private Rigidbody _rigidbody;
+    private bool _isPickable = true;
+    private bool _isPickedUp;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     /// <inheritdoc />
     public GameObject PickUp(GameObject picker)
     {
-        isPickedUp = true;
+        _isPickedUp = true;
         gameObject.transform.SetParent(picker.transform, KeepWorldPosition);
 
-        if (rb != null)
-            rb.isKinematic = true;
+        if (_rigidbody != null)
+            _rigidbody.isKinematic = true;
 
         return gameObject;
     }
@@ -29,19 +28,28 @@ public class PickableObject : MonoBehaviour, IPickable
     /// <inheritdoc />
     public void Drop()
     {
-        isPickedUp = false;
+        _isPickedUp = false;
         gameObject.transform.SetParent(null);
 
-        if (rb != null)
-            rb.isKinematic = false;
+        if (_rigidbody != null)
+            _rigidbody.isKinematic = false;
     }
 
     /// <inheritdoc />
-    public void SetIsPickable(bool isPickable) => this.isPickable = isPickable;
+    public void SetIsPickable(bool isPickable)
+    {
+        _isPickable = isPickable;
+    }
 
     /// <inheritdoc />
-    public bool IsPickable() => isPickable;
+    public bool IsPickable()
+    {
+        return _isPickable;
+    }
 
     /// <inheritdoc />
-    public bool IsPickedUp() => isPickedUp;
+    public bool IsPickedUp()
+    {
+        return _isPickedUp;
+    }
 }

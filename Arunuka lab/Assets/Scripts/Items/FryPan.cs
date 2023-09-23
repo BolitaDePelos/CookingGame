@@ -1,37 +1,33 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manages the state and ingredients in the fry pan object.
+/// </summary>
 public class FryPan : SingletonMonobehaviour<FryPan>
 {
-    //[Header("Pouring Properties")]
-    //[SerializeField] private float liquidFillDurationSeconds = 10;
-    //[SerializeField] private MeshRenderer liquidRenderer;
-
-    [Header("Extra properties")]
-    [SerializeField] private List<GameObject> foodInsidePot = new();
-    [SerializeField] private bool stoveIsActive = false;
+    [SerializeField] private bool stoveIsActive;
     [SerializeField] private ParticleSystem smokeParticles;
+    [SerializeField] private List<GameObject> foodInsidePot = new();
 
-    private bool isBeingPoured = false;
-    private float currentPouringDuration = 0.0f;
-
-    private const float MIN_HEIGHT = 0.42F;
-    private const float MAX_HEIGHT = 0.52F;
-
+    /// <summary>
+    /// Updates each game frame.
+    /// </summary>
     private void Update()
     {
-        if(stoveIsActive && !smokeParticles.isPlaying)
-            smokeParticles.Play();
-        
-        if(!stoveIsActive && smokeParticles.isPlaying)
-            smokeParticles.Stop();
-
-        //UpdateLiquid();
+        switch (stoveIsActive)
+        {
+            case true when !smokeParticles.isPlaying:
+                smokeParticles.Play();
+                break;
+            case false when smokeParticles.isPlaying:
+                smokeParticles.Stop();
+                break;
+        }
     }
 
     /// <summary>
-    /// Checks what objects are now inside to disable the pickability behavior.
+    /// Checks what food is now inside of the fry pan.
     /// </summary>
     private void OnTriggerStay(Collider other)
     {
@@ -44,7 +40,6 @@ public class FryPan : SingletonMonobehaviour<FryPan>
         if (pickable.IsPickedUp())
             return;
 
-        pickable.SetIsPickable(false);
         foodInsidePot.Add(other.gameObject);
 
         if (!other.TryGetComponent(out Food food))
@@ -55,40 +50,37 @@ public class FryPan : SingletonMonobehaviour<FryPan>
     }
 
     /// <summary>
+    /// Checks if a food is now outside of the fry pan.
+    /// </summary>
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.TryGetComponent(out IPickable _))
+            return;
+
+        if (!foodInsidePot.Contains(other.gameObject))
+            return;
+
+        foodInsidePot.Remove(other.gameObject);
+        if (!other.TryGetComponent(out Food food))
+            return;
+
+        food.SetIsBeingCooked(false);
+        food.SetFoodLocation(FoodLocation.Table);
+    }
+
+    /// <summary>
     /// Sets if the stove is active or not.
     /// </summary>
     public void SetStoveActive(bool isActive)
     {
         stoveIsActive = isActive;
-        foodInsidePot.ForEach(foodObject =>
-        {
-            if (!foodObject.TryGetComponent(out Food food))
-                return;
+        foodInsidePot.ForEach(
+            foodObject =>
+            {
+                if (!foodObject.TryGetComponent(out Food food))
+                    return;
 
-            food.SetIsBeingCooked(isActive);
-        });
+                food.SetIsBeingCooked(isActive);
+            });
     }
-
-    /// <summary>
-    /// Sets if liquid is being poured in the pot or not.
-    /// </summary>
-    public void SetIsBeingPoured(bool isBeingPoured) => this.isBeingPoured = isBeingPoured;
-
-    //private void UpdateLiquid()
-    //{
-    //    if (!isBeingPoured)
-    //        return;
-
-    //    if (liquidRenderer == null)
-    //        return;
-
-    //    if (currentPouringDuration > liquidFillDurationSeconds)
-    //        return;
-
-    //    float percent = currentPouringDuration / liquidFillDurationSeconds;
-    //    float fill = MIN_HEIGHT + ((MAX_HEIGHT - MIN_HEIGHT) * percent);
-    //    liquidRenderer.material.SetFloat("_Fill", fill);
-
-    //    currentPouringDuration += Time.deltaTime;
-    //}
 }

@@ -6,34 +6,41 @@ using UnityEngine;
 /// </summary>
 public class Pot : SingletonMonobehaviour<Pot>
 {
-    [Header("Pouring Properties")]
-    [SerializeField] private float liquidFillDurationSeconds = 10;
+    [Header("Pouring Properties")] [SerializeField]
+    private float liquidFillDurationSeconds = 10;
+
     [SerializeField] private MeshRenderer liquidRenderer;
 
-    [Header("Extra properties")]
-    [SerializeField] private List<GameObject> foodInsidePot = new();
-    [SerializeField] private bool stoveIsActive = false;
+    [Header("Extra properties")] [SerializeField]
+    private List<GameObject> foodInsidePot = new();
+
+    [SerializeField] private bool stoveIsActive;
     [SerializeField] private ParticleSystem smokeParticles;
 
-    private bool isBeingPoured = false;
-    private float currentPouringDuration = 0.0f;
+    private bool _isBeingPoured;
+    private float _currentPouringDuration;
+    private static readonly int FillPropertyId = Shader.PropertyToID("_Fill");
 
-    private const float MIN_HEIGHT = 0.42F;
-    private const float MAX_HEIGHT = 0.52F;
+    private const float MinHeight = 0.42F;
+    private const float MaxHeight = 0.52F;
 
     private void Update()
     {
-        if(stoveIsActive && !smokeParticles.isPlaying)
-            smokeParticles.Play();
-        
-        if(!stoveIsActive && smokeParticles.isPlaying)
-            smokeParticles.Stop();
+        switch (stoveIsActive)
+        {
+            case true when !smokeParticles.isPlaying:
+                smokeParticles.Play();
+                break;
+            case false when smokeParticles.isPlaying:
+                smokeParticles.Stop();
+                break;
+        }
 
         UpdateLiquid();
     }
 
     /// <summary>
-    /// Checks what objects are now inside to disable the pickability behavior.
+    /// Checks what food is now inside of the fry pan.
     /// </summary>
     private void OnTriggerStay(Collider other)
     {
@@ -46,14 +53,32 @@ public class Pot : SingletonMonobehaviour<Pot>
         if (pickable.IsPickedUp())
             return;
 
-        pickable.SetIsPickable(false);
         foodInsidePot.Add(other.gameObject);
 
         if (!other.TryGetComponent(out Food food))
             return;
 
         food.SetIsBeingCooked(stoveIsActive);
-        food.SetFoodLocation(FoodLocation.Pot);
+        food.SetFoodLocation(FoodLocation.Pan);
+    }
+
+    /// <summary>
+    /// Checks if a food is now outside of the fry pan.
+    /// </summary>
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.TryGetComponent(out IPickable _))
+            return;
+
+        if (!foodInsidePot.Contains(other.gameObject))
+            return;
+
+        foodInsidePot.Remove(other.gameObject);
+        if (!other.TryGetComponent(out Food food))
+            return;
+
+        food.SetIsBeingCooked(false);
+        food.SetFoodLocation(FoodLocation.Table);
     }
 
     /// <summary>
@@ -62,35 +87,42 @@ public class Pot : SingletonMonobehaviour<Pot>
     public void SetStoveActive(bool isActive)
     {
         stoveIsActive = isActive;
-        foodInsidePot.ForEach(foodObject =>
-        {
-            if (!foodObject.TryGetComponent(out Food food))
-                return;
+        foodInsidePot.ForEach(
+            foodObject =>
+            {
+                if (!foodObject.TryGetComponent(out Food food))
+                    return;
 
-            food.SetIsBeingCooked(isActive);
-        });
+                food.SetIsBeingCooked(isActive);
+            });
     }
 
     /// <summary>
     /// Sets if liquid is being poured in the pot or not.
     /// </summary>
-    public void SetIsBeingPoured(bool isBeingPoured) => this.isBeingPoured = isBeingPoured;
+    public void SetIsBeingPoured(bool isBeingPoured)
+    {
+        _isBeingPoured = isBeingPoured;
+    }
 
+    /// <summary>
+    /// Updates the liquid mesh renderer if it's being poured.
+    /// </summary>
     private void UpdateLiquid()
     {
-        if (!isBeingPoured)
+        if (!_isBeingPoured)
             return;
 
-        if (liquidRenderer == null)
+        if (liquidRenderer is null)
             return;
 
-        if (currentPouringDuration > liquidFillDurationSeconds)
+        if (_currentPouringDuration > liquidFillDurationSeconds)
             return;
 
-        float percent = currentPouringDuration / liquidFillDurationSeconds;
-        float fill = MIN_HEIGHT + ((MAX_HEIGHT - MIN_HEIGHT) * percent);
-        liquidRenderer.material.SetFloat("_Fill", fill);
+        float percent = _currentPouringDuration / liquidFillDurationSeconds;
+        float fill = MinHeight + (MaxHeight - MinHeight) * percent;
+        liquidRenderer.material.SetFloat(FillPropertyId, fill);
 
-        currentPouringDuration += Time.deltaTime;
+        _currentPouringDuration += Time.deltaTime;
     }
 }
