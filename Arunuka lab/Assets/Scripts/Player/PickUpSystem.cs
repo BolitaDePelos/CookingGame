@@ -6,7 +6,7 @@ public class PickUpSystem : MonoBehaviour
 
     [SerializeField] private Transform playerCameraTransform;
 
-    [SerializeField][Min(1)] private float hitrange = 3;
+    [SerializeField] [Min(1)] private float hitRange = 3;
 
     [SerializeField] private Transform pickUpParent;
 
@@ -18,7 +18,7 @@ public class PickUpSystem : MonoBehaviour
 
     [SerializeField] private Transform cutPositionPlayer;
 
-    private RaycastHit hit;
+    private RaycastHit _hit;
 
     private void OnEnable()
     {
@@ -36,17 +36,18 @@ public class PickUpSystem : MonoBehaviour
 
     private void Update()
     {
-        if (hit.collider != null)
-        {
-            // hit.collider.GetComponent<Highlight>()?.ToggleHighlight(false);
-        }
-
         if (inHandItem != null)
             return;
 
-        if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out hit, hitrange, pickableLayerMask))
+        // Just used to keep reference of the hit.
+        //
+        if (Physics.Raycast(
+                playerCameraTransform.position,
+                playerCameraTransform.forward,
+                out _hit,
+                hitRange,
+                pickableLayerMask))
         {
-            //hit.collider.GetComponent <Highlight>()?.ToggleHighlight(true);
         }
     }
 
@@ -61,10 +62,10 @@ public class PickUpSystem : MonoBehaviour
 
     private void PickUp()
     {
-        if (hit.collider == null || inHandItem != null)
+        if (_hit.collider == null || inHandItem != null)
             return;
 
-        if (!hit.collider.TryGetComponent(out IPickable pickableItem))
+        if (!_hit.collider.TryGetComponent(out IPickable pickableItem))
             return;
 
         if (!pickableItem.IsPickable())
@@ -73,7 +74,7 @@ public class PickUpSystem : MonoBehaviour
         pickUpSource.Play();
         inHandItem = pickableItem.PickUp(pickUpParent.gameObject);
 
-        if (hit.collider.GetComponent<Knife>())
+        if (_hit.collider.GetComponent<Knife>())
         {
             Debug.Log("It's a Knife!");
             player.GetComponentInParent<Animator>().SetTrigger("Knife");
@@ -102,7 +103,7 @@ public class PickUpSystem : MonoBehaviour
         inHandItem = null;
     }
 
-    public void PlayerSetCutPosition()
+    private void PlayerSetCutPosition()
     {
         // Stops temporally player movement.
         //
@@ -117,6 +118,6 @@ public class PickUpSystem : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawRay(playerCameraTransform.position, playerCameraTransform.forward * hitrange);
+        Gizmos.DrawRay(playerCameraTransform.position, playerCameraTransform.forward * hitRange);
     }
 }

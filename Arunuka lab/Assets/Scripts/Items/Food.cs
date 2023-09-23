@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class Food : MonoBehaviour
 {
-    [Header("Food Properties")]
-    public Ingredients IngredientType;
+    [Header("Food Properties")] public Ingredients IngredientType;
 
     public string IngredientName;
     public Material crossMaterial;
@@ -15,29 +14,26 @@ public class Food : MonoBehaviour
     [SerializeField] private FoodCookState foodState = FoodCookState.Raw;
     [SerializeField] private FoodLocation foodLocation = FoodLocation.Table;
 
-    [Header("Extra Properties")]
-    [SerializeField] private MeshRenderer materialRenderer;
+    [Header("Extra Properties")] [SerializeField]
+    private MeshRenderer materialRenderer;
 
-    [SerializeField]
-    private GameObject cuttingBoard;
+    [SerializeField] private GameObject cuttingBoard;
 
-    [SerializeField]
-    private CuttingManager cuttingManager;
+    [SerializeField] private CuttingManager cuttingManager;
 
-    [SerializeField]
-    private bool onCuttingBoard;
+    [SerializeField] private bool onCuttingBoard;
 
     public Vector3 initPos;
 
-    private bool isBeingCooked = false;
-    private float cookedDuration = 0.0f;
+    private bool isBeingCooked;
+    private float cookedDuration;
     private Color originalColor;
 
     private void Start()
     {
         initPos = transform.position;
 
-        if(materialRenderer == null && TryGetComponent(out MeshRenderer myMeshRenderer))
+        if (materialRenderer == null && TryGetComponent(out MeshRenderer myMeshRenderer))
             materialRenderer = myMeshRenderer;
 
         originalColor = materialRenderer != null
@@ -62,21 +58,21 @@ public class Food : MonoBehaviour
             // Change color to the cooked one if it's raw.
             //
             case FoodCookState.Raw:
-                {
-                    float percent = cookedDuration / cookedThresholdSeconds;
-                    ChangeColorTo(originalColor, cookedColor, percent);
-                    break;
-                }
+            {
+                float percent = cookedDuration / cookedThresholdSeconds;
+                ChangeColorTo(originalColor, cookedColor, percent);
+                break;
+            }
 
             // Change color to the burnt one if it's cooked.
             //
             case FoodCookState.Cooked:
-                {
-                    float percent = (cookedDuration - cookedThresholdSeconds)
-                        / (burnThresholdSeconds - cookedThresholdSeconds);
-                    ChangeColorTo(cookedColor, burnColor, percent);
-                    break;
-                }
+            {
+                float percent = (cookedDuration - cookedThresholdSeconds)
+                                / (burnThresholdSeconds - cookedThresholdSeconds);
+                ChangeColorTo(cookedColor, burnColor, percent);
+                break;
+            }
         }
     }
 
@@ -94,12 +90,18 @@ public class Food : MonoBehaviour
     /// <summary>
     /// Sets if the food is being cooked or not.
     /// </summary>
-    public bool SetIsBeingCooked(bool isBeingCooked) => this.isBeingCooked = isBeingCooked;
+    public bool SetIsBeingCooked(bool isBeingCooked)
+    {
+        return this.isBeingCooked = isBeingCooked;
+    }
 
     /// <summary>
     /// Sets the location of the food.
     /// </summary>
-    public void SetFoodLocation(FoodLocation foodLocation) => this.foodLocation = foodLocation;
+    public void SetFoodLocation(FoodLocation foodLocation)
+    {
+        this.foodLocation = foodLocation;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -120,5 +122,21 @@ public class Food : MonoBehaviour
 
         Color lerpedColor = Color.Lerp(currentColor, targetColor, percent);
         materialRenderer.material.color = lerpedColor;
+    }
+
+    /// <summary>
+    /// Gets the <see cref="FoodCookState"/> of the owner.
+    /// </summary>
+    public FoodCookState GetFoodState()
+    {
+        return foodState;
+    }
+
+    /// <summary>
+    /// Gets how long the food was cooked in seconds.
+    /// </summary>
+    public float GetCookedTimeSeconds()
+    {
+        return cookedDuration;
     }
 }
