@@ -9,6 +9,26 @@ using UnityEngine;
 public class Plate : MonoBehaviour
 {
     [Header("Food")] [SerializeField] private List<GameObject> foodOnPlate = new();
+    [SerializeField] private float destroyAfterSeconds = 1.0f;
+
+    private bool _mustDestroy;
+    private float _currentDestroySeconds;
+
+    private void Update()
+    {
+        if (!_mustDestroy)
+            return;
+
+        _currentDestroySeconds += Time.deltaTime;
+        if (!(_currentDestroySeconds > destroyAfterSeconds))
+            return;
+
+        // Remove plate container
+        //
+        Transform parent = transform.parent;
+        PlateManager.Instance.RemoveFromSpawner(parent.gameObject);
+        DestroyImmediate(parent.gameObject);
+    }
 
     /// <summary>
     /// Checks what food is now inside of the plate.
@@ -63,6 +83,7 @@ public class Plate : MonoBehaviour
                 if (!foodObject.TryGetComponent(out Food food))
                     return;
 
+                foodObject.transform.parent = transform;
                 string ingredientName = food.IngredientName;
                 FoodCookState cookState = food.GetFoodState();
                 float cookDuration = food.GetCookedTimeSeconds();
@@ -74,6 +95,7 @@ public class Plate : MonoBehaviour
                 builder.AppendLine(description);
             });
 
+        _mustDestroy = true;
         Debug.Log(builder.ToString());
     }
 

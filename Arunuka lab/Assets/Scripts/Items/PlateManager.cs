@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
 /// Manages the plates in the counter, how they can spawn, and the sites we have.
 /// </summary>
-public class PlateManager : MonoBehaviour
+public class PlateManager : SingletonMonobehaviour<PlateManager>
 {
     [Header("Plate Settings")] [SerializeField]
     private List<PlateSpawn> _plateSpawns = new();
@@ -33,19 +34,33 @@ public class PlateManager : MonoBehaviour
     /// </summary>
     private void SpawnPlate()
     {
-        (PlateSpawn plateSpawn, int index) = _plateSpawns.GetNextEmpty();
-        if (plateSpawn == null)
-            return;
+        foreach (PlateSpawn plateSpawn in _plateSpawns)
+        {
+            if (plateSpawn.isUsed)
+                continue;
 
-        int prefabIndex = Random.Range(0, _platePrefabs.Count);
-        GameObject plate = Instantiate(_platePrefabs[prefabIndex], plateSpawn.plateLocation);
-        plate.transform.parent = transform;
+            int prefabIndex = Random.Range(0, _platePrefabs.Count);
+            GameObject plate = Instantiate(_platePrefabs[prefabIndex], plateSpawn.plateLocation);
+            plate.transform.parent = plateSpawn.plateLocation;
+            plateSpawn.isUsed = true;
+            plateSpawn.currentPlate = plate;
 
-        plateSpawn.isUsed = true;
-        plateSpawn.currentPlate = plate;
-        _plateSpawns[index] = plateSpawn;
+            var plateComponent = plate.GetComponentInChildren<Plate>();
+            plateComponent.OnSpawn();
+            break;
+        }
+    }
 
-        var plateComponent = plate.GetComponentInChildren<Plate>();
-        plateComponent.OnSpawn();
+    /// <summary>
+    /// Removes a plate from the spawner cache.
+    /// </summary>
+    public void RemoveFromSpawner(GameObject plate)
+    {
+        foreach (PlateSpawn t in _plateSpawns.Where(t => t.currentPlate == plate))
+        {
+            t.isUsed = false;
+            t.currentPlate = null;
+            _currentWaitTimeSeconds = 0f;
+        }
     }
 }
