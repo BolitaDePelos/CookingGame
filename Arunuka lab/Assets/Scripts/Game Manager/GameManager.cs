@@ -1,25 +1,71 @@
+using NaughtyAttributes;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : SingletonMonobehaviour<GameManager>
 {
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [ReadOnly] [SerializeField] private int currentScore;
 
-    //Start is called before the first frame update
-
+    /// <summary>
+    /// Start is called before the first frame update.
+    /// </summary>
     protected override void Awake()
     {
         base.Awake();
 
         //TODO: Need a resolution settings option screen
-
-        var displayResWidth = 1920;
-        var displayResHeight = 1080;
-        var fullScreen = false;
+        //
+        const int displayResWidth = 1920;
+        const int displayResHeight = 1080;
+        const bool fullScreen = false;
 
         PlayerPrefs.SetInt("Screenmanager Resolution Width", displayResWidth);
         PlayerPrefs.SetInt("Screenmanager Resolution Height", displayResHeight);
         QualitySettings.vSyncCount = 0;
         Screen.SetResolution(displayResWidth, displayResHeight, fullScreen);
+
+        InitializeSavedValues();
     }
 
+    /// <summary>
+    /// Adds value to the score.
+    /// </summary>
+    public void AddScore(int score)
+    {
+        currentScore += score;
 
+        if (scoreText == null)
+            return;
+
+        scoreText.text = currentScore.ToString().PadLeft(4, '0');
+    }
+
+    /// <summary>
+    /// Loads all the saved values from <see cref="PlayerPrefs"/>
+    /// </summary>
+    private void InitializeSavedValues()
+    {
+        if (!SaveProperties.IsSaved())
+            return;
+
+        AddScore(PlayerPrefs.GetInt(SaveProperties.ScoreProperty, 0));
+        // TODO: Load the other values.
+    }
+
+    /// <summary>
+    /// Save all the savable values into <see cref="PlayerPrefs"/>
+    /// </summary>
+    public void Save()
+    {
+        PlayerPrefs.SetInt(SaveProperties.IsSavedProperty, 1);
+        PlayerPrefs.SetInt(SaveProperties.ScoreProperty, currentScore);
+
+        PlayerPrefs.SetString(
+            SaveProperties.RecipeHistoryProperty,
+            RecipeManager.Instance.GetRecipeHistoryJson());
+
+        // TODO: Save the other values.
+        //
+    }
 }

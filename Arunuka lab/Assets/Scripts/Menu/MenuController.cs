@@ -4,22 +4,21 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class MenuController : MonoBehaviour
 {
+    [Header("Volume Setting")] [SerializeField]
+    private TMP_Text volumenTextValue;
 
-    [Header("Volume Setting")]
-    [SerializeField] private TMP_Text volumenTextValue= null;
-    [SerializeField] private Slider volumenSlider = null;
+    [SerializeField] private Slider volumenSlider;
     [SerializeField] private float defaultVolume = 1.0f;
 
-    [Header("Graphics Settings")]
-    [SerializeField] private Slider brightnessSlider = null;
-    [SerializeField] private TMP_Text brightnessTextValue = null;
+    [Header("Graphics Settings")] [SerializeField]
+    private Slider brightnessSlider;
+
+    [SerializeField] private TMP_Text brightnessTextValue;
     [SerializeField] private float defaultBrightness = 1.0f;
 
-    [Space(10)]
-    [SerializeField] private TMP_Dropdown qualityDropdown;
+    [Space(10)] [SerializeField] private TMP_Dropdown qualityDropdown;
     [SerializeField] private Toggle fullScreenToggle;
 
 
@@ -28,25 +27,18 @@ public class MenuController : MonoBehaviour
     private float _brightnessLevel;
 
 
-
-
-    [Header("Resolution Dropdowns")]
-    public TMP_Dropdown resolutionDropdown;
+    [Header("Resolution Dropdowns")] public TMP_Dropdown resolutionDropdown;
     private Resolution[] resolutions;
 
-    
 
+    [Header("Confirmation")] [SerializeField]
+    private GameObject comfirmationPrompt;
 
-    [Header("Confirmation")]
-    [SerializeField] private GameObject comfirmationPrompt = null;
-
-    [Header("Level to load")]
-    public string _newGameLevel = SceneName.Scene_Level_1.ToString();
+    [Header("Level to load")] public string _newGameLevel = SceneName.Scene_Level_1.ToString();
     private string levelToLoad;
-    [SerializeField] private GameObject noSavedGameDialog = null;
+    [SerializeField] private GameObject noSavedGameDialog;
 
-    [Header("Anim")]
-    private bool Menu;
+    [Header("Anim")] private bool Menu;
     private bool Fade;
     public Animator anim;
 
@@ -63,24 +55,21 @@ public class MenuController : MonoBehaviour
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
 
-        List<string> options = new List<string>();
+        var options = new List<string>();
         int currentResolutionIndex = 0;
 
-        for(int i = 0;i< resolutions.Length; i++)
+        for (int i = 0; i < resolutions.Length; i++)
         {
-            string option = resolutions[i].width +" x " + resolutions[i].height;
+            string option = resolutions[i].width + " x " + resolutions[i].height;
             options.Add(option);
 
             if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height)
-            {
                 currentResolutionIndex = i;
-            }
         }
 
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
-
     }
 
     private void Update()
@@ -102,19 +91,15 @@ public class MenuController : MonoBehaviour
         anim.SetTrigger("Fade");
         FadeCanvas.SetActive(true);
 
+        SaveProperties.ResetSave();
     }
 
     public void LoadGameDialogYes()
     {
-        if (PlayerPrefs.HasKey("SavedLevel"))
-        {
-            levelToLoad = PlayerPrefs.GetString("SaveLevel");
-            SceneControllerManager.Instance.LoadNextLevel(levelToLoad);
-        }
+        if (SaveProperties.IsSaved())
+            SceneControllerManager.Instance.LoadNextLevel(_newGameLevel);
         else
-        {
             noSavedGameDialog.SetActive(true);
-        }
     }
 
     public void ExitButton()
@@ -137,9 +122,8 @@ public class MenuController : MonoBehaviour
 
     public void ResetButton(string MenuType)
     {
-        if(MenuType == "Graphics")
+        if (MenuType == "Graphics")
         {
-
             //Reset brightness value
             brightnessSlider.value = defaultBrightness;
             brightnessTextValue.text = defaultBrightness.ToString("0.0");
@@ -151,14 +135,13 @@ public class MenuController : MonoBehaviour
             Screen.fullScreen = false;
 
             Resolution currentResolution = Screen.currentResolution;
-            Screen.SetResolution(currentResolution.width, currentResolution.height,Screen.fullScreen);
+            Screen.SetResolution(currentResolution.width, currentResolution.height, Screen.fullScreen);
             resolutionDropdown.value = resolutions.Length;
             GraphicsApply();
         }
 
 
-
-        if(MenuType == "Audio")
+        if (MenuType == "Audio")
         {
             AudioListener.volume = defaultVolume;
             volumenSlider.value = defaultVolume;
@@ -177,7 +160,7 @@ public class MenuController : MonoBehaviour
     {
         _isFullScreen = isFullScreen;
     }
-   
+
     public void SetQuality(int qualityIndex)
     {
         _qualityLevel = qualityIndex;
@@ -191,7 +174,7 @@ public class MenuController : MonoBehaviour
 
         QualitySettings.SetQualityLevel(_qualityLevel);
 
-        PlayerPrefs.SetInt("masterFullScreen", (_isFullScreen ? 1 : 0));
+        PlayerPrefs.SetInt("masterFullScreen", _isFullScreen ? 1 : 0);
 
         Screen.fullScreen = _isFullScreen;
 
@@ -204,7 +187,6 @@ public class MenuController : MonoBehaviour
         comfirmationPrompt.SetActive(true);
         yield return new WaitForSeconds(2);
         comfirmationPrompt.SetActive(false);
-
     }
 
     public void PressAnyKey()
@@ -217,5 +199,4 @@ public class MenuController : MonoBehaviour
             FadeCanvas.SetActive(true);
         }
     }
-
 }

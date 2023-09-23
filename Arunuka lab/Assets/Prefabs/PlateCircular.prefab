@@ -100,7 +100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press G to finish dish
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5a38a8b0eb12c1a4881b699020ad940c, type: 2}
   m_sharedMaterial: {fileID: 3003765883094047193, guid: 5a38a8b0eb12c1a4881b699020ad940c, type: 2}
@@ -127,8 +127,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1
-  m_fontSizeBase: 1
+  m_fontSize: 0.5
+  m_fontSizeBase: 0.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 9.425055, y: 2.272777, z: 9.334954, w: 2.282416}
+  m_margin: {x: 9.707322, y: 2.2868905, z: 9.711983, w: 2.282416}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -231,6 +231,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodOnPlate: []
+  destroyAfterSeconds: 1
+  myHoverable: {fileID: 6048447581063818292}
+  hoverableText: {fileID: 6269524540927491535}
+  textToDisplay: 'Presione G para entregar: "[Recipe]"'
 --- !u!1 &758143092065685737
 GameObject:
   m_ObjectHideFlags: 0
