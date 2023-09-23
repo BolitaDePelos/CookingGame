@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+
 
 public class PourDetector : MonoBehaviour
 {
@@ -19,9 +21,11 @@ public class PourDetector : MonoBehaviour
     private void Update()
     {
         
+        // TODO press twice
         if(pickable.IsPickedUp() && InputManager.GetInstance().GetLeftMousePressed())
         {
             // TODO: Execute animation of tilding.
+            StartCoroutine(Rotate());
         }
 
         bool pourCheck = CalculatePourAngle() < pourThreshold;
@@ -33,6 +37,31 @@ public class PourDetector : MonoBehaviour
             StartPour();
         else
             EndPour();
+    }
+
+    private IEnumerator Rotate()
+    {
+        Vector3 forward = Vector3.forward;
+        Vector3 vector1 = Camera.main.transform.position;
+        Vector3 vector2 = transform.position;
+        int timeDuration = 10;
+        Vector3 dir = vector2 - vector1;
+
+        float angle = Vector3.Angle(forward, dir);
+        //float angle = Mathf.Acos(Vector2.Dot(forward.normalized, dir.normalized));
+        float timeAnimation = 0;
+
+        while (timeAnimation< timeDuration) 
+        {
+            timeAnimation += Time.deltaTime;
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0,-90,-90),timeAnimation/ timeDuration);
+            if (angle < 90)
+            {
+                print("asdasdasd");
+            }
+            yield return new WaitForEndOfFrame();
+        
+        }
     }
 
     private void StartPour()
