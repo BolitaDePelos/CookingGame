@@ -176,7 +176,7 @@ public class RecipeManager : SingletonMonobehaviour<RecipeManager>
 
     private static IEnumerator MakeAppearCoroutine()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2f);
         EndDayManager.Instance.MakeAppear();
     }
 
