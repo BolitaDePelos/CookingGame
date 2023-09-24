@@ -1,15 +1,21 @@
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class PickableItem : MonoBehaviour, IPickable
 {
     /// <inheritdoc />
     public bool KeepWorldPosition { get; private set; }
-
     public bool tutorialMode;
-
     private Rigidbody rb;
     private bool isPickable = true;
     private bool isPickedUp = false;
+
+    private void Start() 
+    {
+        //AudioManager.Instance;
+    
+    }
+
 
     private void Awake()
     {
@@ -31,6 +37,7 @@ public class PickableItem : MonoBehaviour, IPickable
             rb.isKinematic = true;
 
         transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+        
         return gameObject;
     }
 
