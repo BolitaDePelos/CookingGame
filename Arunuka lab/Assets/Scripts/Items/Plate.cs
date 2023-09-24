@@ -1,6 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -10,6 +9,9 @@ public class Plate : MonoBehaviour
 {
     [Header("Food")] [SerializeField] private List<GameObject> foodOnPlate = new();
     [SerializeField] private float destroyAfterSeconds = 1.0f;
+    [SerializeField] private PlateHoverable myHoverable;
+    [SerializeField] private TextMeshPro hoverableText;
+    [SerializeField] private string textToDisplay;
 
     private bool _mustDestroy;
     private float _currentDestroySeconds;
@@ -72,8 +74,7 @@ public class Plate : MonoBehaviour
 
     public void FinishPlate()
     {
-        StringBuilder builder = new();
-
+        List<FoodResult> foodResults = new();
         foodOnPlate.ForEach(
             foodObject =>
             {
@@ -84,34 +85,35 @@ public class Plate : MonoBehaviour
                     return;
 
                 foodObject.transform.parent = transform;
-                string ingredientName = food.IngredientName;
-                FoodCookState cookState = food.GetFoodState();
-                float cookDuration = food.GetCookedTimeSeconds();
 
-                string description
-                    = $"{ingredientName} was cooked for {cookDuration:G}s, "
-                      + $"so it's {Enum.GetName(typeof(FoodCookState), cookState)}.";
+                FoodResult foodResult = new()
+                {
+                    ingredient = food.IngredientType,
+                    cookState = food.GetFoodState(),
+                    cookDurationSeconds = food.GetCookedTimeSeconds()
+                };
 
-                builder.AppendLine(description);
+                foodResults.Add(foodResult);
             });
 
+
+        myHoverable.SetHoverable(false);
+
+        // TODO: Improve code so the plate also knows what recipe is serving.
+        //
+        RecipeManager.Instance.FinishDish(
+            new RecipeResult {foodResults = foodResults},
+            transform.position);
+
         _mustDestroy = true;
-        Debug.Log(builder.ToString());
     }
 
     /// <summary>
-    /// Executed when the object in spawned.
+    /// Called when the object is spawned.
     /// </summary>
-    public void OnSpawn()
+    public void OnSpawn(Recipe recipe)
     {
-        // TODO: Add the spawn animation and/or logic.
-    }
-
-    /// <summary>
-    /// Executed when the object in removed or dispawned.
-    /// </summary>
-    public void OnDispawn()
-    {
-        // TODO: Add the spawn animation and/or logic.
+        textToDisplay = textToDisplay.Replace("[Recipe]", recipe.title);
+        hoverableText.text = textToDisplay;
     }
 }

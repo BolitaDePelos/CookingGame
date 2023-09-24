@@ -10,7 +10,7 @@ public enum Ingredients
     Salt,
     Pepper,
     whiteWine,
-    OliveOil,
+    OliveOil
 }
 
 public enum SceneName
@@ -27,7 +27,7 @@ public enum FoodCookState
 {
     Raw,
     Cooked,
-    Burn,
+    Burn
 }
 
 /// <summary>
@@ -39,4 +39,14 @@ public enum FoodLocation
     Pot,
     Pan,
     Plate
+}
+
+/// <summary>
+/// Emotion states.
+/// </summary>
+public enum Emotion
+{
+    Bad,
+    Normal,
+    Good
 }

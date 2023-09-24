@@ -3,7 +3,17 @@ guid: 9384953c4cace264282fc6124d25cc3f
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: platosHondosMat
+    second: {fileID: 2100000, guid: 377c7f07fbed2b84c8c432782a2febad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rellenoPlatoHondoMat
+    second: {fileID: 2100000, guid: 2192d3ac72dc5a64d846fbc202941fca, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -8,45 +8,26 @@ using UnityEngine;
 public class PlateManager : SingletonMonobehaviour<PlateManager>
 {
     [Header("Plate Settings")] [SerializeField]
-    private List<PlateSpawn> _plateSpawns = new();
-
-    [SerializeField] private List<GameObject> _platePrefabs = new();
-    [SerializeField] private float waitTimeUntilNextPlateSeconds = 2f;
-
-    private float _currentWaitTimeSeconds;
-
-    /// <summary>
-    /// Called every game frame.
-    /// </summary>
-    private void Update()
-    {
-        if (_currentWaitTimeSeconds > waitTimeUntilNextPlateSeconds)
-        {
-            SpawnPlate();
-            _currentWaitTimeSeconds = 0.0f;
-        }
-
-        _currentWaitTimeSeconds += Time.deltaTime;
-    }
+    private List<PlateSpawn> plateSpawns = new();
 
     /// <summary>
     /// Spawn a new plate in an empty space.
     /// </summary>
-    private void SpawnPlate()
+    public void SpawnPlate(GameObject platePrefab, Recipe recipe)
     {
-        foreach (PlateSpawn plateSpawn in _plateSpawns)
+        foreach (PlateSpawn plateSpawn in plateSpawns)
         {
             if (plateSpawn.isUsed)
                 continue;
 
-            int prefabIndex = Random.Range(0, _platePrefabs.Count);
-            GameObject plate = Instantiate(_platePrefabs[prefabIndex], plateSpawn.plateLocation);
+            GameObject plate = Instantiate(platePrefab, plateSpawn.plateLocation);
             plate.transform.parent = plateSpawn.plateLocation;
             plateSpawn.isUsed = true;
             plateSpawn.currentPlate = plate;
 
             var plateComponent = plate.GetComponentInChildren<Plate>();
-            plateComponent.OnSpawn();
+            plateComponent.OnSpawn(recipe);
+
             break;
         }
     }
@@ -56,11 +37,10 @@ public class PlateManager : SingletonMonobehaviour<PlateManager>
     /// </summary>
     public void RemoveFromSpawner(GameObject plate)
     {
-        foreach (PlateSpawn t in _plateSpawns.Where(t => t.currentPlate == plate))
+        foreach (PlateSpawn plateSpawn in plateSpawns.Where(p => p.currentPlate == plate))
         {
-            t.isUsed = false;
-            t.currentPlate = null;
-            _currentWaitTimeSeconds = 0f;
+            plateSpawn.isUsed = false;
+            plateSpawn.currentPlate = null;
         }
     }
 }
