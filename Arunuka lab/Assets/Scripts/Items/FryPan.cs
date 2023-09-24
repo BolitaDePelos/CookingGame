@@ -27,6 +27,7 @@ public class FryPan : SingletonMonobehaviour<FryPan>
                 break;
             case false when smokeParticles.isPlaying:
                 smokeParticles.Stop();
+                audioManager.StopSoundFire();
                 break;
         }
     }
