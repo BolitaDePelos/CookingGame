@@ -70,6 +70,19 @@ public class InteractionSystem : MonoBehaviour
                 }
 
             }
+
+            if (hit.collider.GetComponent<StoveView>())
+            {
+
+                StoveView stoveComponent = hit.collider.GetComponent<StoveView>();
+
+                if (stoveComponent != null)
+                {
+                    stoveComponent.Use(gameObject);
+                }
+
+            }
+
         }
 
     }
