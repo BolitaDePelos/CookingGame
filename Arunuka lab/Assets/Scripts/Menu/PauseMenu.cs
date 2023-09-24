@@ -8,13 +8,15 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject PauseMenuUI;
 
+    private AudioManager audioManager;
+
     [Header("Level to load")]
     public string _LevelLoad = SceneName.MainMenu.ToString();
 
     private void Start()
     {
         PauseMenuUI.SetActive(false);
-
+        audioManager = AudioManager.Instance;
     }
 
     private void Update()
@@ -37,6 +39,7 @@ public class PauseMenu : MonoBehaviour
         PauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
+        audioManager.PlayPauseSound();
     }
 
     public void Continue()
@@ -44,6 +47,7 @@ public class PauseMenu : MonoBehaviour
         PauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
+        audioManager.PlayPauseSound();
     }
 
     public void ExitButton()
