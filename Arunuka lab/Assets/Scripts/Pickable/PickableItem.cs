@@ -10,12 +10,6 @@ public class PickableItem : MonoBehaviour, IPickable
     private bool isPickable = true;
     private bool isPickedUp = false;
 
-    private void Start() 
-    {
-        //AudioManager.Instance;
-    
-    }
-
 
     private void Awake()
     {
