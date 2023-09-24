@@ -38,6 +38,7 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
     internal void PlaySoundKnifeCut() => PlayAudioSource(knifeCut);
     internal void PlaySoundFry() => PlayAudioSource(frySound);
     internal void StopSoundFry() => StopAudioSource(frySound);
+    internal void StopSoundFire() => StopAudioSource(fireSound);
     internal void PlaySoundFire() => PlayAudioSource(fireSound);
     internal void PlaySoundTurnOnStove() => PlayAudioSource(knifeCut);
     internal void PlaySoundSelect() => PlayAudioSource(seleccionarSound);

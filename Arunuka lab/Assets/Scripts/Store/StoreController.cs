@@ -36,12 +36,14 @@ public class StoreController : Singleton<StoreController>
     {
         CurrentItem.UnlockItem();
         moneyUpdater.UpdateMoney(-CurrentItem.Price);
+        AudioManager.Instance.PlayBuySound();
     }
 
     public void SelectItem()
     {
         CurrentItem.SetCurrent();
         DisplayItem();
+        AudioManager.Instance.PlaySoundSelect();
     }
 
     public void NextItem()
@@ -50,6 +52,7 @@ public class StoreController : Singleton<StoreController>
         if (currentItem >= items.Length)
             currentItem = 0;
         DisplayItem();
+        AudioManager.Instance.PlaySoundSelect();
     }
 
     public void BackItem()
@@ -58,6 +61,7 @@ public class StoreController : Singleton<StoreController>
         if (currentItem < 0)
             currentItem = items.Length - 1;
         DisplayItem();
+        AudioManager.Instance.PlaySoundSelect();
     }
 
 
