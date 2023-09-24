@@ -92,6 +92,10 @@ public class Food : MonoBehaviour
     /// </summary>
     public bool SetIsBeingCooked(bool isBeingCooked)
     {
+        if (isBeingCooked)
+            AudioManager.Instance.PlaySoundFry();
+        else
+            AudioManager.Instance.StopSoundFry();
         return this.isBeingCooked = isBeingCooked;
     }
 

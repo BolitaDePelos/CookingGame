@@ -11,11 +11,6 @@ public abstract class HoverableBase : MonoBehaviour
 
     private bool _isHoverable = true;
     private bool _isHoverOn;
-
-    AudioManager audioManager;
-    private void Start() => audioManager = AudioManager.Instance;
-
-
     /// <summary>
     /// Executed when the object is hover on.
     /// </summary>
@@ -23,7 +18,7 @@ public abstract class HoverableBase : MonoBehaviour
     {
         _isHoverOn = true;
         onHoverEnter?.Invoke();
-        audioManager.PlayHoverSound();
+        AudioManager.Instance.PlayHoverSound();
     }
 
     /// <summary>

@@ -26,6 +26,7 @@ public class Stove : MonoBehaviour, IUsable
 
     private void Start()
     {
+        audioManager = AudioManager.Instance;
         colliderFlame.SetActive(false);
         vfx.SetActive(false);
     }

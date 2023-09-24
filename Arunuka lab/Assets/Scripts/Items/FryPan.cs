@@ -23,6 +23,7 @@ public class FryPan : SingletonMonobehaviour<FryPan>
         {
             case true when !smokeParticles.isPlaying:
                 smokeParticles.Play();
+                audioManager.PlaySoundFire();
                 break;
             case false when smokeParticles.isPlaying:
                 smokeParticles.Stop();
@@ -48,7 +49,7 @@ public class FryPan : SingletonMonobehaviour<FryPan>
 
         if (!other.TryGetComponent(out Food food))
             return;
-        audioManager.PlaySoundFry();
+
         food.SetIsBeingCooked(stoveIsActive);
         food.SetFoodLocation(FoodLocation.Pan);
     }
@@ -67,7 +68,6 @@ public class FryPan : SingletonMonobehaviour<FryPan>
         foodInsidePot.Remove(other.gameObject);
         if (!other.TryGetComponent(out Food food))
             return;
-
         food.SetIsBeingCooked(false);
         food.SetFoodLocation(FoodLocation.Table);
     }
@@ -86,6 +86,5 @@ public class FryPan : SingletonMonobehaviour<FryPan>
 
                 food.SetIsBeingCooked(isActive);
             });
-        audioManager.PlaySoundFry();
     }
 }
