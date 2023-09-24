@@ -47128,7 +47128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsCurrentDeviceMouse: 0
-  moveSpeed: 4
+  moveSpeed: 6
   rotationSpeed: 1
   SpeedChangeRate: 10
   grounded: 0
@@ -47142,7 +47142,7 @@ MonoBehaviour:
   BottomClamp: -89
   animPlayer: {fileID: 7260886550736379019}
   tutorialMode: 0
-  gravityMultiplier: 3
+  gravityMultiplier: 2
 --- !u!1 &459298567612409438
 GameObject:
   m_ObjectHideFlags: 0
