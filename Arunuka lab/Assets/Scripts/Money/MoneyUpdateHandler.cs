@@ -1,35 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+using System;
 using UnityEngine;
 
 public class MoneyUpdateHandler : MonoBehaviour
 {
-    MoneyUpdater updater;
+    private MoneyUpdater updater;
+
     private void Start()
     {
         updater = new MoneyUpdater();
     }
 
-    public void UpdateMoney(int amount) => updater.UpdateMoney(amount);
+    public void UpdateMoney(int amount)
+    {
+        updater.UpdateMoney(amount);
+    }
 }
 
 public class MoneyUpdater
 {
-    public static event System.Action<int> OnUpdateMoney;
-    MoneyReader moneyReader;
+    public static event Action<int> OnUpdateMoney;
+    private readonly MoneyReader moneyReader;
+
     public MoneyUpdater()
     {
-        this.moneyReader = new MoneyReader();
+        moneyReader = new MoneyReader();
     }
 
     public void UpdateMoney(int amount)
     {
-        var money = moneyReader.GetMoney();
+        int money = moneyReader.GetMoney();
         money += amount;
-        PlayerPrefs.SetInt(KeyStorage.Money, money);
+        PlayerPrefs.SetInt(SaveProperties.ScoreProperty, money);
         OnUpdateMoney?.Invoke(money);
     }
 }
-
-

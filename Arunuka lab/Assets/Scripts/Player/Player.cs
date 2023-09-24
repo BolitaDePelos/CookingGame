@@ -11,12 +11,10 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class Player : SingletonMonobehaviour<Player>
 {
-    [Header("Inputs")]
-    [Tooltip("If Device input is Mouse")]
+    [Header("Inputs")] [Tooltip("If Device input is Mouse")]
     public bool IsCurrentDeviceMouse;
 
-    [Header("Player")]
-    [Tooltip("Move speed of the character in m/s")]
+    [Header("Player")] [Tooltip("Move speed of the character in m/s")]
     public float moveSpeed = 4.0f;
 
     [Tooltip("Rotation speed of the character")]
@@ -25,15 +23,13 @@ public class Player : SingletonMonobehaviour<Player>
     [Tooltip("Acceleration and deceleration")]
     public float SpeedChangeRate = 10.0f;
 
-    [Header("Grounded")]
-    public bool grounded = false;
+    [Header("Grounded")] public bool grounded;
 
     public float groundedOffset = -0.14f;
     public float groundedRadious = 0.5f;
     public LayerMask groundedLayers;
 
-    [Header("Cinemachine")]
-    public GameObject CinemachineCameraTarget;
+    [Header("Cinemachine")] public GameObject CinemachineCameraTarget;
 
     public float TopClamp = 90.0f; //How far in degrees can you move the camera up
     public float BottomClamp = -90.0f; //How far in degrees can you move the camera down
@@ -41,8 +37,7 @@ public class Player : SingletonMonobehaviour<Player>
     //cinemachine
     private float cinemachineTargetPitch;
 
-    [Header("Parameters")]
-    public Animator animPlayer;
+    [Header("Parameters")] public Animator animPlayer;
 
     public bool tutorialMode;
 
@@ -68,13 +63,9 @@ public class Player : SingletonMonobehaviour<Player>
 
     private const float CameraRotationThreshold = 0.01f;
 
-
-    [Header("Gravity")]
-    private float _gravity = -9.81f;
+    [Header("Gravity")] private readonly float _gravity = -9.81f;
     [SerializeField] private float gravityMultiplier = 3.0f;
     private float _velocity;
-
-
 
     /// <summary>
     /// Called when the objects are being created.
@@ -107,12 +98,9 @@ public class Player : SingletonMonobehaviour<Player>
         PlayerInput();
         GroundedCheck();
 
-
+        ApplyGravity();
         if (canMove)
-            ApplyGravity();
             Move();
-
-     
     }
 
     /// <summary>
@@ -120,17 +108,16 @@ public class Player : SingletonMonobehaviour<Player>
     /// </summary>
     private void LateUpdate()
     {
-        if (!RecipesMenu.GameIsPaused )
-        {
-            CameraRotation();
-        }
-  
+        if (!RecipesMenu.GameIsPaused) CameraRotation();
     }
 
     /// <summary>
     /// Sets if the player can move or not.
     /// </summary>
-    public void SetCanMove(bool canMove) => this.canMove = canMove;
+    public void SetCanMove(bool canMove)
+    {
+        this.canMove = canMove;
+    }
 
     /// <summary>
     /// Checks if the player is on the ground or not.
@@ -144,7 +131,11 @@ public class Player : SingletonMonobehaviour<Player>
             transform.position.y - groundedOffset,
             transform.position.z);
 
-        grounded = Physics.CheckSphere(spherePositionCheck, groundedRadious, groundedLayers, QueryTriggerInteraction.Ignore);
+        grounded = Physics.CheckSphere(
+            spherePositionCheck,
+            groundedRadious,
+            groundedLayers,
+            QueryTriggerInteraction.Ignore);
     }
 
     private Vector3 currentPosition;
@@ -175,7 +166,6 @@ public class Player : SingletonMonobehaviour<Player>
     /// </summary>
     private void CameraRotation()
     {
-    
         if (InputManager.GetInstance().GetlookInput().sqrMagnitude < CameraRotationThreshold)
             return;
 
@@ -198,17 +188,15 @@ public class Player : SingletonMonobehaviour<Player>
     /// <summary>
     /// Moves the player based on the input values.
     /// </summary>
-    
     private void Move()
     {
         // Reference to the players current horizontal velocity.
         //
-        
-          float currentHorizontalSpeed = new Vector3(
-              characterController.velocity.x,
-              0.0f,
-              characterController.velocity.z).magnitude;
-        
+        float currentHorizontalSpeed = new Vector3(
+            characterController.velocity.x,
+            0.0f,
+            characterController.velocity.z).magnitude;
+
 
         float speedOffset = 0.1f;
         float inputMagnitude = InputManager.GetInstance().analogMovement
@@ -227,9 +215,7 @@ public class Player : SingletonMonobehaviour<Player>
             speed = Mathf.Round(speed * 1000f) / 1000f; // Three decimal rounded.
         }
         else
-        {
             speed = moveSpeed; // Desired speed achieved.
-        }
 
         Vector3 inputDirection = new Vector3(xInput, 0.0f, yInput).normalized;
 
@@ -248,23 +234,19 @@ public class Player : SingletonMonobehaviour<Player>
 
         // Move the player.
         //
-
         Vector3 motion = inputDirection.normalized * (speed * Time.deltaTime)
-            + new Vector3(0.0f, verticalVelocity, 0.0f) * Time.deltaTime;
+                         + new Vector3(0.0f, verticalVelocity, 0.0f) * Time.deltaTime;
+
         characterController.Move(motion);
     }
 
 
     private void ApplyGravity()
     {
-        if (!grounded) // Si el jugador no está en el suelo.
-        {
+        if (!grounded) // Si el jugador no estï¿½ en el suelo.
             verticalVelocity += _gravity * gravityMultiplier * Time.deltaTime; // Aplicar gravedad.
-        }
-        else // Si el jugador está en el suelo, resetear la velocidad vertical.
-        {
-            verticalVelocity = -0.5f; // Puedes ajustar este valor según tus necesidades.
-        }
+        else // Si el jugador estï¿½ en el suelo, resetear la velocidad vertical.
+            verticalVelocity = 0f; // Puedes ajustar este valor segï¿½n tus necesidades.
     }
 
     private void OnDrawGizmosSelected()
@@ -289,8 +271,8 @@ public class Player : SingletonMonobehaviour<Player>
     /// Clamps a angle based on the given one.
     /// </summary>
     /// <remarks>
-    /// If the angle is less than -360°, add 360° to only have one full turn.
-    /// If the angle is less than 360°, subtract 360° to only have one full turn.
+    /// If the angle is less than -360ï¿½, add 360ï¿½ to only have one full turn.
+    /// If the angle is less than 360ï¿½, subtract 360ï¿½ to only have one full turn.
     /// </remarks>
     private static float ClampAngle(float angle, float minimumAngle, float maximumAngle)
     {

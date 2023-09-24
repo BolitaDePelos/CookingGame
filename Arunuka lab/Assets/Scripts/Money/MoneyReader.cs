@@ -2,7 +2,13 @@
 
 public class MoneyReader
 {
-    public int GetMoney() => PlayerPrefs.GetInt(KeyStorage.Money, 0);
+    public int GetMoney()
+    {
+        return PlayerPrefs.GetInt(SaveProperties.ScoreProperty, 0);
+    }
 
-    public bool CheckHasMoney(int amountCompare) => GetMoney() >= amountCompare;
+    public bool CheckHasMoney(int amountCompare)
+    {
+        return GetMoney() >= amountCompare;
+    }
 }
