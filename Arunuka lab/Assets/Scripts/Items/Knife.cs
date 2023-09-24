@@ -16,7 +16,7 @@ public class Knife : MonoBehaviour, IUsable, IPickable
     public float explosionForce = 100f;
     public int maxCutsPerObject = 3;
     public bool tutorialMode;
-
+    AudioManager audioManager;
     [SerializeField] private CuttingManager cuttingManager;
 
     [SerializeField] private UnityEvent onCut;
@@ -49,6 +49,7 @@ public class Knife : MonoBehaviour, IUsable, IPickable
     /// </summary>
     private void Start()
     {
+        audioManager = AudioManager.Instance;
         enabled = !tutorialMode;
 
         // Note: It needs to be referenced in the Start because 
@@ -113,7 +114,7 @@ public class Knife : MonoBehaviour, IUsable, IPickable
             new Quaternion(0.114386953f, 0.710132778f, -0.0854734182f, 0.689435542f));
 
         onPickUp?.Invoke();
-
+        audioManager.PlaySoundKnifeOut();
         return gameObject;
     }
 
@@ -214,6 +215,7 @@ public class Knife : MonoBehaviour, IUsable, IPickable
             //
             currentCutsInParent[cutParent]++;
             onCut?.Invoke();
+            audioManager.PlaySoundKnifeCut();
         }
 
         if (!checkMeOut)

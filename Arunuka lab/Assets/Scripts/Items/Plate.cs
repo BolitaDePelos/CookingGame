@@ -16,6 +16,9 @@ public class Plate : MonoBehaviour
 
     private bool _mustDestroy;
     private float _currentDestroySeconds;
+    AudioManager audioManager;
+
+    private void Start() => audioManager = AudioManager.Instance;
 
     private void Update()
     {
@@ -82,6 +85,7 @@ public class Plate : MonoBehaviour
     {
         if (!foodOnPlate.Any())
             return;
+        audioManager.PlaySoundDishTake();
 
         List<FoodResult> foodResults = new();
         foodOnPlate.ForEach(

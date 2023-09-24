@@ -22,6 +22,8 @@ public class Stove : MonoBehaviour, IUsable
     [SerializeField] private string Close = "Close";
     public bool IsActivate;
 
+    AudioManager audioManager;
+
     private void Start()
     {
         colliderFlame.SetActive(false);
@@ -51,6 +53,7 @@ public class Stove : MonoBehaviour, IUsable
             vfx.SetActive(true);
             colliderFlame.SetActive(true);
             OnStoveOn?.Invoke();
+            audioManager.PlaySoundTurnOnStove();
         }
         else
         {

@@ -9,6 +9,10 @@ public class FryPan : SingletonMonobehaviour<FryPan>
     [SerializeField] private bool stoveIsActive;
     [SerializeField] private ParticleSystem smokeParticles;
     [SerializeField] private List<GameObject> foodInsidePot = new();
+    AudioManager audioManager;
+
+    private void Start() => audioManager = AudioManager.Instance;
+
 
     /// <summary>
     /// Updates each game frame.
@@ -44,7 +48,7 @@ public class FryPan : SingletonMonobehaviour<FryPan>
 
         if (!other.TryGetComponent(out Food food))
             return;
-
+        audioManager.PlaySoundFry();
         food.SetIsBeingCooked(stoveIsActive);
         food.SetFoodLocation(FoodLocation.Pan);
     }
@@ -82,5 +86,6 @@ public class FryPan : SingletonMonobehaviour<FryPan>
 
                 food.SetIsBeingCooked(isActive);
             });
+        audioManager.PlaySoundFry();
     }
 }
