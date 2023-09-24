@@ -44,7 +44,7 @@ public class FoodIcon : MonoBehaviour
         switch(emotion)
         {
             case Emotion.Good:
-                AudioManager.Instance.PlayBadSound();
+                AudioManager.Instance.PlayHappySound();
                 break;
             case Emotion.Normal:
                 AudioManager.Instance.PlayNormalSound();

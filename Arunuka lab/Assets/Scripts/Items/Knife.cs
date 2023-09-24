@@ -220,7 +220,7 @@ public class Knife : MonoBehaviour, IUsable, IPickable
 
         if (!checkMeOut)
             return;
-
+        AudioManager.Instance.PlayActionDenied();
         Debug.Log("Se ha alcanzado el límite de cortes permitidos para este objeto.");
         cuttingManager.CheckCut();
     }

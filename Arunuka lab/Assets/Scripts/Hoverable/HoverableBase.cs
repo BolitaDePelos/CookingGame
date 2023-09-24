@@ -18,7 +18,7 @@ public abstract class HoverableBase : MonoBehaviour
     {
         _isHoverOn = true;
         onHoverEnter?.Invoke();
-        AudioManager.Instance.PlayHoverSound();
+        //AudioManager.Instance.PlayHoverSound();
     }
 
     /// <summary>

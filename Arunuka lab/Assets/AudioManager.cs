@@ -7,7 +7,6 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
 {
     [SerializeField] private AudioSource faceHappy;
     [SerializeField] private AudioSource faceSad;
-    [SerializeField] private AudioSource faceNoBad;
     [SerializeField] private AudioSource grabSound;
     [SerializeField] private AudioSource buySound;
     [SerializeField] private AudioSource hoverSound;
@@ -22,11 +21,13 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
     [SerializeField] private AudioSource frySound;
     [SerializeField] private AudioSource fireSound;
     [SerializeField] private AudioSource turnOnStoveSound;
+    [SerializeField] private AudioSource seleccionarSound;
+    [SerializeField] private AudioSource ActionDenied;
 
     private new void Awake() => base.Awake();
     internal void PlayBadSound() => PlayAudioSource(faceSad);
     internal void PlayHappySound() => PlayAudioSource(faceHappy);
-    internal void PlayNormalSound() => PlayAudioSource(faceNoBad);
+    internal void PlayNormalSound() => PlayAudioSource(faceHappy);
     internal void PlayGrabSound() => PlayAudioSource(grabSound);
     internal void PlayBuySound() => PlayAudioSource(buySound);
     internal void PlayHoverSound() => PlayAudioSource(hoverSound);
@@ -39,6 +40,8 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
     internal void StopSoundFry() => StopAudioSource(frySound);
     internal void PlaySoundFire() => PlayAudioSource(fireSound);
     internal void PlaySoundTurnOnStove() => PlayAudioSource(knifeCut);
+    internal void PlaySoundSelect() => PlayAudioSource(seleccionarSound);
+    internal void PlayActionDenied() => PlayAudioSource(ActionDenied);
     internal void PlayFridgeOpenSound()
     {
         PlayAudioSource(fridgeOpenSound);
@@ -54,4 +57,5 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
     private void StopAudioSource(AudioSource source) => source.Stop();
     private void PlayAudioSource(AudioSource source) => source.Play();
 
+    
 }

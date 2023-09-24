@@ -42,6 +42,7 @@ public class RecipesMenu : MonoBehaviour
 
     public void Continue()
     {
+        AudioManager.Instance.PlayNextPageSound();
         book.currentPage = 0;
         RecipesMenuUI.SetActive(false);
         GameIsPaused = false;

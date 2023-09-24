@@ -473,7 +473,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faceHappy: {fileID: 7218949685039874214}
   faceSad: {fileID: 7218949686259299240}
-  faceNoBad: {fileID: 7218949686259299240}
   grabSound: {fileID: 7218949684737726778}
   buySound: {fileID: 7218949686403843925}
   hoverSound: {fileID: 7218949686322150475}
@@ -488,6 +487,8 @@ MonoBehaviour:
   frySound: {fileID: 7218949684979014528}
   fireSound: {fileID: 7218949684428478976}
   turnOnStoveSound: {fileID: 7218949685109403835}
+  seleccionarSound: {fileID: 7218949684319376491}
+  ActionDenied: {fileID: 0}
 --- !u!1 &7218949684737726780
 GameObject:
   m_ObjectHideFlags: 0
