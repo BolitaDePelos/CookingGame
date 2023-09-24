@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0.5
+  m_AmbientIntensity: 0.63
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 8162517b6ec2309499f99e303b29f146, type: 2}
@@ -37,8 +37,8 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5238657, g: 0.5617043, b: 0.47704506, a: 1}
+  m_Sun: {fileID: 2097930470}
+  m_IndirectSpecularColor: {r: 0.5238657, g: 0.5617042, b: 0.47704506, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: fd1db27183df5564ab85b2538b667bdb, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 57400ffe5fcd71b48839a9c5113878e4, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -22703,7 +22703,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.6
-  m_Range: 2.5
+  m_Range: 5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -32512,14 +32512,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2097930467}
-  m_LocalRotation: {x: -0.64697, y: 0.34576944, z: -0.3938867, w: -0.55382913}
+  m_LocalRotation: {x: 0.58031714, y: 0.55320543, z: -0.13864937, w: 0.58135366}
   m_LocalPosition: {x: 0.32999998, y: 0.745, z: 1.177}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1063519761}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 81.498, y: -238.953, z: 184.311}
+  m_LocalEulerAnglesHint: {x: 55.908, y: 480.633, z: 419.08002}
 --- !u!114 &2097930469
 MonoBehaviour:
   m_ObjectHideFlags: 0
