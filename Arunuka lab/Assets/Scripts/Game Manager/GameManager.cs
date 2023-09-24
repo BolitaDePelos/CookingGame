@@ -19,12 +19,10 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         const int displayResWidth = 1920;
         const int displayResHeight = 1080;
         const bool fullScreen = false;
-
         PlayerPrefs.SetInt("Screenmanager Resolution Width", displayResWidth);
         PlayerPrefs.SetInt("Screenmanager Resolution Height", displayResHeight);
         QualitySettings.vSyncCount = 0;
         Screen.SetResolution(displayResWidth, displayResHeight, fullScreen);
-
         InitializeSavedValues();
     }
 
@@ -37,7 +35,8 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
         if (scoreText == null)
             return;
-
+        MoneyUpdater moneyUpdater = new MoneyUpdater();
+        moneyUpdater.UpdateMoney(currentScore);
         scoreText.text = "$" + currentScore;
     }
 
