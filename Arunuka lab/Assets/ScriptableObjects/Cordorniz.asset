@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f353eef65701046854bb8ce57d8e72, type: 3}
   m_Name: Cordorniz
   m_EditorClassIdentifier: 
-  title: Codorniz Encabezada
+  title: Codorniz Escabechada
   description: 
   platePrefab: {fileID: 1278040917042156735, guid: c0c2380e745a2854d937f5b893509d43, type: 3}
   scoreForBad: {x: 0, y: 5}
