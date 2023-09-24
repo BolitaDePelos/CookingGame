@@ -20,7 +20,7 @@ MonoBehaviour:
   scoreForGood: {x: 9, y: 40}
   expectedFoodResult:
   - ingredient: 0
-    piecesAmount: 5
+    piecesAmount: 3
     expectedFoodResultByState:
     - cookState: 0
       score: 0
@@ -29,7 +29,7 @@ MonoBehaviour:
     - cookState: 2
       score: 2
   - ingredient: 2
-    piecesAmount: 3
+    piecesAmount: 2
     expectedFoodResultByState:
     - cookState: 0
       score: 0
