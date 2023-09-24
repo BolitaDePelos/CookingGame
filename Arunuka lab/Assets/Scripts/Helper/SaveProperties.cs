@@ -27,6 +27,23 @@ public static class SaveProperties
     public const string RecipeHistoryProperty = "RecipeHistory";
 
     /// <summary>
+    /// Today money gained.
+    /// </summary>
+    public const string TodayMoneyProperty = "TodayMoney";
+
+    /// <summary>
+    /// How many plates were served today.
+    /// </summary>
+    public const string PlatesServedToday = "PlatesServedToday";
+
+    /// <summary>
+    /// Prefix for the current saved prop.
+    /// </summary>
+    public const string PrefixCurrentProp = "CURRENT_STORE_";
+
+    public const string CurrentDay = "CurrentDay";
+
+    /// <summary>
     /// Resets the save game.
     /// </summary>
     public static void ResetSave()
@@ -35,8 +52,10 @@ public static class SaveProperties
         PlayerPrefs.SetInt(ScoreProperty, 0);
         PlayerPrefs.SetString(RecipeHistoryProperty, "[]");
 
-        // TODO: Reset the other values.
-        //
+        PlayerPrefs.SetInt(TodayMoneyProperty, 0);
+        PlayerPrefs.SetInt(PlatesServedToday, 0);
+
+        PlayerPrefs.SetInt(CurrentDay, 0);
     }
 
     /// <summary>

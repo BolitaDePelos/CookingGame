@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NaughtyAttributes;
@@ -12,9 +13,12 @@ using UnityEngine;
 public class RecipeManager : SingletonMonobehaviour<RecipeManager>
 {
     [Header("Day")] [SerializeField] private int recipesPerDay = 2;
-    [SerializeField] private TextMeshProUGUI dayText;
+    [SerializeField] private TextMeshProUGUI recipesServedText;
+    [SerializeField] private TextMeshProUGUI currentDayText;
 
-    [SerializeField] private List<Recipe> recipes;
+    [Header("Recipe Properties")] [SerializeField]
+    private List<Recipe> recipes;
+
     [ReadOnly] [SerializeField] private Recipe currentRecipe;
     [SerializeField] [Range(0, 5)] private float createDishIntervalSeconds;
 
@@ -24,10 +28,13 @@ public class RecipeManager : SingletonMonobehaviour<RecipeManager>
     private List<(string, int)> _recipeHistory = new();
     private int _recipesCreatedAmount;
     private bool _dayEnded;
+    private int _todayMoney;
 
     private void Start()
     {
-        InitializeRecipeHistory();
+        InitializeSave();
+
+        currentDayText.text = PlayerPrefs.GetInt(SaveProperties.CurrentDay, 1).ToString();
     }
 
     /// <summary>
@@ -60,9 +67,6 @@ public class RecipeManager : SingletonMonobehaviour<RecipeManager>
     {
         currentRecipe = recipes.GetRandom();
         PlateManager.Instance.SpawnPlate(currentRecipe.platePrefab, currentRecipe);
-
-        //TODO: Display something when creating the dish.
-        //
     }
 
     /// <summary>
@@ -105,9 +109,10 @@ public class RecipeManager : SingletonMonobehaviour<RecipeManager>
 
         _recipeHistory ??= new List<(string, int)>();
         _recipeHistory.Add(new ValueTuple<string, int>(currentRecipe.title, totalScore));
+        _todayMoney += totalScore;
 
         _recipesCreatedAmount++;
-        dayText.text = _recipesCreatedAmount.ToString();
+        recipesServedText.text = _recipesCreatedAmount.ToString();
 
         currentRecipe = null;
         _secondsElapsedToCreateDish = 0.0f;
@@ -131,19 +136,24 @@ public class RecipeManager : SingletonMonobehaviour<RecipeManager>
     }
 
     /// <summary>
-    /// Initialize the saved values in the recipe history.
+    /// Initialize the saved values.
     /// </summary>
-    private void InitializeRecipeHistory()
+    private void InitializeSave()
     {
         if (!SaveProperties.IsSaved())
+        {
+            StartNewDay();
             return;
+        }
+
+        _recipesCreatedAmount = PlayerPrefs.GetInt(SaveProperties.PlatesServedToday, 0);
+        _todayMoney = PlayerPrefs.GetInt(SaveProperties.TodayMoneyProperty, 0);
+        recipesServedText.text = _recipesCreatedAmount.ToString();
 
         try
         {
             string jsonHistory = PlayerPrefs.GetString(SaveProperties.RecipeHistoryProperty);
             _recipeHistory = JsonConvert.DeserializeObject<List<(string, int)>>(jsonHistory);
-
-            Debug.Log(jsonHistory);
         }
         catch
         {
@@ -157,6 +167,17 @@ public class RecipeManager : SingletonMonobehaviour<RecipeManager>
     private void EndDay()
     {
         _dayEnded = true;
+
+        GameManager.Instance.Save();
+        PlayerPrefs.SetInt(SaveProperties.TodayMoneyProperty, _todayMoney);
+
+        StartCoroutine(MakeAppearCoroutine());
+    }
+
+    private static IEnumerator MakeAppearCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+        EndDayManager.Instance.MakeAppear();
     }
 
     /// <summary>
@@ -169,5 +190,21 @@ public class RecipeManager : SingletonMonobehaviour<RecipeManager>
         _recipeHistory = new List<(string, int)>();
 
         PlayerPrefs.SetString(SaveProperties.RecipeHistoryProperty, "[]");
+        PlayerPrefs.SetInt(SaveProperties.PlatesServedToday, 0);
+        PlayerPrefs.SetInt(SaveProperties.TodayMoneyProperty, 0);
+
+        PlayerPrefs.SetInt(
+            SaveProperties.CurrentDay,
+            PlayerPrefs.GetInt(SaveProperties.CurrentDay, 0) + 1);
+    }
+
+    public void Save()
+    {
+        PlayerPrefs.SetString(
+            SaveProperties.RecipeHistoryProperty,
+            GetRecipeHistoryJson());
+
+        PlayerPrefs.SetInt(SaveProperties.TodayMoneyProperty, _todayMoney);
+        PlayerPrefs.SetInt(SaveProperties.PlatesServedToday, _recipesCreatedAmount);
     }
 }

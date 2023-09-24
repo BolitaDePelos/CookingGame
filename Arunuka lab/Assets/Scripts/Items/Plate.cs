@@ -97,6 +97,9 @@ public class Plate : MonoBehaviour
                 if (!foodObject.TryGetComponent(out Food food))
                     return;
 
+                if (foodObject.TryGetComponent(out Rigidbody component))
+                    component.isKinematic = true;
+
                 foodObject.transform.parent = transform;
 
                 FoodResult foodResult = new()

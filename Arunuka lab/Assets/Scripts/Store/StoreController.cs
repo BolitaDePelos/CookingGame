@@ -1,26 +1,31 @@
-using Cinemachine;
 using System.Collections;
-using System.Collections.Generic;
+using Cinemachine;
+using NaughtyAttributes;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StoreController : Singleton<StoreController>
 {
     [SerializeField] private ItemStoreHandler[] items;
-    [SerializeField] CinemachineVirtualCamera vcam = null;
+    [SerializeField] private CinemachineVirtualCamera vcam;
     [SerializeField] private CostItemDisplay costDisplayer;
     [SerializeField] private Button buttonBuy;
     [SerializeField] private Button buttonSelect;
-    int currentItem =0;
-    MoneyUpdater moneyUpdater;
-    public ItemStoreHandler CurrentItem => items[currentItem];
 
-    AudioManager audioManager;
+    [Header("Next Day")] [Scene] [SerializeField]
+    private int nextDayScene;
+
+    [SerializeField] private Animator fadeOutAnimator;
+
+    private int currentItem;
+    private MoneyUpdater moneyUpdater;
+    private static readonly int startTriggerId = Animator.StringToHash("Start");
+    public ItemStoreHandler CurrentItem => items[currentItem];
 
     private void Start()
     {
-        audioManager = AudioManager.Instance;
         moneyUpdater = new MoneyUpdater();
         SetItem(0);
         buttonBuy.onClick.AddListener(BuyItem);
@@ -31,8 +36,6 @@ public class StoreController : Singleton<StoreController>
     {
         CurrentItem.UnlockItem();
         moneyUpdater.UpdateMoney(-CurrentItem.Price);
-        audioManager.PlayBuySound();
-        DisplayItem();
     }
 
     public void SelectItem()
@@ -41,39 +44,50 @@ public class StoreController : Singleton<StoreController>
         DisplayItem();
     }
 
-    public void NextItem() 
+    public void NextItem()
     {
         currentItem++;
         if (currentItem >= items.Length)
             currentItem = 0;
         DisplayItem();
-        audioManager.PlayNextPageSound();
     }
 
     public void BackItem()
     {
         currentItem--;
-        if (currentItem <0)
-            currentItem = items.Length-1;
+        if (currentItem < 0)
+            currentItem = items.Length - 1;
         DisplayItem();
-        audioManager.PlayNextPageSound();
     }
 
 
-    public void SetItem(int newIndex) 
+    public void SetItem(int newIndex)
     {
         currentItem = newIndex;
         DisplayItem();
     }
 
-    public void DisplayItem() 
+    public void DisplayItem()
     {
         costDisplayer.DisplayCost();
-        buttonBuy.interactable =  CurrentItem.CheckBuy();
+        buttonBuy.interactable = CurrentItem.CheckBuy();
         buttonSelect.interactable = CurrentItem.CheckSelect();
-        buttonBuy.gameObject.SetActive(!buttonSelect.interactable);
-        buttonSelect.gameObject.SetActive(buttonSelect.interactable);
         vcam.Follow = vcam.LookAt = CurrentItem.transform;
+    }
+
+    /// <summary>
+    /// Goes to the next day.
+    /// </summary>
+    public void OnGoNextDay()
+    {
+        StartCoroutine(GoNextDay());
+    }
+
+    private IEnumerator GoNextDay()
+    {
+        fadeOutAnimator.SetTrigger(startTriggerId);
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(nextDayScene);
     }
 
 
