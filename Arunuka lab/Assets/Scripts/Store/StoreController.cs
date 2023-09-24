@@ -16,11 +16,8 @@ public class StoreController : Singleton<StoreController>
     MoneyUpdater moneyUpdater;
     public ItemStoreHandler CurrentItem => items[currentItem];
 
-    AudioManager audioManager;
-
     private void Start()
     {
-        audioManager = AudioManager.Instance;
         moneyUpdater = new MoneyUpdater();
         SetItem(0);
         buttonBuy.onClick.AddListener(BuyItem);
@@ -31,8 +28,6 @@ public class StoreController : Singleton<StoreController>
     {
         CurrentItem.UnlockItem();
         moneyUpdater.UpdateMoney(-CurrentItem.Price);
-        audioManager.PlayBuySound();
-        DisplayItem();
     }
 
     public void SelectItem()
@@ -47,7 +42,6 @@ public class StoreController : Singleton<StoreController>
         if (currentItem >= items.Length)
             currentItem = 0;
         DisplayItem();
-        audioManager.PlayNextPageSound();
     }
 
     public void BackItem()
@@ -56,7 +50,6 @@ public class StoreController : Singleton<StoreController>
         if (currentItem <0)
             currentItem = items.Length-1;
         DisplayItem();
-        audioManager.PlayNextPageSound();
     }
 
 
@@ -71,8 +64,6 @@ public class StoreController : Singleton<StoreController>
         costDisplayer.DisplayCost();
         buttonBuy.interactable =  CurrentItem.CheckBuy();
         buttonSelect.interactable = CurrentItem.CheckSelect();
-        buttonBuy.gameObject.SetActive(!buttonSelect.interactable);
-        buttonSelect.gameObject.SetActive(buttonSelect.interactable);
         vcam.Follow = vcam.LookAt = CurrentItem.transform;
     }
 

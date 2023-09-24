@@ -13,8 +13,12 @@ using UnityEngine;
 public class RecipeManager : SingletonMonobehaviour<RecipeManager>
 {
     [Header("Day")] [SerializeField] private int recipesPerDay = 2;
-    [SerializeField] private TextMeshProUGUI dayText;
-    [SerializeField] private List<Recipe> recipes;
+    [SerializeField] private TextMeshProUGUI recipesServedText;
+    [SerializeField] private TextMeshProUGUI currentDayText;
+
+    [Header("Recipe Properties")] [SerializeField]
+    private List<Recipe> recipes;
+
     [ReadOnly] [SerializeField] private Recipe currentRecipe;
     [SerializeField] [Range(0, 5)] private float createDishIntervalSeconds;
 
@@ -29,6 +33,8 @@ public class RecipeManager : SingletonMonobehaviour<RecipeManager>
     private void Start()
     {
         InitializeSave();
+
+        currentDayText.text = PlayerPrefs.GetInt(SaveProperties.CurrentDay, 1).ToString();
     }
 
     /// <summary>
@@ -106,7 +112,7 @@ public class RecipeManager : SingletonMonobehaviour<RecipeManager>
         _todayMoney += totalScore;
 
         _recipesCreatedAmount++;
-        dayText.text = _recipesCreatedAmount.ToString();
+        recipesServedText.text = _recipesCreatedAmount.ToString();
 
         currentRecipe = null;
         _secondsElapsedToCreateDish = 0.0f;
@@ -142,7 +148,7 @@ public class RecipeManager : SingletonMonobehaviour<RecipeManager>
 
         _recipesCreatedAmount = PlayerPrefs.GetInt(SaveProperties.PlatesServedToday, 0);
         _todayMoney = PlayerPrefs.GetInt(SaveProperties.TodayMoneyProperty, 0);
-        dayText.text = _recipesCreatedAmount.ToString();
+        recipesServedText.text = _recipesCreatedAmount.ToString();
 
         try
         {
@@ -186,6 +192,10 @@ public class RecipeManager : SingletonMonobehaviour<RecipeManager>
         PlayerPrefs.SetString(SaveProperties.RecipeHistoryProperty, "[]");
         PlayerPrefs.SetInt(SaveProperties.PlatesServedToday, 0);
         PlayerPrefs.SetInt(SaveProperties.TodayMoneyProperty, 0);
+
+        PlayerPrefs.SetInt(
+            SaveProperties.CurrentDay,
+            PlayerPrefs.GetInt(SaveProperties.CurrentDay, 0) + 1);
     }
 
     public void Save()

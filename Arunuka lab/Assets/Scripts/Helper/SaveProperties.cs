@@ -41,6 +41,8 @@ public static class SaveProperties
     /// </summary>
     public const string PrefixCurrentProp = "CURRENT_STORE_";
 
+    public const string CurrentDay = "CurrentDay";
+
     /// <summary>
     /// Resets the save game.
     /// </summary>
@@ -52,6 +54,8 @@ public static class SaveProperties
 
         PlayerPrefs.SetInt(TodayMoneyProperty, 0);
         PlayerPrefs.SetInt(PlatesServedToday, 0);
+
+        PlayerPrefs.SetInt(CurrentDay, 0);
     }
 
     /// <summary>
