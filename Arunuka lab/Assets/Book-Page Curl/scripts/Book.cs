@@ -298,7 +298,7 @@ public class Book : MonoBehaviour {
         Right.sprite = (currentPage < bookPages.Length - 1) ? bookPages[currentPage + 1] : background;
 
         RightNext.sprite = (currentPage < bookPages.Length - 2) ? bookPages[currentPage + 2] : background;
-
+        AudioManager.Instance.PlayNextPageSound();
         LeftNext.transform.SetAsFirstSibling();
         if (enableShadowEffect) Shadow.gameObject.SetActive(true);
         UpdateBookRTLToPoint(f);
@@ -330,7 +330,7 @@ public class Book : MonoBehaviour {
         Left.transform.position = LeftNext.transform.position;
         Left.transform.eulerAngles = new Vector3(0, 0, 0);
         Left.sprite = (currentPage >= 2) ? bookPages[currentPage - 2] : background;
-
+        AudioManager.Instance.PlayNextPageSound();
         LeftNext.sprite = (currentPage >= 3) ? bookPages[currentPage - 3] : background;
 
         RightNext.transform.SetAsFirstSibling();

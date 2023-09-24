@@ -12,9 +12,11 @@ public class Fridge : MonoBehaviour, IUsable
     [SerializeField] string Open = "Open";
     [SerializeField] string Close = "Close";
     public bool isOpen;
-
-    public bool tutorialMode;
     public int tutorialFridgeTask=2;
+    public bool tutorialMode;
+    private AudioManager audioManager;
+
+    private void Start() => audioManager = AudioManager.Instance;
 
     private void Update()
     {
@@ -41,10 +43,12 @@ public class Fridge : MonoBehaviour, IUsable
         if (isOpen)
         {
             animator.PlayAnimationByName(Open);
+            audioManager.PlayFridgeOpenSound();
         }
         else
         {
             animator.PlayAnimationByName(Close);
+            audioManager.PlayFridgeCloseSound();
         }
     }
 

@@ -10,6 +10,7 @@ public class PickableItem : MonoBehaviour, IPickable
     private bool isPickable = true;
     private bool isPickedUp = false;
 
+    AudioManager audioManager;
 
     private void Awake()
     {
@@ -19,6 +20,7 @@ public class PickableItem : MonoBehaviour, IPickable
     private void Start()
     {
         enabled = !tutorialMode;
+        audioManager = AudioManager.Instance;
     }
 
     /// <inheritdoc />
@@ -29,9 +31,8 @@ public class PickableItem : MonoBehaviour, IPickable
 
         if (rb != null)
             rb.isKinematic = true;
-
         transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
-        
+        audioManager.PlayGrabSound();
         return gameObject;
     }
 

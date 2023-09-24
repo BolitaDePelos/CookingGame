@@ -434,6 +434,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7218949684545906653}
+  - component: {fileID: 161656268}
   m_Layer: 0
   m_Name: Audio Manager
   m_TagString: Untagged
@@ -458,6 +459,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &161656268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7218949684545906654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aed88173531bd5b4c84cc7507c6a045b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  faceHappy: {fileID: 7218949685039874214}
+  faceSad: {fileID: 7218949686259299240}
+  grabSound: {fileID: 7218949684737726778}
+  buySound: {fileID: 7218949686403843925}
+  hoverSound: {fileID: 7218949686322150475}
+  nextPageSound: {fileID: 7218949685180204947}
+  pauseSound: {fileID: 7218949686019691198}
+  fridgeOpenSound: {fileID: 7218949686041026540}
+  fridgeContinuesSound: {fileID: 7218949686212387037}
+  fridgeCloseSound: {fileID: 7218949686391761831}
+  dishSound: {fileID: 7218949684863525827}
+  knifeGrab: {fileID: 7218949684470131481}
+  knifeCut: {fileID: 7218949685414846169}
+  frySound: {fileID: 7218949684979014528}
+  fireSound: {fileID: 7218949684428478976}
+  turnOnStoveSound: {fileID: 7218949685109403835}
+  seleccionarSound: {fileID: 7218949684319376491}
+  ActionDenied: {fileID: 0}
 --- !u!1 &7218949684737726780
 GameObject:
   m_ObjectHideFlags: 0
@@ -1270,7 +1301,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -678950101369214002, guid: f4c7d907ebe1fc044ae6dfcda0bc9a46, type: 2}
   m_audioClip: {fileID: 8300000, guid: 2522318e5a98e57478898586cbd5b0bc, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

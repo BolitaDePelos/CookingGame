@@ -23,6 +23,9 @@ public class Pot : SingletonMonobehaviour<Pot>
 
     private const float MinHeight = 0.42F;
     private const float MaxHeight = 0.52F;
+    AudioManager audioManager;
+
+    private void Start() => audioManager = AudioManager.Instance;
 
     private void Update()
     {
@@ -58,6 +61,7 @@ public class Pot : SingletonMonobehaviour<Pot>
         if (!other.TryGetComponent(out Food food))
             return;
 
+        audioManager.PlaySoundFire();
         food.SetIsBeingCooked(stoveIsActive);
         food.SetFoodLocation(FoodLocation.Pan);
     }
