@@ -61,11 +61,6 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         PlayerPrefs.SetInt(SaveProperties.IsSavedProperty, 1);
         PlayerPrefs.SetInt(SaveProperties.ScoreProperty, currentScore);
 
-        PlayerPrefs.SetString(
-            SaveProperties.RecipeHistoryProperty,
-            RecipeManager.Instance.GetRecipeHistoryJson());
-
-        // TODO: Save the other values.
-        //
+        RecipeManager.Instance.Save();
     }
 }

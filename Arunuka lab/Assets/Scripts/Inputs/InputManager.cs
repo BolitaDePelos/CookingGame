@@ -1,31 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
 
 [RequireComponent(typeof(PlayerInput))]
 public class InputManager : MonoBehaviour
 {
-    [Header("UI")]
-    private bool RecipesPressed = false;
-    private bool PausePressed = false;
+    [Header("UI")] private bool RecipesPressed;
+    private bool PausePressed;
 
 
-    [Header("Character Input")]
-    private Vector2 move = Vector2.zero;
+    [Header("Character Input")] private Vector2 move = Vector2.zero;
     private Vector2 look = Vector2.zero;
 
-    private bool interactPressed = false;
-    private bool DropPressed = false;
-    private bool LeftButtonMousePressed = false;
+    private bool interactPressed;
+    private bool DropPressed;
+    private bool LeftButtonMousePressed;
 
-    [Header("Movement Settings")]
-    public bool analogMovement;
+    [Header("Movement Settings")] public bool analogMovement;
 
-    [Header("Mouse Cursor Settings")]
-    private bool cursorLocked = true;
-    private bool cursorInputForLook = true;
+    [Header("Mouse Cursor Settings")] private bool cursorLocked = true;
+    private readonly bool cursorInputForLook = true;
     private bool cursorUnlocked = false;
 
 
@@ -33,10 +26,7 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null)
-        {
-            Debug.LogError("Found more than one Input Manager in the scene.");
-        }
+        if (instance != null) Debug.LogError("Found more than one Input Manager in the scene.");
         instance = this;
     }
 
@@ -49,113 +39,59 @@ public class InputManager : MonoBehaviour
     {
         //  Event Movement
         if (context.performed || context.canceled)
-        {
             GameEventsManager.instance.InputEvents.MovePressed(context.ReadValue<Vector2>());
-        }
 
         if (context.performed)
-        {
             move = context.ReadValue<Vector2>();
-        }
-        else if (context.canceled)
-        {
-            move = context.ReadValue<Vector2>();
-
-        }
+        else if (context.canceled) move = context.ReadValue<Vector2>();
     }
 
     public void OnLook(InputAction.CallbackContext context)
     {
-        if (cursorInputForLook)
-        {
-            look = context.ReadValue<Vector2>();
-
-        }
+        if (cursorInputForLook) look = context.ReadValue<Vector2>();
     }
 
 
     public void InteractButtonPressed(InputAction.CallbackContext context)
     {
-
-        if (context.started)
-        {
-            GameEventsManager.instance.InputEvents.InteractionPressed();
-            Debug.Log("Button Interact Pressed");
-
-        }
+        if (context.started) GameEventsManager.instance.InputEvents.InteractionPressed();
 
         if (context.performed)
-        {
             interactPressed = true;
-        }
-        else if (context.canceled)
-        {
-            interactPressed = false;
-        }
+        else if (context.canceled) interactPressed = false;
     }
 
     public void DropButtonPressed(InputAction.CallbackContext context)
     {
-        if (context.started)
-        {
-            GameEventsManager.instance.InputEvents.DropPressed();
-            Debug.Log("Button Drop Pressed");
-        }
+        if (context.started) GameEventsManager.instance.InputEvents.DropPressed();
 
         if (context.performed)
-        {
             DropPressed = true;
-        }
-        else if (context.canceled)
-        {
-            DropPressed = false;
-        }
+        else if (context.canceled) DropPressed = false;
     }
 
     public void LeftMouseButtonPressed(InputAction.CallbackContext context)
     {
-        if (context.started)
-        {
-            GameEventsManager.instance.InputEvents.UsePressed();
-
-            //Debug.Log("Button Use Pressed");
-
-        }
+        if (context.started) GameEventsManager.instance.InputEvents.UsePressed();
 
         if (context.performed)
-        {
             LeftButtonMousePressed = true;
-        }
-        else if (context.canceled)
-        {
-            LeftButtonMousePressed = false;
-        }
+        else if (context.canceled) LeftButtonMousePressed = false;
     }
 
 
     public void RecipesButtonPressed(InputAction.CallbackContext context)
     {
-
         if (context.performed)
-        {
             RecipesPressed = true;
-        }
-        else if (context.canceled)
-        {
-            RecipesPressed = false;
-        }
+        else if (context.canceled) RecipesPressed = false;
     }
 
     public void PauseMenuPressed(InputAction.CallbackContext context)
     {
         if (context.performed)
-        {
             PausePressed = true;
-        }
-        else if (context.canceled)
-        {
-            PausePressed = false;
-        }
+        else if (context.canceled) PausePressed = false;
     }
 
 
@@ -205,28 +141,27 @@ public class InputManager : MonoBehaviour
         return result;
     }
 
- /*
-    private void OnApplicationFocus(bool focus)
-    {
+    /*
+       private void OnApplicationFocus(bool focus)
+       {
 
-        SetCursorState(cursorLocked);
+           SetCursorState(cursorLocked);
 
-    }
-    private void SetCursorState(bool newState)
-    {
-        Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
-    }
-    */
+       }
+       private void SetCursorState(bool newState)
+       {
+           Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+       }
+       */
     public bool IsCurrentDeviceMouse
     {
         get
         {
-#if ENABLE_INPUT_SYSTEM 
-				return GetComponent<PlayerInput>().currentControlScheme == "KeyboardMouse";
+#if ENABLE_INPUT_SYSTEM
+            return GetComponent<PlayerInput>().currentControlScheme == "KeyboardMouse";
 #else
             return false;
 #endif
         }
-
     }
 }
