@@ -63,9 +63,14 @@ public class StoreController : Singleton<StoreController>
         vcam.Follow = vcam.LookAt = CurrentItem.transform;
     }
 
+
+#if UNITY_EDITOR
+
     [MenuItem("Tools/PlayerPrefs Elimination")]
     public static void DeleteAll()
     {
         PlayerPrefs.DeleteAll();
     }
+
+#endif
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,9 @@ public class FoodIcon : MonoBehaviour
     [SerializeField] private List<Sprite> emotionIcons;
     [SerializeField] private Image iconImage;
     [SerializeField] private float destroyAfter = 2.0f;
+    private AudioManager audioManager;
+
+    private void Start() => audioManager = AudioManager.Instance;
 
     private float _elapsedSeconds;
 
@@ -36,5 +40,19 @@ public class FoodIcon : MonoBehaviour
             Emotion.Good => emotionIcons[2],
             _ => iconImage.sprite
         };
+
+        switch(emotion)
+        {
+            case Emotion.Good:
+                AudioManager.Instance.PlayBadSound();
+                break;
+            case Emotion.Normal:
+                AudioManager.Instance.PlayNormalSound();
+                break;
+            case Emotion.Bad:
+                AudioManager.Instance.PlayBadSound();
+                break;
+
+        }
     }
 }
