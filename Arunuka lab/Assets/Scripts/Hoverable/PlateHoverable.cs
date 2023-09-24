@@ -6,6 +6,7 @@ using UnityEngine.Events;
 /// </summary>
 public class PlateHoverable : HoverableBase
 {
+    [SerializeField] private Plate plate;
     [SerializeField] private UnityEvent onButtonClickEvent;
 
     /// <summary>
@@ -18,6 +19,12 @@ public class PlateHoverable : HoverableBase
 
         if (!Input.GetKeyDown(KeyCode.G))
             return;
+
+        if (plate.IsEmpty())
+        {
+            // TODO: Show something to indicate the plate is empty.
+            return;
+        }
 
         onButtonClickEvent?.Invoke();
     }

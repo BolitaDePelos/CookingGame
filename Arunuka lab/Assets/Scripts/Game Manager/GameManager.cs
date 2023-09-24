@@ -38,7 +38,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         if (scoreText == null)
             return;
 
-        scoreText.text = currentScore.ToString().PadLeft(4, '0');
+        scoreText.text = "$" + currentScore;
     }
 
     /// <summary>

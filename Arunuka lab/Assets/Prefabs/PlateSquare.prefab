@@ -214,6 +214,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  plate: {fileID: 2125112575025080477}
   onButtonClickEvent:
     m_PersistentCalls:
       m_Calls:

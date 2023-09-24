@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NaughtyAttributes;
 using Newtonsoft.Json;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -10,6 +11,9 @@ using UnityEngine;
 /// </summary>
 public class RecipeManager : SingletonMonobehaviour<RecipeManager>
 {
+    [Header("Day")] [SerializeField] private int recipesPerDay = 2;
+    [SerializeField] private TextMeshProUGUI dayText;
+
     [SerializeField] private List<Recipe> recipes;
     [ReadOnly] [SerializeField] private Recipe currentRecipe;
     [SerializeField] [Range(0, 5)] private float createDishIntervalSeconds;
@@ -18,6 +22,8 @@ public class RecipeManager : SingletonMonobehaviour<RecipeManager>
 
     private float _secondsElapsedToCreateDish;
     private List<(string, int)> _recipeHistory = new();
+    private int _recipesCreatedAmount;
+    private bool _dayEnded;
 
     private void Start()
     {
@@ -29,8 +35,17 @@ public class RecipeManager : SingletonMonobehaviour<RecipeManager>
     /// </summary>
     private void Update()
     {
+        if (_dayEnded)
+            return;
+
         if (currentRecipe != null)
             return;
+
+        if (_recipesCreatedAmount >= recipesPerDay)
+        {
+            EndDay();
+            return;
+        }
 
         _secondsElapsedToCreateDish += Time.deltaTime;
         if (_secondsElapsedToCreateDish > createDishIntervalSeconds)
@@ -91,6 +106,9 @@ public class RecipeManager : SingletonMonobehaviour<RecipeManager>
         _recipeHistory ??= new List<(string, int)>();
         _recipeHistory.Add(new ValueTuple<string, int>(currentRecipe.title, totalScore));
 
+        _recipesCreatedAmount++;
+        dayText.text = _recipesCreatedAmount.ToString();
+
         currentRecipe = null;
         _secondsElapsedToCreateDish = 0.0f;
     }
@@ -131,5 +149,25 @@ public class RecipeManager : SingletonMonobehaviour<RecipeManager>
         {
             Debug.Log("Could not initialize recipe history.");
         }
+    }
+
+    /// <summary>
+    /// Ends the day.
+    /// </summary>
+    private void EndDay()
+    {
+        _dayEnded = true;
+    }
+
+    /// <summary>
+    /// Starts a new day by restarting all the recipe manager properties.
+    /// </summary>
+    public void StartNewDay()
+    {
+        _recipesCreatedAmount = 0;
+        _dayEnded = false;
+        _recipeHistory = new List<(string, int)>();
+
+        PlayerPrefs.SetString(SaveProperties.RecipeHistoryProperty, "[]");
     }
 }

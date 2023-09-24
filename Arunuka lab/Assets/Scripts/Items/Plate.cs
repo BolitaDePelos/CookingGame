@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -72,8 +73,16 @@ public class Plate : MonoBehaviour
         food.SetFoodLocation(FoodLocation.Table);
     }
 
+    public bool IsEmpty()
+    {
+        return !foodOnPlate.Any();
+    }
+
     public void FinishPlate()
     {
+        if (!foodOnPlate.Any())
+            return;
+
         List<FoodResult> foodResults = new();
         foodOnPlate.ForEach(
             foodObject =>

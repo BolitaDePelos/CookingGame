@@ -1,6 +1,5 @@
-using EzySlice;
 using System.Collections.Generic;
-using UnityEditor;
+using EzySlice;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -18,17 +17,13 @@ public class Knife : MonoBehaviour, IUsable, IPickable
     public int maxCutsPerObject = 3;
     public bool tutorialMode;
 
-    [SerializeField]
-    private CuttingManager cuttingManager;
+    [SerializeField] private CuttingManager cuttingManager;
 
-    [SerializeField]
-    private UnityEvent onCut;
+    [SerializeField] private UnityEvent onCut;
 
-    [SerializeField]
-    private UnityEvent onPickUp;
+    [SerializeField] private UnityEvent onPickUp;
 
-    [SerializeField]
-    private UnityEvent onDrop;
+    [SerializeField] private UnityEvent onDrop;
 
     // Cache of how many cuts has the parent.
     // Note: The GetHasCode of GameObject is the InstanceId, so it's not expensive to leave it as the key.
@@ -42,12 +37,11 @@ public class Knife : MonoBehaviour, IUsable, IPickable
     private readonly float movementSpeed = 1.0f;
     private Rigidbody m_Rigidbody;
     private bool isPickable = true;
-    private bool isPickedUp = false;
+    private bool isPickedUp;
 
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
-        
     }
 
     /// <summary>
@@ -83,16 +77,28 @@ public class Knife : MonoBehaviour, IUsable, IPickable
     }
 
     /// <inheritdoc />
-    public void Use(GameObject actor) => OnUse?.Invoke();
+    public void Use(GameObject actor)
+    {
+        OnUse?.Invoke();
+    }
 
     /// <inheritdoc />
-    public void SetIsPickable(bool isPickable) => this.isPickable = isPickable;
+    public void SetIsPickable(bool isPickable)
+    {
+        this.isPickable = isPickable;
+    }
 
     /// <inheritdoc />
-    public bool IsPickable() => isPickable;
+    public bool IsPickable()
+    {
+        return isPickable;
+    }
 
     /// <inheritdoc />
-    public bool IsPickedUp() => isPickedUp;
+    public bool IsPickedUp()
+    {
+        return isPickedUp;
+    }
 
     /// <inheritdoc />
     public GameObject PickUp(GameObject picker)
@@ -103,7 +109,7 @@ public class Knife : MonoBehaviour, IUsable, IPickable
         //TODO: Set an animation for this.
         //
         transform.SetLocalPositionAndRotation(
-            new Vector3(-0.31099999f, 0.331f, -0.0340000018f),
+            new Vector3(-0.31099999f, 0.42f, -0.0340000018f),
             new Quaternion(0.114386953f, 0.710132778f, -0.0854734182f, 0.689435542f));
 
         onPickUp?.Invoke();
@@ -135,6 +141,8 @@ public class Knife : MonoBehaviour, IUsable, IPickable
         if (hits.Length <= 0)
             return;
 
+        bool checkMeOut = true;
+
         foreach (Collider hit in hits)
         {
             GameObject hitObject = hit.gameObject;
@@ -144,12 +152,10 @@ public class Knife : MonoBehaviour, IUsable, IPickable
             if (cutParent != null)
                 currentHitsOnParent = currentCutsInParent[cutParent];
 
-            if (currentHitsOnParent >= maxCutsPerObject)
-            {
-                Debug.Log("Se ha alcanzado el límite de cortes permitidos para este objeto.");
-                cuttingManager.CheckCut();
+            if (currentHitsOnParent < maxCutsPerObject)
+                checkMeOut = false;
+            else
                 continue;
-            }
 
             // Guarda las transformaciones locales antes del corte.
             //
@@ -168,7 +174,7 @@ public class Knife : MonoBehaviour, IUsable, IPickable
             if (hull == null)
                 continue;
 
-            // Crea un nuevo GameObject vacío solo si no existe uno para el objeto que se está cortando.
+            // Crea un nuevo GameObject vacÃ­o solo si no existe uno para el objeto que se estÃ¡ cortando.
             //
             if (cutParent == null)
             {
@@ -209,29 +215,35 @@ public class Knife : MonoBehaviour, IUsable, IPickable
             currentCutsInParent[cutParent]++;
             onCut?.Invoke();
         }
+
+        if (!checkMeOut)
+            return;
+
+        Debug.Log("Se ha alcanzado el lÃ­mite de cortes permitidos para este objeto.");
+        cuttingManager.CheckCut();
     }
 
     public void AddHullComponents(GameObject go, GameObject parent)
     {
         go.layer = 8;
-        Rigidbody rb = go.AddComponent<Rigidbody>();
+        var rb = go.AddComponent<Rigidbody>();
         rb.interpolation = RigidbodyInterpolation.Interpolate;
-        MeshCollider collider = go.AddComponent<MeshCollider>();
+        var collider = go.AddComponent<MeshCollider>();
         collider.convex = true;
 
         go.transform.rotation = Quaternion.identity;
-        
+
         // Item Food
         //
-        Food parentFood = parent.GetComponent<Food>();
-        Food food = go.AddComponent<Food>();
+        var parentFood = parent.GetComponent<Food>();
+        var food = go.AddComponent<Food>();
         food.SetIngredientType(parentFood.IngredientType);
         food.SetCrossMaterial(parentFood.crossMaterial);
 
         // IPickable
         //
-        PickableObject parentPickable = parent.GetComponent<PickableObject>();
-        PickableObject pickable = go.AddComponent<PickableObject>();
+        var parentPickable = parent.GetComponent<PickableObject>();
+        var pickable = go.AddComponent<PickableObject>();
         pickable.KeepWorldPosition = parentPickable.KeepWorldPosition;
 
         rb.AddExplosionForce(explosionForce, go.transform.position, 20);
@@ -273,7 +285,7 @@ public class Knife : MonoBehaviour, IUsable, IPickable
 
         // Draw spheres at the center of the overlapping colliders
         Gizmos.color = Color.red;
-        foreach (var hit in hits)
+        foreach (Collider hit in hits)
             Gizmos.DrawSphere(hit.bounds.center, 0.1f);
     }
 }

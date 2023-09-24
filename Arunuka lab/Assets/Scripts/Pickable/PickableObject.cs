@@ -8,16 +8,25 @@ public class PickableObject : MonoBehaviour, IPickable
     private bool _isPickable = true;
     private bool _isPickedUp;
 
+    private Vector3 _myLocalPosition;
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        if (IsPickedUp())
+            transform.localPosition = _myLocalPosition;
     }
 
     /// <inheritdoc />
     public GameObject PickUp(GameObject picker)
     {
         _isPickedUp = true;
-        gameObject.transform.SetParent(picker.transform, KeepWorldPosition);
+        transform.SetParent(picker.transform, KeepWorldPosition);
+        _myLocalPosition = transform.localPosition;
 
         if (_rigidbody != null)
             _rigidbody.isKinematic = true;
