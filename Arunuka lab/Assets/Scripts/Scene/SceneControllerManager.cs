@@ -19,12 +19,8 @@ public class SceneControllerManager : Singleton<SceneControllerManager>
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(transitionTime);
-        var  progress = SceneManager.LoadSceneAsync(levelIndex);
 
-        yield return new WaitUntil(()=>progress.isDone == true);
-        print("Do Something");
-
-        //SceneManager.LoadScene(levelIndex);
+        SceneManager.LoadScene(levelIndex);
 
     }
 
