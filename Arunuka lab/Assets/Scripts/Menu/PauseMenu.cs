@@ -40,6 +40,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
         GameIsPaused = true;
         audioManager.PlayPauseSound();
+        Cursor.visible = true;
     }
 
     public void Continue()
