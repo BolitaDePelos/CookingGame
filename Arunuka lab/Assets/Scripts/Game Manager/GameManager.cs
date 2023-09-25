@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : SingletonMonobehaviour<GameManager>
 {
@@ -27,6 +28,15 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     }
 
     /// <summary>
+    /// Init score.
+    /// </summary>
+    private void DisplayInitScore() 
+    {
+        currentScore = PlayerPrefs.GetInt(SaveProperties.ScoreProperty, 0);
+        scoreText.text = "$" + currentScore;
+    }
+
+    /// <summary>
     /// Adds value to the score.
     /// </summary>
     public void AddScore(int score)
@@ -47,8 +57,8 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     {
         if (!SaveProperties.IsSaved())
             return;
-
-        AddScore(PlayerPrefs.GetInt(SaveProperties.ScoreProperty, 0));
+        DisplayInitScore();
+        //AddScore(PlayerPrefs.GetInt(SaveProperties.ScoreProperty, 0));
         // TODO: Load the other values.
     }
 
