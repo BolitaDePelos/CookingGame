@@ -48,7 +48,6 @@ public class MenuController : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
-
         Menu = false;
         Fade = false;
         CanvasAnyKey.SetActive(true);
@@ -197,6 +196,8 @@ public class MenuController : MonoBehaviour
             anim.SetBool("Menu", true);
             CanvasAnyKey.SetActive(false);
             FadeCanvas.SetActive(true);
+            //Cursor.visible = true;
         }
+        
     }
 }

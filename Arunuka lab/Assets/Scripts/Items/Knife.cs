@@ -131,6 +131,7 @@ public class Knife : MonoBehaviour, IUsable, IPickable
             new Quaternion(-0.413232654f, 0.435098618f, -0.567699552f, 0.563600302f));
 
         onDrop?.Invoke();
+        HoverCursor.Instance.OnExitHover();
     }
 
     /// <summary>

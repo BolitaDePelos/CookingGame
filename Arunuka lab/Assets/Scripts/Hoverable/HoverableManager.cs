@@ -9,7 +9,7 @@ public class HoverableManager : MonoBehaviour
     [SerializeField] private Transform playerCameraTransform;
     [SerializeField] [Min(1)] private float hitRange = 3;
     [SerializeField] private GameObject currentHoverObject;
-
+    public GameObject CurrentHoverObject => currentHoverObject;
     /// <summary>
     /// Called every game frame.
     /// </summary>

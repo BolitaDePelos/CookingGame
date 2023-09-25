@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -37,6 +38,7 @@ public class RecipesMenu : MonoBehaviour
     public void Pause()
     {
         RecipesMenuUI.SetActive(true);
+        Cursor.visible = true;
         GameIsPaused = true;
     }
 
@@ -46,6 +48,7 @@ public class RecipesMenu : MonoBehaviour
         book.currentPage = 0;
         RecipesMenuUI.SetActive(false);
         GameIsPaused = false;
+        Cursor.visible = false;
        
     }
 

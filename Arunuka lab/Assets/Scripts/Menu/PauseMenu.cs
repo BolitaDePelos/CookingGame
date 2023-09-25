@@ -48,6 +48,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         GameIsPaused = false;
         audioManager.PlayPauseSound();
+        Cursor.visible = false;
     }
 
     public void ExitButton()
