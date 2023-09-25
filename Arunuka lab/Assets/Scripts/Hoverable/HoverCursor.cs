@@ -14,7 +14,11 @@ public class HoverCursor : Singleton<HoverCursor>
     private void Start() 
     {
         Cursor.visible = false;
-        OnExitHover();
+        Cursor.lockState = CursorLockMode.Confined;
+        if (point == null)
+            Cursor.visible = true;
+        else
+            OnExitHover();
     }
 
     public void OnGrab() => point.sprite = textureGrab;
