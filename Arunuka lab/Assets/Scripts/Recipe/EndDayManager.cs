@@ -21,7 +21,7 @@ public class EndDayManager : SingletonMonobehaviour<EndDayManager>
     {
         endDayCanvasAnimator.SetTrigger(Appearing);
         moneyGainedText.text = "$" + PlayerPrefs.GetInt(SaveProperties.TodayMoneyProperty, 0);
-
+        Cursor.visible = true;
         Player.Instance.SetCanMove(false);
     }
 

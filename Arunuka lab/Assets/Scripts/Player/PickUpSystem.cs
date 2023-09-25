@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PickUpSystem : MonoBehaviour
@@ -36,8 +37,8 @@ public class PickUpSystem : MonoBehaviour
 
     private void Update()
     {
-        if (inHandItem != null)
-            return;
+        if (inHandItem == null)
+            HoverCursor.Instance.OnExitHover();
 
         // Just used to keep reference of the hit.
         //
@@ -48,7 +49,14 @@ public class PickUpSystem : MonoBehaviour
                 hitRange,
                 pickableLayerMask))
         {
+            if (_hit.collider != null)
+                HoverCursor.Instance.OnHover();
         }
+
+        if (inHandItem != null)
+            HoverCursor.Instance.OnGrab();
+
+        
     }
 
     private void UseItem()
@@ -74,6 +82,7 @@ public class PickUpSystem : MonoBehaviour
         pickUpSource.Play();
         inHandItem = pickableItem.PickUp(pickUpParent.gameObject);
 
+        HoverCursor.Instance.OnGrab();
         if (_hit.collider.GetComponent<Knife>())
         {
             Debug.Log("It's a Knife!");
@@ -101,6 +110,7 @@ public class PickUpSystem : MonoBehaviour
             pickableItem.Drop();
 
         inHandItem = null;
+        HoverCursor.Instance.OnExitHover();
     }
 
     private void PlayerSetCutPosition()
