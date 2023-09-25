@@ -37,6 +37,7 @@ public class StoreController : Singleton<StoreController>
         CurrentItem.UnlockItem();
         moneyUpdater.UpdateMoney(-CurrentItem.Price);
         AudioManager.Instance.PlayBuySound();
+        DisplayItem();
     }
 
     public void SelectItem()
@@ -76,6 +77,8 @@ public class StoreController : Singleton<StoreController>
         costDisplayer.DisplayCost();
         buttonBuy.interactable = CurrentItem.CheckBuy();
         buttonSelect.interactable = CurrentItem.CheckSelect();
+        buttonSelect.gameObject.SetActive(CurrentItem.CheckSelect());
+        buttonBuy.gameObject.SetActive(CurrentItem.CheckBuy());
         vcam.Follow = vcam.LookAt = CurrentItem.transform;
     }
 
