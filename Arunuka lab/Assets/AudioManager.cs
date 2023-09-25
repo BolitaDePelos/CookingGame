@@ -6,6 +6,7 @@ using UnityEngine;
 public class AudioManager : SingletonMonobehaviour<AudioManager>
 {
     [SerializeField] private AudioSource faceHappy;
+    [SerializeField] private AudioSource faceNormal;
     [SerializeField] private AudioSource faceSad;
     [SerializeField] private AudioSource grabSound;
     [SerializeField] private AudioSource buySound;
@@ -27,7 +28,7 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
     private new void Awake() => base.Awake();
     internal void PlayBadSound() => PlayAudioSource(faceSad);
     internal void PlayHappySound() => PlayAudioSource(faceHappy);
-    internal void PlayNormalSound() => PlayAudioSource(faceHappy);
+    internal void PlayNormalSound() => PlayAudioSource(faceNormal);
     internal void PlayGrabSound() => PlayAudioSource(grabSound);
     internal void PlayBuySound() => PlayAudioSource(buySound);
     internal void PlayHoverSound() => PlayAudioSource(hoverSound);
@@ -40,7 +41,7 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
     internal void StopSoundFry() => StopAudioSource(frySound);
     internal void StopSoundFire() => StopAudioSource(fireSound);
     internal void PlaySoundFire() => PlayAudioSource(fireSound);
-    internal void PlaySoundTurnOnStove() => PlayAudioSource(knifeCut);
+    internal void PlaySoundTurnOnStove() => PlayAudioSource(turnOnStoveSound);
     internal void PlaySoundSelect() => PlayAudioSource(seleccionarSound);
     internal void PlayActionDenied() => PlayAudioSource(ActionDenied);
     internal void PlayFridgeOpenSound()
