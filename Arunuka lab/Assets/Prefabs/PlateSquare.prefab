@@ -506,7 +506,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3003765883094047193, guid: 5a38a8b0eb12c1a4881b699020ad940c, type: 2}
+  - {fileID: -5922970629657333237, guid: 175ed28ee7068274192ee559b7867ba6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -618,5 +618,5 @@ MonoBehaviour:
   _SortingLayerID: 0
   _SortingOrder: 0
   m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 0}
+  m_renderer: {fileID: 7677490880470829856}
   m_maskType: 0
