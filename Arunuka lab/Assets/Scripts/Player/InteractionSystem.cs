@@ -17,13 +17,13 @@ public class InteractionSystem : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEventsManager.instance.InputEvents.OnInteractionPressed += InteractionObjects;
+        GameEventsManager.Instance.InputEvents.OnInteractionPressed += InteractionObjects;
     }
 
 
     private void OnDisable()
     {
-        GameEventsManager.instance.InputEvents.OnInteractionPressed -= InteractionObjects;
+        GameEventsManager.Instance.InputEvents.OnInteractionPressed -= InteractionObjects;
     }
 
 

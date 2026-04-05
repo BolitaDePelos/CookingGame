@@ -16,14 +16,14 @@ public class Grabber : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEventsManager.instance.InputEvents.OnInteractionPressed += DragItem;
-        GameEventsManager.instance.InputEvents.OnUsePressed += UseItem;
+        GameEventsManager.Instance.InputEvents.OnInteractionPressed += DragItem;
+        GameEventsManager.Instance.InputEvents.OnUsePressed += UseItem;
     }
 
     private void OnDisable()
     {
-        GameEventsManager.instance.InputEvents.OnInteractionPressed -= DragItem;
-        GameEventsManager.instance.InputEvents.OnUsePressed -= UseItem;
+        GameEventsManager.Instance.InputEvents.OnInteractionPressed -= DragItem;
+        GameEventsManager.Instance.InputEvents.OnUsePressed -= UseItem;
     }
 
     private void Update()

@@ -10,12 +10,12 @@ public class StoveView : MonoBehaviour, IUsable
 
     private void OnEnable()
     {
-        GameEventsManager.instance.InputEvents.OnDropPressed += Desactivate;
+        GameEventsManager.Instance.InputEvents.OnDropPressed += Desactivate;
     }
 
     private void OnDisable()
     {
-        GameEventsManager.instance.InputEvents.OnDropPressed -= Desactivate;
+        GameEventsManager.Instance.InputEvents.OnDropPressed -= Desactivate;
     }
 
     public void Use(GameObject actor)
