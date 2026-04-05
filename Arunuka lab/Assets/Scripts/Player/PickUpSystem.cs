@@ -82,6 +82,7 @@ public class PickUpSystem : MonoBehaviour
 
         pickUpSource.Play();
         inHandItem = pickableItem.PickUp(pickUpParent.gameObject);
+        if(inHandItem)
 
         HoverCursor.Instance.OnGrab();
         if (_hit.collider.GetComponent<Knife>())

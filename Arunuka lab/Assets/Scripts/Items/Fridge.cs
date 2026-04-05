@@ -4,9 +4,9 @@ using UnityEngine.Events;
 
 public class Fridge : MonoBehaviour, IUsable
 {
-    [field:SerializeField]
-    public UnityEvent OnUse { get; private set; }
-    
+    [field:SerializeField] public UnityEvent OnUse { get; private set; }
+    [SerializeField] private Animator playerAnimator;
+
     [Header("Animation")]
     [SerializeField] public NameAnimation animator;
     [SerializeField] string Open = "Open";
@@ -16,12 +16,17 @@ public class Fridge : MonoBehaviour, IUsable
     public bool tutorialMode;
     private AudioManager audioManager;
 
-    private void Start() => audioManager = AudioManager.Instance;
-
-    private void Update()
+    private void Start()
     {
-        ToggleFridgeState();
+        audioManager = AudioManager.Instance;
+        OnUse.AddListener(ToggleFridgeState);
+        OnUse.AddListener(PlayAnimation);
     }
+
+    //private void Update()
+    //{
+    //    ToggleFridgeState();
+    //}
 
     public void Use(GameObject actor)
     {
@@ -38,17 +43,20 @@ public class Fridge : MonoBehaviour, IUsable
         isOpen = !isOpen;
     }
 
+
     public void PlayAnimation()
     {
         if (isOpen)
         {
             animator.PlayAnimationByName(Open);
             audioManager.PlayFridgeOpenSound();
+            playerAnimator.SetTrigger("Default");
         }
         else
         {
             animator.PlayAnimationByName(Close);
             audioManager.PlayFridgeCloseSound();
+            playerAnimator.SetTrigger("Fridge");
         }
     }
 

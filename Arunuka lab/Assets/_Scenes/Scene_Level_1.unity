@@ -28301,8 +28301,12 @@ PrefabInstance:
       value: FridgeDoorBottom_Close
       objectReference: {fileID: 0}
     - target: {fileID: 1505508449724315656, guid: fc7c35392a156cb40b17392d49de8332, type: 3}
+      propertyPath: playerAnimator
+      value: 
+      objectReference: {fileID: 7260886550736379019}
+    - target: {fileID: 1505508449724315656, guid: fc7c35392a156cb40b17392d49de8332, type: 3}
       propertyPath: <OnUse>k__BackingField.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1505508449724315656, guid: fc7c35392a156cb40b17392d49de8332, type: 3}
       propertyPath: <OnUse>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -28333,8 +28337,12 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1505508449724315659, guid: fc7c35392a156cb40b17392d49de8332, type: 3}
+      propertyPath: playerAnimator
+      value: 
+      objectReference: {fileID: 7260886550736379019}
+    - target: {fileID: 1505508449724315659, guid: fc7c35392a156cb40b17392d49de8332, type: 3}
       propertyPath: <OnUse>k__BackingField.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1505508449724315659, guid: fc7c35392a156cb40b17392d49de8332, type: 3}
       propertyPath: <OnUse>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -37389,18 +37397,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 7260886550736379019}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Fridge
-          m_BoolArgument: 0
-        m_CallState: 2
+  playerAnimator: {fileID: 7260886550736379019}
   animator: {fileID: 1961254668}
   Open: FridgeDoorBottom_Open
   Close: FridgeDoorBottom_Close
