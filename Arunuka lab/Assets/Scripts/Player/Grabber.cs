@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Grabber : MonoBehaviour
 {
-
-
     [SerializeField] private LayerMask draggableLayerMask;
     [SerializeField] private Transform playerCameraTransform;
     [SerializeField] [Min(1)] private float hitrange = 3;

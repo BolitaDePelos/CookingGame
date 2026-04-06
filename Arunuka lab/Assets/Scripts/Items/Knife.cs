@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using EzySlice;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,13 +18,15 @@ public class Knife : MonoBehaviour, IUsable, IPickable
     public int maxCutsPerObject = 3;
     public bool tutorialMode;
     AudioManager audioManager;
+    public static int countCuts =0;
+    public static int recommendedCuts =5;
     [SerializeField] private CuttingManager cuttingManager;
 
-    [SerializeField] private UnityEvent onCut;
+    public UnityEvent onCut;
 
-    [SerializeField] private UnityEvent onPickUp;
+    public UnityEvent onPickUp;
 
-    [SerializeField] private UnityEvent onDrop;
+    public UnityEvent onDrop;
 
     // Cache of how many cuts has the parent.
     // Note: The GetHasCode of GameObject is the InstanceId, so it's not expensive to leave it as the key.
@@ -38,6 +41,7 @@ public class Knife : MonoBehaviour, IUsable, IPickable
     private Rigidbody m_Rigidbody;
     private bool isPickable = true;
     private bool isPickedUp;
+
 
     private void Awake()
     {
@@ -215,6 +219,7 @@ public class Knife : MonoBehaviour, IUsable, IPickable
             // Adds cuts in parent counter.
             //
             currentCutsInParent[cutParent]++;
+            countCuts++;
             onCut?.Invoke();
             audioManager.PlaySoundKnifeCut();
         }

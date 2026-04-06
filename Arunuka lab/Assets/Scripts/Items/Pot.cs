@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 /// Mechanics of a pot.
 /// </summary>
-public class Pot : SingletonMonobehaviour<Pot>
+public class Pot : SingletonMonobehaviour<Pot>, IKitchenSector
 {
     [Header("Pouring Properties")] [SerializeField]
     private float liquidFillDurationSeconds = 10;
@@ -128,5 +129,10 @@ public class Pot : SingletonMonobehaviour<Pot>
         liquidRenderer.material.SetFloat(FillPropertyId, fill);
 
         _currentPouringDuration += Time.deltaTime;
+    }
+
+    public void ConfigureFoodKitchenSector(Food food)
+    {
+
     }
 }

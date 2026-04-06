@@ -19,7 +19,7 @@ public class RecipeManager : SingletonMonobehaviour<RecipeManager>
     [Header("Recipe Properties")] [SerializeField]
     private List<Recipe> recipes;
 
-    [ReadOnly] [SerializeField] private Recipe currentRecipe;
+    public Recipe currentRecipe;
     [SerializeField] [Range(0, 5)] private float createDishIntervalSeconds;
 
     [Header("Reaction")] [SerializeField] private GameObject foodEmotionPrefab;

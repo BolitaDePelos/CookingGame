@@ -24,9 +24,8 @@ public class PickableObject : MonoBehaviour, IPickable
     /// <inheritdoc />
     public GameObject PickUp(GameObject picker)
     {
-        _isPickedUp = true;
-        print("Picking up unavailable");
         return null;
+        _isPickedUp = true;
         transform.SetParent(picker.transform, KeepWorldPosition);
         _myLocalPosition = transform.localPosition;
 

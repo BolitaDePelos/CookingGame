@@ -15,5 +15,7 @@ public class GameEventsManager : SingletonMonobehaviour<GameEventsManager>
         InputEvents = new InputEvents();
         SceneLoadEvents = new SceneLoadEvents();
     }
-
 }
+
+
+//public class Table

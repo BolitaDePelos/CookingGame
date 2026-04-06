@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using UnityEngine;
 
@@ -28,11 +29,12 @@ public class Food : MonoBehaviour
     private bool isBeingCooked;
     private float cookedDuration;
     private Color originalColor;
+    Rigidbody rb;
 
     private void Start()
     {
         initPos = transform.position;
-
+        rb = GetComponent<Rigidbody>();
         if (materialRenderer == null && TryGetComponent(out MeshRenderer myMeshRenderer))
             materialRenderer = myMeshRenderer;
 
@@ -82,10 +84,7 @@ public class Food : MonoBehaviour
         IngredientName = Enum.GetName(typeof(Ingredients), IngredientType);
     }
 
-    public void SetCrossMaterial(Material material)
-    {
-        crossMaterial = material;
-    }
+    public void SetCrossMaterial(Material material) => crossMaterial = material;
 
     /// <summary>
     /// Sets if the food is being cooked or not.
@@ -102,10 +101,7 @@ public class Food : MonoBehaviour
     /// <summary>
     /// Sets the location of the food.
     /// </summary>
-    public void SetFoodLocation(FoodLocation foodLocation)
-    {
-        this.foodLocation = foodLocation;
-    }
+    public void SetFoodLocation(FoodLocation foodLocation) => this.foodLocation = foodLocation;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -113,7 +109,7 @@ public class Food : MonoBehaviour
             return;
 
         onCuttingBoard = true;
-        cuttingManager.AddItemCut(this);
+        cuttingManager.ConfigureFoodKitchenSector(this);
     }
 
     /// <summary>
@@ -131,16 +127,21 @@ public class Food : MonoBehaviour
     /// <summary>
     /// Gets the <see cref="FoodCookState"/> of the owner.
     /// </summary>
-    public FoodCookState GetFoodState()
-    {
-        return foodState;
-    }
-
+    public FoodCookState GetFoodState() => foodState;
     /// <summary>
     /// Gets how long the food was cooked in seconds.
     /// </summary>
-    public float GetCookedTimeSeconds()
+    public float GetCookedTimeSeconds() => cookedDuration;
+
+    public void AnimateMovement(Transform[] targets)
     {
-        return cookedDuration;
+       var sequence = DOTween.Sequence();
+        sequence.OnStart(()=>rb.isKinematic = true);
+        foreach (Transform target in targets)
+        { 
+            sequence.Append(transform.DOMove(target.position,0.6f));
+        }
+        sequence.Append(transform.DORotate(targets[targets.Length-1].rotation.eulerAngles,0.6f));
+        sequence.OnComplete(() => rb.isKinematic = false);
     }
 }
