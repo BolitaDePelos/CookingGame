@@ -10,15 +10,8 @@ public class TableManager:Singleton<TableManager>,IKitchenSector
     [SerializeField] Transform tableCenter;
     [SerializeField] Knife knife;
     int count = 0;
-
     public List<Food> foodsOnTable = new List<Food>();
-
-    private void Start()
-    {
-        knife.onPickUp.AddListener(SetPosCenter);
-    }
-
-
+    private void Start() => knife.onPickUp.AddListener(SetPosCenter);
     public void ConfigureFoodKitchenSector(Food food)
     {
         foodsOnTable.Add(food);
@@ -35,7 +28,11 @@ public class TableManager:Singleton<TableManager>,IKitchenSector
 
     public void SetPosCenter() 
     {
-        if(foodsOnTable.Count>0)
+        if (foodsOnTable.Count > 0)
+        { 
             foodsOnTable[0].AnimateMovement(new Transform[] { tableCenter });
+            knife.lastObjectHit = foodsOnTable[0].gameObject;
+            foodsOnTable.RemoveAt(0);
+        }
     }
 }

@@ -26,6 +26,8 @@ public class Pot : SingletonMonobehaviour<Pot>, IKitchenSector
     private const float MaxHeight = 0.52F;
     AudioManager audioManager;
 
+    public Transform cuttingPos;
+
     private void Start() => audioManager = AudioManager.Instance;
 
     private void Update()

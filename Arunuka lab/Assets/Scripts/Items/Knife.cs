@@ -110,6 +110,7 @@ public class Knife : MonoBehaviour, IUsable, IPickable
     {
         isPickedUp = true;
         m_Rigidbody.isKinematic = true;
+        recommendedCuts = maxCutsPerObject;
 
         //TODO: Set an animation for this.
         //
@@ -136,7 +137,10 @@ public class Knife : MonoBehaviour, IUsable, IPickable
 
         onDrop?.Invoke();
         HoverCursor.Instance.OnExitHover();
+        countCuts = 0;
     }
+
+    public GameObject lastObjectHit;
 
     /// <summary>
     /// Slices the objects that entered in contact with the knife collider.
@@ -152,9 +156,9 @@ public class Knife : MonoBehaviour, IUsable, IPickable
         foreach (Collider hit in hits)
         {
             GameObject hitObject = hit.gameObject;
-
             int currentHitsOnParent = 0;
             GameObject cutParent = GetCutParent(hitObject);
+            lastObjectHit = cutParent;
             if (cutParent != null)
                 currentHitsOnParent = currentCutsInParent[cutParent];
 
@@ -171,9 +175,9 @@ public class Knife : MonoBehaviour, IUsable, IPickable
 
             // Imprime las transformaciones locales antes del corte en la consola
             //
-            Debug.Log("Original Position: " + originalPosition);
-            Debug.Log("Original Rotation: " + originalRotation);
-            Debug.Log("Original Scale: " + originalScale);
+            //Debug.Log("Original Position: " + originalPosition);
+            //Debug.Log("Original Rotation: " + originalRotation);
+            //Debug.Log("Original Scale: " + originalScale);
 
             Material crossMaterial = hitObject.GetComponent<Food>().crossMaterial;
             SlicedHull hull = SliceObject(hitObject, crossMaterial);

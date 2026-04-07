@@ -10892,13 +10892,15 @@ MonoBehaviour:
   ingredients: []
   currentItemsCount: 0
   totalItemsCount: 0
-  tutorialMode: 0
   sliceParents: []
-  onCutDone: 0
   OnCutEnds:
     m_PersistentCalls:
       m_Calls: []
   stroveManager: {fileID: 0}
+  knife: {fileID: 1722726885}
+  boardCut: {fileID: 1169811033}
+  tutorialMode: 0
+  onCutDone: 0
 --- !u!4 &596712747
 Transform:
   m_ObjectHideFlags: 0
@@ -12517,6 +12519,51 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51bc90d2b6f95004db94bf0e5e29797b, type: 3}
+--- !u!1 &704956190
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 704956192}
+  - component: {fileID: 704956191}
+  m_Layer: 0
+  m_Name: ListCompletation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &704956191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704956190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 653286b72c71c7546ae556630cdbc999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardTask: {fileID: 0}
+--- !u!4 &704956192
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704956190}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.08336, y: -3.0212374, z: 1.1546421}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &711397245 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 51bc90d2b6f95004db94bf0e5e29797b, type: 3}
@@ -16415,6 +16462,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5955234cc8592c349af7a95af22bade1, type: 3}
+--- !u!1 &903045235
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 903045236}
+  m_Layer: 0
+  m_Name: UpPot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &903045236
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903045235}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.1942222, y: -0.27681503, z: -0.012851479, w: 0.94100267}
+  m_LocalPosition: {x: -0.08700001, y: 0.436, z: 0.20899999}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2082581548}
+  m_LocalEulerAnglesHint: {x: -21.879, y: -33.781, z: 5.153}
 --- !u!1001 &905320008
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33814,6 +33892,7 @@ MonoBehaviour:
   foodInsidePot: []
   stoveIsActive: 0
   smokeParticles: {fileID: 1130153847}
+  cuttingPos: {fileID: 903045236}
 --- !u!1 &1733085943 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d303f5dce7b19ab45ab2e6172db8041d, type: 3}
@@ -39978,6 +40057,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: a3c91285ba186194fbd2f0dae3112475, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1723748603}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: a3c91285ba186194fbd2f0dae3112475, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 903045236}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a3c91285ba186194fbd2f0dae3112475, type: 3}
       insertIndex: -1
@@ -42173,6 +42255,10 @@ PrefabInstance:
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4622777704948516704, guid: fa6663a43718c434080f183c9559e474, type: 3}
+      propertyPath: maxCutsPerObject
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4622777704948516704, guid: fa6663a43718c434080f183c9559e474, type: 3}
       propertyPath: onCut.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -43708,3 +43794,4 @@ SceneRoots:
   - {fileID: 368094028}
   - {fileID: 1513194063}
   - {fileID: 2027833417}
+  - {fileID: 704956192}
