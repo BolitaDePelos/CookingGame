@@ -1,0 +1,12 @@
+{
+  version: 2,
+  mediaFileName: "UnBocadill'o Creditos.mp4",
+  cutSegments: [
+    {
+      start: 0,
+      end: 45.15268042382812,
+      name: '',
+      selected: true,
+    },
+  ],
+}
