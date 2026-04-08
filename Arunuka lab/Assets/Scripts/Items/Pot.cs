@@ -25,7 +25,6 @@ public class Pot : SingletonMonobehaviour<Pot>, IKitchenSector
     private const float MinHeight = 0.42F;
     private const float MaxHeight = 0.52F;
     AudioManager audioManager;
-
     public Transform cuttingPos;
 
     private void Start() => audioManager = AudioManager.Instance;
@@ -87,6 +86,8 @@ public class Pot : SingletonMonobehaviour<Pot>, IKitchenSector
         food.SetIsBeingCooked(false);
         food.SetFoodLocation(FoodLocation.Table);
     }
+
+    public List<GameObject> GetFoodInsidePot() => foodInsidePot;
 
     /// <summary>
     /// Sets if the stove is active or not.

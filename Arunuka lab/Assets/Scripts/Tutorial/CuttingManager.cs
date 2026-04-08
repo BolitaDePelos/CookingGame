@@ -54,7 +54,12 @@ public class CuttingManager : SingletonMonobehaviour<CuttingManager>,IKitchenSec
     private void MoveBoard()
     {
         // Set parent while maintaining world position
-        knife.lastObjectHit.transform.SetParent(boardCut, true);
+        if(knife.lastObjectHit == null)
+        {
+            print("No object hit by the knife.");
+            return;
+        }
+        //knife.lastObjectHit.transform.SetParent(boardCut, true);
         posInit = boardCut.position;
         rotInit = boardCut.rotation.eulerAngles;
 
@@ -62,18 +67,16 @@ public class CuttingManager : SingletonMonobehaviour<CuttingManager>,IKitchenSec
         foreach (var item in knife.lastObjectHit.GetComponentsInChildren<Rigidbody>())
         {
             item.isKinematic = true;
-            item.DOMove(Pot.Instance.cuttingPos.position+Vector3.up*0.081f, 0.5f);
+            item.DOMove(Pot.Instance.cuttingPos.position+Vector3.up*0.081f, 0.7f).SetDelay(0.2f);
         }
-        if (Knife.countCuts >= Knife.recommendedCuts)
-        { 
-            Sequence sequence = DOTween.Sequence();
-            sequence.Append(boardCut.DOMove(Pot.Instance.cuttingPos.position, 0.6f)).SetDelay(0.2f);
-            sequence.Append(boardCut.DORotate(Pot.Instance.cuttingPos.rotation.eulerAngles, 0.5f));
-            sequence.OnComplete(() =>
-            {
-                StartCoroutine(DoWaitRelease());
-            });
-        }
+
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(boardCut.DOMove(Pot.Instance.cuttingPos.position, 0.7f)).SetDelay(0.2f);
+        sequence.Append(boardCut.DORotate(Pot.Instance.cuttingPos.rotation.eulerAngles, 0.5f));
+        sequence.OnComplete(() =>
+        {
+            StartCoroutine(DoWaitRelease());
+        });
     }
 
     IEnumerator DoWaitRelease() 

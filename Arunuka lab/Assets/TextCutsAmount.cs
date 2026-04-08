@@ -36,5 +36,5 @@ public class TextQuitKnife: MonoBehaviour
     }
     private void Show() => _text.DOFade(1, 0.5f);
     private void Hide() => _text.DOFade(0, 0.5f);
-    private void UpdateText() => _text.text = Knife.countCuts.ToString() + "/" + Knife.recommendedCuts.ToString();
+    private void UpdateText() => _text.text = "Cortes "+Knife.countCuts.ToString() + "/" + Knife.recommendedCuts.ToString();
 }

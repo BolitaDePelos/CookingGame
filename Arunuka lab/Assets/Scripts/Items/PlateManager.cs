@@ -9,6 +9,7 @@ public class PlateManager : SingletonMonobehaviour<PlateManager>
 {
     [Header("Plate Settings")] [SerializeField]
     private List<PlateSpawn> plateSpawns = new();
+    public List<Transform> positionsPlate = new();
 
     /// <summary>
     /// Spawn a new plate in an empty space.

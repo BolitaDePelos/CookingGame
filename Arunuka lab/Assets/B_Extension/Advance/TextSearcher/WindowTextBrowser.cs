@@ -49,7 +49,7 @@ public class WindowTextBrowser : EditorWindow
     {
 #if UNITY_2023_3_OR_NEWER
         var items = FindObjectsByType<Text>(FindObjectsInactive.Include,FindObjectsSortMode.None);
-        var items2 = FindObjectsByType<TextMeshProUGUI>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        var items2 = FindObjectsByType<TMP_Text>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 #else
         var items = GameObject.FindObjectsOfType<Text>(true);
         var items2 = GameObject.FindObjectsOfType<TextMeshProUGUI>(true);
