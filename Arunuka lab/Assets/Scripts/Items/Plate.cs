@@ -13,7 +13,7 @@ public class Plate : MonoBehaviour
     [SerializeField] private PlateHoverable myHoverable;
     [SerializeField] private TextMeshPro hoverableText;
     [SerializeField] private string textToDisplay;
-
+    
     private bool _mustDestroy;
     private float _currentDestroySeconds;
     AudioManager audioManager;

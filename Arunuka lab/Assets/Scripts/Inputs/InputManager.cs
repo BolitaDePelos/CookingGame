@@ -39,7 +39,7 @@ public class InputManager : MonoBehaviour
     {
         //  Event Movement
         if (context.performed || context.canceled)
-            GameEventsManager.instance.InputEvents.MovePressed(context.ReadValue<Vector2>());
+            GameEventsManager.Instance.InputEvents.MovePressed(context.ReadValue<Vector2>());
 
         if (context.performed)
             move = context.ReadValue<Vector2>();
@@ -51,19 +51,21 @@ public class InputManager : MonoBehaviour
         if (cursorInputForLook) look = context.ReadValue<Vector2>();
     }
 
-
+    // [EDITOR REFERENCE]
     public void InteractButtonPressed(InputAction.CallbackContext context)
     {
-        if (context.started) GameEventsManager.instance.InputEvents.InteractionPressed();
+        if (context.started) 
+            GameEventsManager.Instance.InputEvents.InteractionPressed();
 
         if (context.performed)
             interactPressed = true;
-        else if (context.canceled) interactPressed = false;
+        else if (context.canceled) 
+            interactPressed = false;
     }
 
     public void DropButtonPressed(InputAction.CallbackContext context)
     {
-        if (context.started) GameEventsManager.instance.InputEvents.DropPressed();
+        if (context.started) GameEventsManager.Instance.InputEvents.DropPressed();
 
         if (context.performed)
             DropPressed = true;
@@ -72,7 +74,7 @@ public class InputManager : MonoBehaviour
 
     public void LeftMouseButtonPressed(InputAction.CallbackContext context)
     {
-        if (context.started) GameEventsManager.instance.InputEvents.UsePressed();
+        if (context.started) GameEventsManager.Instance.InputEvents.UsePressed();
 
         if (context.performed)
             LeftButtonMousePressed = true;

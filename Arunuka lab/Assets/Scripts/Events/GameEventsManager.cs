@@ -2,26 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameEventsManager : MonoBehaviour
+public class GameEventsManager : SingletonMonobehaviour<GameEventsManager>
 {
-
-    public static GameEventsManager instance { get; private set; }
-
     public InputEvents InputEvents;
     public SceneLoadEvents SceneLoadEvents;
 
-
-    private void Awake()
+    private new void Awake()
     {
-        if (instance != null)
-        {
-            Debug.LogError("Found more than one Game Events Manager in the scene.");
-        }
-        instance = this;
+        base.Awake();
 
         // initialize all events
         InputEvents = new InputEvents();
         SceneLoadEvents = new SceneLoadEvents();
     }
-
 }
+
+
+//public class Table

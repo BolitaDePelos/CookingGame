@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 /// Mechanics of a pot.
 /// </summary>
-public class Pot : SingletonMonobehaviour<Pot>
+public class Pot : SingletonMonobehaviour<Pot>, IKitchenSector
 {
     [Header("Pouring Properties")] [SerializeField]
     private float liquidFillDurationSeconds = 10;
@@ -24,6 +25,7 @@ public class Pot : SingletonMonobehaviour<Pot>
     private const float MinHeight = 0.42F;
     private const float MaxHeight = 0.52F;
     AudioManager audioManager;
+    public Transform cuttingPos;
 
     private void Start() => audioManager = AudioManager.Instance;
 
@@ -85,6 +87,8 @@ public class Pot : SingletonMonobehaviour<Pot>
         food.SetFoodLocation(FoodLocation.Table);
     }
 
+    public List<GameObject> GetFoodInsidePot() => foodInsidePot;
+
     /// <summary>
     /// Sets if the stove is active or not.
     /// </summary>
@@ -128,5 +132,10 @@ public class Pot : SingletonMonobehaviour<Pot>
         liquidRenderer.material.SetFloat(FillPropertyId, fill);
 
         _currentPouringDuration += Time.deltaTime;
+    }
+
+    public void ConfigureFoodKitchenSector(Food food)
+    {
+
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using EzySlice;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,13 +18,15 @@ public class Knife : MonoBehaviour, IUsable, IPickable
     public int maxCutsPerObject = 3;
     public bool tutorialMode;
     AudioManager audioManager;
+    public static int countCuts =0;
+    public static int recommendedCuts =5;
     [SerializeField] private CuttingManager cuttingManager;
 
-    [SerializeField] private UnityEvent onCut;
+    public UnityEvent onCut;
 
-    [SerializeField] private UnityEvent onPickUp;
+    public UnityEvent onPickUp;
 
-    [SerializeField] private UnityEvent onDrop;
+    public UnityEvent onDrop;
 
     // Cache of how many cuts has the parent.
     // Note: The GetHasCode of GameObject is the InstanceId, so it's not expensive to leave it as the key.
@@ -38,6 +41,7 @@ public class Knife : MonoBehaviour, IUsable, IPickable
     private Rigidbody m_Rigidbody;
     private bool isPickable = true;
     private bool isPickedUp;
+
 
     private void Awake()
     {
@@ -106,6 +110,7 @@ public class Knife : MonoBehaviour, IUsable, IPickable
     {
         isPickedUp = true;
         m_Rigidbody.isKinematic = true;
+        recommendedCuts = maxCutsPerObject;
 
         //TODO: Set an animation for this.
         //
@@ -132,7 +137,10 @@ public class Knife : MonoBehaviour, IUsable, IPickable
 
         onDrop?.Invoke();
         HoverCursor.Instance.OnExitHover();
+        countCuts = 0;
     }
+
+    public GameObject lastObjectHit;
 
     /// <summary>
     /// Slices the objects that entered in contact with the knife collider.
@@ -148,9 +156,9 @@ public class Knife : MonoBehaviour, IUsable, IPickable
         foreach (Collider hit in hits)
         {
             GameObject hitObject = hit.gameObject;
-
             int currentHitsOnParent = 0;
             GameObject cutParent = GetCutParent(hitObject);
+            lastObjectHit = cutParent;
             if (cutParent != null)
                 currentHitsOnParent = currentCutsInParent[cutParent];
 
@@ -167,9 +175,9 @@ public class Knife : MonoBehaviour, IUsable, IPickable
 
             // Imprime las transformaciones locales antes del corte en la consola
             //
-            Debug.Log("Original Position: " + originalPosition);
-            Debug.Log("Original Rotation: " + originalRotation);
-            Debug.Log("Original Scale: " + originalScale);
+            //Debug.Log("Original Position: " + originalPosition);
+            //Debug.Log("Original Rotation: " + originalRotation);
+            //Debug.Log("Original Scale: " + originalScale);
 
             Material crossMaterial = hitObject.GetComponent<Food>().crossMaterial;
             SlicedHull hull = SliceObject(hitObject, crossMaterial);
@@ -215,6 +223,7 @@ public class Knife : MonoBehaviour, IUsable, IPickable
             // Adds cuts in parent counter.
             //
             currentCutsInParent[cutParent]++;
+            countCuts++;
             onCut?.Invoke();
             audioManager.PlaySoundKnifeCut();
         }

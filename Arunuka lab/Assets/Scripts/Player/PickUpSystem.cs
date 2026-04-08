@@ -1,3 +1,4 @@
+using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -23,16 +24,16 @@ public class PickUpSystem : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEventsManager.instance.InputEvents.OnInteractionPressed += PickUp;
-        GameEventsManager.instance.InputEvents.OnDropPressed += DropItem;
-        GameEventsManager.instance.InputEvents.OnUsePressed += UseItem;
+        GameEventsManager.Instance.InputEvents.OnInteractionPressed += PickUp;
+        GameEventsManager.Instance.InputEvents.OnDropPressed += DropItem;
+        GameEventsManager.Instance.InputEvents.OnUsePressed += UseItem;
     }
 
     private void OnDisable()
     {
-        GameEventsManager.instance.InputEvents.OnInteractionPressed -= PickUp;
-        GameEventsManager.instance.InputEvents.OnDropPressed -= DropItem;
-        GameEventsManager.instance.InputEvents.OnUsePressed -= UseItem;
+        GameEventsManager.Instance.InputEvents.OnInteractionPressed -= PickUp;
+        GameEventsManager.Instance.InputEvents.OnDropPressed -= DropItem;
+        GameEventsManager.Instance.InputEvents.OnUsePressed -= UseItem;
     }
 
     private void Update()
@@ -81,6 +82,7 @@ public class PickUpSystem : MonoBehaviour
 
         pickUpSource.Play();
         inHandItem = pickableItem.PickUp(pickUpParent.gameObject);
+        if(inHandItem)
 
         HoverCursor.Instance.OnGrab();
         if (_hit.collider.GetComponent<Knife>())

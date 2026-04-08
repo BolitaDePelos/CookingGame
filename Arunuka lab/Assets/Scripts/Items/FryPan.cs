@@ -13,7 +13,6 @@ public class FryPan : SingletonMonobehaviour<FryPan>
 
     private void Start() => audioManager = AudioManager.Instance;
 
-
     /// <summary>
     /// Updates each game frame.
     /// </summary>

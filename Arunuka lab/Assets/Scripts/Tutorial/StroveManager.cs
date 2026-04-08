@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class StroveManager : MonoBehaviour
 {
-    [SerializeField]
-    Transform thrownFoodPoint;
+    [SerializeField] Transform thrownFoodPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -17,9 +16,6 @@ public class StroveManager : MonoBehaviour
         for (int idx = 0; idx < sliceParents.Count; idx++)
         {
             sliceParents[idx].transform.position = thrownFoodPoint.transform.position;
-
         }
-
-
     }
 }
